@@ -17,9 +17,45 @@ public class Regional {
     private String sigla;
     private TipoRegional tipo;
 
-    public Regional(String nome, String sigla, TipoRegional tipo) {
+    public Regional() {
+    }
+
+    public Regional(Integer id, String nome, String sigla, TipoRegional tipo) {
+        this.id = id;
         this.nome = nome;
         this.sigla = sigla;
+        this.tipo = tipo;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getSigla() {
+        return sigla;
+    }
+
+    public void setSigla(String sigla) {
+        this.sigla = sigla;
+    }
+
+    public TipoRegional getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoRegional tipo) {
         this.tipo = tipo;
     }
 
@@ -28,7 +64,7 @@ public class Regional {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Regional regional = (Regional) o;
-        return id.equals(regional.id);
+        return Objects.equals(id, regional.id);
     }
 
     @Override

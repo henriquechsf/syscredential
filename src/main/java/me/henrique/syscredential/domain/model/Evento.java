@@ -1,10 +1,10 @@
 package me.henrique.syscredential.domain.model;
 
+import me.henrique.syscredential.api.dto.EventoFormDto;
 import me.henrique.syscredential.domain.enums.StatusEvento;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,20 +15,45 @@ public class Evento {
     private Integer id;
     private String titulo;
     private String descricao;
-    private String url;
-    private Date dataInicio;
-    private Date dataFim;
-    private String urlBanner;
-    private StatusEvento status;
 
     @OneToMany(mappedBy = "evento")
     private List<Atividade> atividades = new ArrayList<>();
 
-    public Evento(String titulo, String descricao, Date dataInicio, Date dataFim) {
+    public Evento() {
+    }
+
+    public Evento(String titulo, String descricao) {
+
         this.titulo = titulo;
         this.descricao = descricao;
-        this.dataInicio = dataInicio;
-        this.dataFim = dataFim;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public List<Atividade> getAtividades() {
+        return atividades;
     }
 
     @Override
@@ -36,7 +61,7 @@ public class Evento {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Evento evento = (Evento) o;
-        return id.equals(evento.id);
+        return Objects.equals(id, evento.id);
     }
 
     @Override

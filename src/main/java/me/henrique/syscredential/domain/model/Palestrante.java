@@ -15,13 +15,47 @@ public class Palestrante {
     private String nome;
     private String resumo;
     private String email;
-    private String facebook;
-    private String linkedin;
-    private String twitter;
 
-    public Palestrante(String nome, String resumo) {
+    public Palestrante() {
+    }
+
+    public Palestrante(Integer id, String nome, String resumo, String email) {
+        this.id = id;
         this.nome = nome;
         this.resumo = resumo;
+        this.email = email;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getResumo() {
+        return resumo;
+    }
+
+    public void setResumo(String resumo) {
+        this.resumo = resumo;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
@@ -29,7 +63,7 @@ public class Palestrante {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Palestrante that = (Palestrante) o;
-        return id.equals(that.id);
+        return Objects.equals(id, that.id);
     }
 
     @Override
