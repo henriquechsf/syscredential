@@ -1,17 +1,20 @@
 package me.henrique.syscredential;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import me.henrique.syscredential.domain.enums.TamanhoCamiseta;
+import me.henrique.syscredential.domain.model.Participante;
+import me.henrique.syscredential.domain.model.Regional;
+import me.henrique.syscredential.domain.repository.ParticipanteRepository;
 
 @SpringBootApplication
 public class SyscredentialApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SyscredentialApplication.class, args);
+
 	}
 
 }

@@ -1,7 +1,10 @@
 package me.henrique.syscredential.domain.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Regional {
@@ -9,6 +12,9 @@ public class Regional {
 	private Integer id;
 	private String nome;
 	private String sigla;
+
+	@OneToMany(mappedBy = "regional")
+	private List<Participante> participantes;
 
 	public Regional() {
 	}
@@ -41,6 +47,10 @@ public class Regional {
 
 	public void setSigla(String sigla) {
 		this.sigla = sigla;
+	}
+
+	public List<Participante> getParticipantes() {
+		return participantes;
 	}
 
 }

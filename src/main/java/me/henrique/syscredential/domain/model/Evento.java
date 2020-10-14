@@ -1,8 +1,11 @@
 package me.henrique.syscredential.domain.model;
 
-import java.util.Date;
+import java.time.Instant;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 import me.henrique.syscredential.domain.enums.StatusEvento;
 
@@ -15,14 +18,14 @@ public class Evento {
 	private String titulo;
 	private String descricao;
 	private String local;
-	private Date inicio;
-	private Date termino;
+	private Instant inicio;
+	private Instant termino;
 	private StatusEvento status;
 
 	public Evento() {
 	}
 
-	public Evento(String titulo, String descricao, String local, Date inicio, Date termino) {
+	public Evento(String titulo, String descricao, String local, Instant inicio, Instant termino) {
 		this.titulo = titulo;
 		this.descricao = descricao;
 		this.local = local;
@@ -63,19 +66,19 @@ public class Evento {
 		this.local = local;
 	}
 
-	public Date getInicio() {
+	public Instant getInicio() {
 		return inicio;
 	}
 
-	public void setInicio(Date inicio) {
+	public void setInicio(Instant inicio) {
 		this.inicio = inicio;
 	}
 
-	public Date getTermino() {
+	public Instant getTermino() {
 		return termino;
 	}
 
-	public void setTermino(Date termino) {
+	public void setTermino(Instant termino) {
 		this.termino = termino;
 	}
 

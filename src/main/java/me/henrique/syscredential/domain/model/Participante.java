@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import me.henrique.syscredential.domain.enums.StatusParticipante;
 import me.henrique.syscredential.domain.enums.TamanhoCamiseta;
@@ -21,15 +23,21 @@ public class Participante {
 	private TamanhoCamiseta camiseta;
 	private StatusParticipante status;
 
+	@ManyToOne
+	@JoinColumn(name = "regional_id")
+	private Regional regional;
+
 	public Participante() {
 	}
 
-	public Participante(String cpf, String nome, String email, String telefone, TamanhoCamiseta camiseta) {
+	public Participante(String cpf, String nome, String email, String telefone, TamanhoCamiseta camiseta,
+			Regional regional) {
 		this.cpf = cpf;
 		this.nome = nome;
 		this.email = email;
 		this.telefone = telefone;
 		this.camiseta = camiseta;
+		this.regional = regional;
 		this.status = StatusParticipante.CADASTRADO;
 	}
 
@@ -87,6 +95,14 @@ public class Participante {
 
 	public void setStatus(StatusParticipante status) {
 		this.status = status;
+	}
+
+	public Regional getRegional() {
+		return regional;
+	}
+
+	public void setRegional(Regional regional) {
+		this.regional = regional;
 	}
 
 }
