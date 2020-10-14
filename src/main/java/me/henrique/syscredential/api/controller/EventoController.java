@@ -32,7 +32,7 @@ public class EventoController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Evento> listarPorId(Integer id) {
+	public ResponseEntity<Evento> listarPorId(@PathVariable Integer id) {
 		Optional<Evento> evento = eventoRepository.findById(id);
 
 		if (evento.isPresent()) {

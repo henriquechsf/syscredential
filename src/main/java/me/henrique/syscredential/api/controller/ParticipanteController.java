@@ -32,7 +32,7 @@ public class ParticipanteController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Participante> listarPorId(Integer id) {
+	public ResponseEntity<Participante> listarPorId(@PathVariable Integer id) {
 		Optional<Participante> participante = participanteRepository.findById(id);
 
 		if (participante.isPresent()) {
