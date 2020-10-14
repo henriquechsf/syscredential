@@ -1,7 +1,7 @@
 package me.henrique.syscredential.domain.enums;
 
 public enum StatusEvento {
-    AGENDADO,
+    CADASTRADO,
     CONFIRMADO,
     CANCELADO,
     ADIADO;

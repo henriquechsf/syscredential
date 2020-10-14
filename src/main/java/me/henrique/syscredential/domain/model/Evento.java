@@ -1,71 +1,90 @@
 package me.henrique.syscredential.domain.model;
 
-import me.henrique.syscredential.api.dto.EventoFormDto;
-import me.henrique.syscredential.domain.enums.StatusEvento;
+import java.util.Date;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+
+import me.henrique.syscredential.domain.enums.StatusEvento;
 
 @Entity
 public class Evento {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String titulo;
-    private String descricao;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-    @OneToMany(mappedBy = "evento")
-    private List<Atividade> atividades = new ArrayList<>();
+	private String titulo;
+	private String descricao;
+	private String local;
+	private Date inicio;
+	private Date termino;
+	private StatusEvento status;
 
-    public Evento() {
-    }
+	public Evento() {
+	}
 
-    public Evento(String titulo, String descricao) {
+	public Evento(String titulo, String descricao, String local, Date inicio, Date termino) {
+		this.titulo = titulo;
+		this.descricao = descricao;
+		this.local = local;
+		this.inicio = inicio;
+		this.termino = termino;
+		this.status = StatusEvento.CADASTRADO;
+	}
 
-        this.titulo = titulo;
-        this.descricao = descricao;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public String getTitulo() {
+		return titulo;
+	}
 
-    public String getTitulo() {
-        return titulo;
-    }
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
+	public String getDescricao() {
+		return descricao;
+	}
 
-    public String getDescricao() {
-        return descricao;
-    }
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+	public String getLocal() {
+		return local;
+	}
 
-    public List<Atividade> getAtividades() {
-        return atividades;
-    }
+	public void setLocal(String local) {
+		this.local = local;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Evento evento = (Evento) o;
-        return Objects.equals(id, evento.id);
-    }
+	public Date getInicio() {
+		return inicio;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
+	public void setInicio(Date inicio) {
+		this.inicio = inicio;
+	}
+
+	public Date getTermino() {
+		return termino;
+	}
+
+	public void setTermino(Date termino) {
+		this.termino = termino;
+	}
+
+	public StatusEvento getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusEvento status) {
+		this.status = status;
+	}
+
 }
