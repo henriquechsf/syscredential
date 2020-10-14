@@ -23,8 +23,8 @@ public class Participante {
 	private TamanhoCamiseta camiseta;
 	private StatusParticipante status;
 
-	@ManyToOne
 	@JoinColumn(name = "regional_id")
+	@ManyToOne
 	private Regional regional;
 
 	public Participante() {

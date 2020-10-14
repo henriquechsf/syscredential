@@ -1,10 +1,13 @@
 package me.henrique.syscredential.domain.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Regional {
@@ -13,8 +16,9 @@ public class Regional {
 	private String nome;
 	private String sigla;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "regional")
-	private List<Participante> participantes;
+	private List<Participante> participantes = new ArrayList<>();
 
 	public Regional() {
 	}
