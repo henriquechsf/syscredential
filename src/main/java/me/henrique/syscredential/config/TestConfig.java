@@ -8,6 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import me.henrique.syscredential.api.dto.EventoFormDto;
 import me.henrique.syscredential.domain.enums.TamanhoCamiseta;
 import me.henrique.syscredential.domain.model.Evento;
 import me.henrique.syscredential.domain.model.Participante;
@@ -42,8 +43,11 @@ public class TestConfig implements CommandLineRunner {
 		
 		pr.saveAll(Arrays.asList(p1, p2));
 		
-		Evento ev1 = new Evento("Convenção de Natal", "Convenção de Vendas", "Hotel Mabu - Curitiba", Instant.parse("2020-12-02T08:00:00Z"), Instant.parse("2020-12-02T17:00:00Z"));
-		Evento ev2 = new Evento("Convenção Junina", "Convenção de Vendas", "Chácara Mafalda", Instant.parse("2020-06-02T08:00:00Z"), Instant.parse("2020-06-02T12:00:00Z"));
+		EventoFormDto evdto1 = new EventoFormDto("Convenção de Natal", "Convenção de Vendas", "Hotel Mabu - Curitiba", Instant.parse("2020-12-02T08:00:00Z"), Instant.parse("2020-12-02T17:00:00Z"));
+		EventoFormDto evdto2 = new EventoFormDto("Convenção Junina", "Convenção de Vendas", "Chácara Mafalda", Instant.parse("2020-06-02T08:00:00Z"), Instant.parse("2020-06-02T12:00:00Z"));
+		
+		Evento ev1 = new Evento(evdto1);
+		Evento ev2 = new Evento(evdto2);
 		
 		er.saveAll(Arrays.asList(ev1, ev2));
 	}
