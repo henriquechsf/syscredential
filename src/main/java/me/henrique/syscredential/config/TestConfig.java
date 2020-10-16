@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import me.henrique.syscredential.api.dto.EventoFormDto;
+import me.henrique.syscredential.api.dto.ParticipanteFormDto;
 import me.henrique.syscredential.domain.enums.TamanhoCamiseta;
 import me.henrique.syscredential.domain.model.Evento;
 import me.henrique.syscredential.domain.model.Participante;
@@ -38,8 +39,11 @@ public class TestConfig implements CommandLineRunner {
 		
 		rr.saveAll(Arrays.asList(reg1, reg2));
 		
-		Participante p1 = new Participante("0444658981", "Henrique", "henrique@email.com", "44984414582", TamanhoCamiseta.G, reg1);
-		Participante p2 = new Participante("9998887772", "Dani Guerra", "dani@email.com", "99988877", TamanhoCamiseta.P, reg2);
+		ParticipanteFormDto pdto1 = new ParticipanteFormDto("0444658981", "Henrique", "henrique@email.com", "44984414582", TamanhoCamiseta.G, reg1);
+		ParticipanteFormDto pdto2 = new ParticipanteFormDto("9998887772", "Dani Guerra", "dani@email.com", "99988877", TamanhoCamiseta.P, reg2);
+		
+		Participante p1 = new Participante(pdto1);
+		Participante p2 = new Participante(pdto2);
 		
 		pr.saveAll(Arrays.asList(p1, p2));
 		

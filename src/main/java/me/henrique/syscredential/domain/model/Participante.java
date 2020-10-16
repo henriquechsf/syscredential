@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import me.henrique.syscredential.api.dto.ParticipanteFormDto;
 import me.henrique.syscredential.domain.enums.StatusParticipante;
 import me.henrique.syscredential.domain.enums.TamanhoCamiseta;
 
@@ -30,14 +31,13 @@ public class Participante {
 	public Participante() {
 	}
 
-	public Participante(String cpf, String nome, String email, String telefone, TamanhoCamiseta camiseta,
-			Regional regional) {
-		this.cpf = cpf;
-		this.nome = nome;
-		this.email = email;
-		this.telefone = telefone;
-		this.camiseta = camiseta;
-		this.regional = regional;
+	public Participante(ParticipanteFormDto dto) {
+		this.cpf = dto.getCpf();
+		this.nome = dto.getNome();
+		this.email = dto.getEmail();
+		this.telefone = dto.getTelefone();
+		this.camiseta = dto.getCamiseta();
+		this.regional = dto.getRegional();
 		this.status = StatusParticipante.CADASTRADO;
 	}
 
