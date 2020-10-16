@@ -1,11 +1,17 @@
 package me.henrique.syscredential.domain.model;
 
-import java.util.Date;
+import java.time.Instant;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import me.henrique.syscredential.api.dto.AtividadeFormDto;
 
 @Entity
 public class Atividade {
@@ -15,17 +21,22 @@ public class Atividade {
 
 	private String titulo;
 	private String descricao;
-	private Date inicio;
-	private Date termino;
+	private Instant inicio;
+	private Instant termino;
+
+	@ManyToOne
+	@JoinColumn(name = "evento_id")
+	//@JsonIgnore
+	private Evento evento;
 
 	public Atividade() {
 	}
 
-	public Atividade(String titulo, String descricao, Date inicio, Date termino) {
-		this.titulo = titulo;
-		this.descricao = descricao;
-		this.inicio = inicio;
-		this.termino = termino;
+	public Atividade(AtividadeFormDto dto) {
+		this.titulo = dto.getTitulo();
+		this.descricao = dto.getDescricao();
+		this.inicio = dto.getInicio();
+		this.termino = dto.getTermino();
 	}
 
 	public Integer getId() {
@@ -52,19 +63,19 @@ public class Atividade {
 		this.descricao = descricao;
 	}
 
-	public Date getInicio() {
+	public Instant getInicio() {
 		return inicio;
 	}
 
-	public void setInicio(Date inicio) {
+	public void setInicio(Instant inicio) {
 		this.inicio = inicio;
 	}
 
-	public Date getTermino() {
+	public Instant getTermino() {
 		return termino;
 	}
 
-	public void setTermino(Date termino) {
+	public void setTermino(Instant termino) {
 		this.termino = termino;
 	}
 

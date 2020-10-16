@@ -1,11 +1,14 @@
 package me.henrique.syscredential.domain.model;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import me.henrique.syscredential.api.dto.EventoFormDto;
 import me.henrique.syscredential.domain.enums.StatusEvento;
@@ -22,6 +25,9 @@ public class Evento {
 	private Instant inicio;
 	private Instant termino;
 	private StatusEvento status;
+	
+	@OneToMany(mappedBy = "evento")
+	private List<Atividade> atividades = new ArrayList<>();
 
 	public Evento() {
 	}
@@ -91,4 +97,11 @@ public class Evento {
 		this.status = status;
 	}
 
+	public List<Atividade> getAtividades() {
+		return atividades;
+	}
+
+	public void adicionarAtividade(Atividade atividade) {
+		this.atividades.add(atividade);
+	}
 }
