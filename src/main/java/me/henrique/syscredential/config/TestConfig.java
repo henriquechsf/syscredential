@@ -8,9 +8,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import me.henrique.syscredential.api.dto.AtividadeFormDto;
-import me.henrique.syscredential.api.dto.EventoFormDto;
-import me.henrique.syscredential.api.dto.ParticipanteFormDto;
+import me.henrique.syscredential.api.dto.AtividadeInput;
+import me.henrique.syscredential.api.dto.EventoInput;
+import me.henrique.syscredential.api.dto.ParticipanteInput;
 import me.henrique.syscredential.domain.enums.TamanhoCamiseta;
 import me.henrique.syscredential.domain.model.Atividade;
 import me.henrique.syscredential.domain.model.Evento;
@@ -45,9 +45,9 @@ public class TestConfig implements CommandLineRunner {
 
 		rr.saveAll(Arrays.asList(reg1, reg2));
 
-		ParticipanteFormDto pdto1 = new ParticipanteFormDto("0444658981", "Henrique", "henrique@email.com",
+		ParticipanteInput pdto1 = new ParticipanteInput("0444658981", "Henrique", "henrique@email.com",
 				"44984414582", TamanhoCamiseta.G, reg1);
-		ParticipanteFormDto pdto2 = new ParticipanteFormDto("9998887772", "Dani Guerra", "dani@email.com", "99988877",
+		ParticipanteInput pdto2 = new ParticipanteInput("9998887772", "Dani Guerra", "dani@email.com", "99988877",
 				TamanhoCamiseta.P, reg2);
 
 		Participante p1 = new Participante(pdto1);
@@ -55,9 +55,9 @@ public class TestConfig implements CommandLineRunner {
 
 		pr.saveAll(Arrays.asList(p1, p2));
 
-		AtividadeFormDto atdto1 = new AtividadeFormDto("Palestra de Vendas", "Como aumentar suas vendas",
+		AtividadeInput atdto1 = new AtividadeInput("Palestra de Vendas", "Como aumentar suas vendas",
 				Instant.parse("2020-12-02T08:00:00Z"), Instant.parse("2020-12-02T10:00:00Z"));
-		AtividadeFormDto atdto2 = new AtividadeFormDto("Degusta Zaeli", "Degustação com os principais produtos",
+		AtividadeInput atdto2 = new AtividadeInput("Degusta Zaeli", "Degustação com os principais produtos",
 				Instant.parse("2020-12-02T10:00:00Z"), Instant.parse("2020-12-02T12:00:00Z"));
 
 		Atividade at1 = new Atividade(atdto1);
@@ -65,9 +65,9 @@ public class TestConfig implements CommandLineRunner {
 		
 		ar.saveAll(Arrays.asList(at1, at2));
 
-		EventoFormDto evdto1 = new EventoFormDto("Convenção de Natal", "Convenção de Vendas", "Hotel Mabu - Curitiba",
+		EventoInput evdto1 = new EventoInput("Convenção de Natal", "Convenção de Vendas", "Hotel Mabu - Curitiba",
 				Instant.parse("2020-12-02T08:00:00Z"), Instant.parse("2020-12-02T17:00:00Z"));
-		EventoFormDto evdto2 = new EventoFormDto("Convenção Junina", "Convenção de Vendas", "Chácara Mafalda",
+		EventoInput evdto2 = new EventoInput("Convenção Junina", "Convenção de Vendas", "Chácara Mafalda",
 				Instant.parse("2020-06-02T08:00:00Z"), Instant.parse("2020-06-02T12:00:00Z"));
 
 		Evento ev1 = new Evento(evdto1);

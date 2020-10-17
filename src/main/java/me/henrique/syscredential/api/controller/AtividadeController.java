@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import me.henrique.syscredential.api.dto.AtividadeFormDto;
+import me.henrique.syscredential.api.dto.AtividadeInput;
 import me.henrique.syscredential.domain.model.Atividade;
 import me.henrique.syscredential.domain.repository.AtividadeRepository;
 
@@ -47,7 +47,7 @@ public class AtividadeController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Atividade adicionar(@Valid @RequestBody AtividadeFormDto dto) {
+	public Atividade adicionar(@Valid @RequestBody AtividadeInput dto) {
 		Atividade atividade = new Atividade(dto);
 		return atividadeRepository.save(atividade);
 	}

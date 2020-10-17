@@ -9,9 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import me.henrique.syscredential.api.dto.AtividadeFormDto;
+import me.henrique.syscredential.api.dto.AtividadeInput;
 
 @Entity
 public class Atividade {
@@ -26,13 +24,13 @@ public class Atividade {
 
 	@ManyToOne
 	@JoinColumn(name = "evento_id")
-	//@JsonIgnore
+	// @JsonIgnore
 	private Evento evento;
 
 	public Atividade() {
 	}
 
-	public Atividade(AtividadeFormDto dto) {
+	public Atividade(AtividadeInput dto) {
 		this.titulo = dto.getTitulo();
 		this.descricao = dto.getDescricao();
 		this.inicio = dto.getInicio();

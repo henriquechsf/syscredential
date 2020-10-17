@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import me.henrique.syscredential.api.dto.ParticipanteFormDto;
+import me.henrique.syscredential.api.dto.ParticipanteInput;
 import me.henrique.syscredential.domain.enums.StatusParticipante;
 import me.henrique.syscredential.domain.enums.TamanhoCamiseta;
 
@@ -31,7 +31,7 @@ public class Participante {
 	public Participante() {
 	}
 
-	public Participante(ParticipanteFormDto dto) {
+	public Participante(ParticipanteInput dto) {
 		this.cpf = dto.getCpf();
 		this.nome = dto.getNome();
 		this.email = dto.getEmail();

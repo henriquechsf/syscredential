@@ -10,7 +10,7 @@ import org.hibernate.validator.constraints.br.CPF;
 import me.henrique.syscredential.domain.enums.TamanhoCamiseta;
 import me.henrique.syscredential.domain.model.Regional;
 
-public class ParticipanteFormDto {
+public class ParticipanteInput {
 
 	@CPF(message = "CPF inválido")
 	@NotNull(message = "CPF é obrigatório")
@@ -32,10 +32,10 @@ public class ParticipanteFormDto {
 	@NotNull(message = "Regional é obrigatório")
 	private Regional regional;
 
-	public ParticipanteFormDto() {
+	public ParticipanteInput() {
 	}
 
-	public ParticipanteFormDto(String cpf, String nome, String email, String telefone, TamanhoCamiseta camiseta,
+	public ParticipanteInput(String cpf, String nome, String email, String telefone, TamanhoCamiseta camiseta,
 			Regional regional) {
 		this.cpf = cpf;
 		this.nome = nome;

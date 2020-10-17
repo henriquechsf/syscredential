@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import me.henrique.syscredential.api.dto.EventoFormDto;
+import me.henrique.syscredential.api.dto.EventoInput;
 import me.henrique.syscredential.domain.enums.StatusEvento;
 
 @Entity
@@ -32,7 +32,7 @@ public class Evento {
 	public Evento() {
 	}
 
-	public Evento(EventoFormDto dto) {
+	public Evento(EventoInput dto) {
 		this.titulo = 		dto.getTitulo();
 		this.descricao = 	dto.getDescricao();
 		this.local = 		dto.getLocal();

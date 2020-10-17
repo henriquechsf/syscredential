@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import me.henrique.syscredential.api.dto.ParticipanteFormDto;
+import me.henrique.syscredential.api.dto.ParticipanteInput;
 import me.henrique.syscredential.domain.model.Participante;
 import me.henrique.syscredential.domain.repository.ParticipanteRepository;
 
@@ -47,7 +47,7 @@ public class ParticipanteController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Participante adicionar(@Valid @RequestBody ParticipanteFormDto dto) {
+	public Participante adicionar(@Valid @RequestBody ParticipanteInput dto) {
 		Participante participante = new Participante(dto);
 		return participanteRepository.save(participante);
 	}

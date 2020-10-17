@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
-public class AtividadeFormDto {
+public class AtividadeInput {
 
 	@NotNull(message = "Título é obrigatório")
 	@NotBlank(message = "Informe o título")
@@ -22,10 +22,10 @@ public class AtividadeFormDto {
 	private Instant inicio;
 	private Instant termino;
 
-	public AtividadeFormDto() {
+	public AtividadeInput() {
 	}
 
-	public AtividadeFormDto(String titulo, String descricao, Instant inicio, Instant termino) {
+	public AtividadeInput(String titulo, String descricao, Instant inicio, Instant termino) {
 		this.titulo = titulo;
 		this.descricao = descricao;
 		this.inicio = inicio;

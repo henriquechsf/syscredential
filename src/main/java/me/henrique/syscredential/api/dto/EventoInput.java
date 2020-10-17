@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
-public class EventoFormDto {
+public class EventoInput {
 
 	@NotNull(message = "Título é obrigatório")
 	@NotBlank(message = "Informe o título")
@@ -28,10 +28,10 @@ public class EventoFormDto {
 
 	private Instant termino;
 
-	public EventoFormDto() {
+	public EventoInput() {
 	}
 
-	public EventoFormDto(String titulo, String descricao, String local, Instant inicio, Instant termino) {
+	public EventoInput(String titulo, String descricao, String local, Instant inicio, Instant termino) {
 		this.titulo = titulo;
 		this.descricao = descricao;
 		this.local = local;
