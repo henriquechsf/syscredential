@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import me.henrique.syscredential.api.dto.ParticipanteInput;
 import me.henrique.syscredential.domain.model.Participante;
 import me.henrique.syscredential.domain.repository.ParticipanteRepository;
+import me.henrique.syscredential.domain.services.CadastroParticipante;
 
 @RestController
 @RequestMapping("/participantes")
@@ -28,6 +29,9 @@ public class ParticipanteController {
 
 	@Autowired
 	private ParticipanteRepository participanteRepository;
+	
+	@Autowired
+	private CadastroParticipante CadastroParticipante;
 	
 	@GetMapping
 	public List<Participante> listar() {
@@ -49,7 +53,7 @@ public class ParticipanteController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public Participante adicionar(@Valid @RequestBody ParticipanteInput dto) {
 		Participante participante = new Participante(dto);
-		return participanteRepository.save(participante);
+		return CadastroParticipante.salvar(participante);
 	}
 
 	@PutMapping("/{id}")
