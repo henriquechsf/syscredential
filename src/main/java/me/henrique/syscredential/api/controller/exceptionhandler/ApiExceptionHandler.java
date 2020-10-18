@@ -15,6 +15,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import me.henrique.syscredential.domain.exception.NegocioException;
+import me.henrique.syscredential.domain.exception.RecursoNaoEncontradoException;
 
 @ControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
@@ -23,6 +24,18 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(NegocioException.class)
 	public ResponseEntity<Object> handleNegocio(NegocioException ex, WebRequest request) {
 		var status = HttpStatus.BAD_REQUEST;
+
+		var problema = new Problema();
+		problema.setStatus(status.value());
+		problema.setTitulo(ex.getMessage());
+		problema.setDataHora(LocalDateTime.now());
+
+		return handleExceptionInternal(ex, problema, new HttpHeaders(), status, request);
+	}
+	
+	@ExceptionHandler(RecursoNaoEncontradoException.class)
+	public ResponseEntity<Object> handleNegocio(RecursoNaoEncontradoException ex, WebRequest request) {
+		var status = HttpStatus.NOT_FOUND;
 
 		var problema = new Problema();
 		problema.setStatus(status.value());

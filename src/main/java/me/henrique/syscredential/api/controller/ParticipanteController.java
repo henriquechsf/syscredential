@@ -1,7 +1,6 @@
 package me.henrique.syscredential.api.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import me.henrique.syscredential.api.dto.ParticipanteInput;
 import me.henrique.syscredential.domain.model.Participante;
-import me.henrique.syscredential.domain.repository.ParticipanteRepository;
 import me.henrique.syscredential.domain.services.CadastroParticipante;
 
 @RestController
@@ -28,54 +26,39 @@ import me.henrique.syscredential.domain.services.CadastroParticipante;
 public class ParticipanteController {
 
 	@Autowired
-	private ParticipanteRepository participanteRepository;
-	
-	@Autowired
-	private CadastroParticipante CadastroParticipante;
-	
+	private CadastroParticipante cadastroParticipante;
+
 	@GetMapping
 	public List<Participante> listar() {
-		return participanteRepository.findAll();
+		return cadastroParticipante.listar();
 	}
-	
+
 	@GetMapping("/{id}")
 	public ResponseEntity<Participante> listarPorId(@PathVariable Integer id) {
-		Optional<Participante> participante = participanteRepository.findById(id);
+		return ResponseEntity.ok(cadastroParticipante.listarPorId(id));
+	}
 
-		if (participante.isPresent()) {
-			return ResponseEntity.ok(participante.get());
-		}
-
-		return ResponseEntity.notFound().build();
+	@GetMapping("/cpf/{cpf}")
+	public ResponseEntity<Participante> listarPorCpf(@PathVariable String cpf) {
+		return ResponseEntity.ok(cadastroParticipante.listarPorCpf(cpf));
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Participante adicionar(@Valid @RequestBody ParticipanteInput dto) {
+	public ResponseEntity<Participante> adicionar(@Valid @RequestBody ParticipanteInput dto) {
 		Participante participante = new Participante(dto);
-		return CadastroParticipante.salvar(participante);
+		return ResponseEntity.ok(cadastroParticipante.salvar(participante));
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Participante> atualizar(@PathVariable Integer id, @RequestBody Participante participante) {
-		if (!participanteRepository.existsById(id)) {
-			return ResponseEntity.notFound().build();
-		}
-
-		participante.setId(id);
-		participante = participanteRepository.save(participante);
-
-		return ResponseEntity.ok(participante);
+	public ResponseEntity<Participante> atualizar(@PathVariable Integer id, @RequestBody ParticipanteInput dto) {
+		Participante participante = new Participante(dto);
+		return ResponseEntity.ok(cadastroParticipante.atualizar(id, participante));
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> remover(@PathVariable Integer id) {
-		if (!participanteRepository.existsById(id)) {
-			return ResponseEntity.notFound().build();
-		}
-	
-		participanteRepository.deleteById(id);
-		
+		cadastroParticipante.remover(id);
 		return ResponseEntity.noContent().build();
 	}
 }
