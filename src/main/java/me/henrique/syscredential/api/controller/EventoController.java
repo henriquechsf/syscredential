@@ -1,14 +1,12 @@
 package me.henrique.syscredential.api.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,55 +19,41 @@ import org.springframework.web.bind.annotation.RestController;
 
 import me.henrique.syscredential.api.dto.EventoInput;
 import me.henrique.syscredential.domain.model.Evento;
-import me.henrique.syscredential.domain.repository.EventoRepository;
+import me.henrique.syscredential.domain.services.CadastroEvento;
 
 @RestController
 @RequestMapping("/eventos")
 public class EventoController {
 
 	@Autowired
-	private EventoRepository eventoRepository;
+	private CadastroEvento cadastroEvento;
 
-	@CrossOrigin
 	@GetMapping
 	public List<Evento> listar() {
-		return eventoRepository.findAll();
+		return cadastroEvento.listar();
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Evento> listarPorId(@PathVariable Integer id) {
-		Optional<Evento> evento = eventoRepository.findById(id);
-
-		if (evento.isPresent()) {
-			return ResponseEntity.ok(evento.get());
-		}
-
-		return ResponseEntity.notFound().build();
+		return ResponseEntity.ok(cadastroEvento.listarPorId(id));
 	}
 
-	@CrossOrigin
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Evento adicionar(@Valid @RequestBody EventoInput dto) {
+	public ResponseEntity<Evento> adicionar(@Valid @RequestBody EventoInput dto) {
 		Evento evento = new Evento(dto);
-		return eventoRepository.save(evento);
+		return ResponseEntity.ok(cadastroEvento.salvar(evento));
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Evento> atualizar(@PathVariable Integer id, @RequestBody EventoInput dto) {
-		if (!eventoRepository.existsById(id)) {
-			return ResponseEntity.notFound().build();
-		}
-
 		Evento evento = new Evento(dto);
-
-		return ResponseEntity.ok(evento);
+		return ResponseEntity.ok(cadastroEvento.atualizar(id, evento));
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> remover(@PathVariable Integer id) {
-		eventoRepository.deleteById(id);
-		
+		cadastroEvento.remover(id);
 		return ResponseEntity.noContent().build();
 	}
 }

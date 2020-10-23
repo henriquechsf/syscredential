@@ -1,7 +1,6 @@
 package me.henrique.syscredential.api.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -20,58 +19,41 @@ import org.springframework.web.bind.annotation.RestController;
 
 import me.henrique.syscredential.api.dto.AtividadeInput;
 import me.henrique.syscredential.domain.model.Atividade;
-import me.henrique.syscredential.domain.repository.AtividadeRepository;
+import me.henrique.syscredential.domain.services.CadastroAtividade;
 
 @RestController
 @RequestMapping("/atividades")
 public class AtividadeController {
 
 	@Autowired
-	private AtividadeRepository atividadeRepository;
+	private CadastroAtividade cadastroAtividade;
 
 	@GetMapping
 	public List<Atividade> listar() {
-		return atividadeRepository.findAll();
+		return cadastroAtividade.listar();
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Atividade> listarPorId(@PathVariable Integer id) {
-		Optional<Atividade> atividade = atividadeRepository.findById(id);
-
-		if (atividade.isPresent()) {
-			return ResponseEntity.ok(atividade.get());
-		}
-
-		return ResponseEntity.notFound().build();
+		return ResponseEntity.ok(cadastroAtividade.listarPorId(id));
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Atividade adicionar(@Valid @RequestBody AtividadeInput dto) {
+	public ResponseEntity<Atividade> adicionar(@Valid @RequestBody AtividadeInput dto) {
 		Atividade atividade = new Atividade(dto);
-		return atividadeRepository.save(atividade);
+		return ResponseEntity.ok(cadastroAtividade.salvar(atividade));
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Atividade> atualizar(@PathVariable Integer id, @RequestBody Atividade atividade) {
-		if (!atividadeRepository.existsById(id)) {
-			return ResponseEntity.notFound().build();
-		}
-
-		atividade.setId(id);
-		atividade = atividadeRepository.save(atividade);
-
-		return ResponseEntity.ok(atividade);
+	public ResponseEntity<Atividade> atualizar(@PathVariable Integer id, @RequestBody AtividadeInput dto) {
+		Atividade atividade = new Atividade(dto);
+		return ResponseEntity.ok(cadastroAtividade.atualizar(id, atividade));
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> remover(@PathVariable Integer id) {
-		if (!atividadeRepository.existsById(id)) {
-			return ResponseEntity.notFound().build();
-		}
-	
-		atividadeRepository.deleteById(id);
-		
+		cadastroAtividade.remover(id);
 		return ResponseEntity.noContent().build();
 	}
 }

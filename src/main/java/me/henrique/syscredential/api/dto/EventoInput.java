@@ -2,7 +2,6 @@ package me.henrique.syscredential.api.dto;
 
 import java.time.Instant;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
@@ -10,17 +9,14 @@ import org.hibernate.validator.constraints.Length;
 public class EventoInput {
 
 	@NotNull(message = "Título é obrigatório")
-	@NotBlank(message = "Informe o título")
 	@Length(min = 4, max = 50)
 	private String titulo;
 
 	@NotNull(message = "Descrição é obrigatório")
-	@NotBlank(message = "Informe a descrição")	
 	@Length(min = 10, max = 100)
 	private String descricao;
 
 	@NotNull(message = "Local é obrigatório")
-	@NotBlank(message = "Informe a local")	
 	@Length(min = 4, max = 50)
 	private String local;
 
