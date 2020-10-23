@@ -19,46 +19,46 @@ import org.springframework.web.bind.annotation.RestController;
 
 import me.henrique.syscredential.api.dto.ParticipanteInput;
 import me.henrique.syscredential.domain.model.Participante;
-import me.henrique.syscredential.domain.services.CadastroParticipante;
+import me.henrique.syscredential.domain.services.GestaoParticipanteService;
 
 @RestController
 @RequestMapping("/participantes")
 public class ParticipanteController {
 
 	@Autowired
-	private CadastroParticipante cadastroParticipante;
+	private GestaoParticipanteService service;
 
 	@GetMapping
 	public List<Participante> listar() {
-		return cadastroParticipante.listar();
+		return service.listar();
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Participante> listarPorId(@PathVariable Integer id) {
-		return ResponseEntity.ok(cadastroParticipante.listarPorId(id));
+		return ResponseEntity.ok(service.listarPorId(id));
 	}
 
 	@GetMapping("/cpf/{cpf}")
 	public ResponseEntity<Participante> listarPorCpf(@PathVariable String cpf) {
-		return ResponseEntity.ok(cadastroParticipante.listarPorCpf(cpf));
+		return ResponseEntity.ok(service.listarPorCpf(cpf));
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<Participante> adicionar(@Valid @RequestBody ParticipanteInput dto) {
 		Participante participante = new Participante(dto);
-		return ResponseEntity.ok(cadastroParticipante.salvar(participante));
+		return ResponseEntity.ok(service.salvar(participante));
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Participante> atualizar(@PathVariable Integer id, @RequestBody ParticipanteInput dto) {
 		Participante participante = new Participante(dto);
-		return ResponseEntity.ok(cadastroParticipante.atualizar(id, participante));
+		return ResponseEntity.ok(service.atualizar(id, participante));
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> remover(@PathVariable Integer id) {
-		cadastroParticipante.remover(id);
+		service.remover(id);
 		return ResponseEntity.noContent().build();
 	}
 }

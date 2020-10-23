@@ -19,41 +19,41 @@ import org.springframework.web.bind.annotation.RestController;
 
 import me.henrique.syscredential.api.dto.EventoInput;
 import me.henrique.syscredential.domain.model.Evento;
-import me.henrique.syscredential.domain.services.CadastroEvento;
+import me.henrique.syscredential.domain.services.GestaoEventoService;
 
 @RestController
 @RequestMapping("/eventos")
 public class EventoController {
 
 	@Autowired
-	private CadastroEvento cadastroEvento;
+	private GestaoEventoService service;
 
 	@GetMapping
 	public List<Evento> listar() {
-		return cadastroEvento.listar();
+		return service.listar();
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Evento> listarPorId(@PathVariable Integer id) {
-		return ResponseEntity.ok(cadastroEvento.listarPorId(id));
+		return ResponseEntity.ok(service.listarPorId(id));
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<Evento> adicionar(@Valid @RequestBody EventoInput dto) {
 		Evento evento = new Evento(dto);
-		return ResponseEntity.ok(cadastroEvento.salvar(evento));
+		return ResponseEntity.ok(service.salvar(evento));
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Evento> atualizar(@PathVariable Integer id, @RequestBody EventoInput dto) {
 		Evento evento = new Evento(dto);
-		return ResponseEntity.ok(cadastroEvento.atualizar(id, evento));
+		return ResponseEntity.ok(service.atualizar(id, evento));
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> remover(@PathVariable Integer id) {
-		cadastroEvento.remover(id);
+		service.remover(id);
 		return ResponseEntity.noContent().build();
 	}
 }

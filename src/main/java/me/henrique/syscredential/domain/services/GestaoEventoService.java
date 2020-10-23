@@ -11,7 +11,7 @@ import me.henrique.syscredential.domain.model.Evento;
 import me.henrique.syscredential.domain.repository.EventoRepository;
 
 @Service
-public class CadastroEvento {
+public class GestaoEventoService {
 
 	@Autowired
 	private EventoRepository eventoRepository;

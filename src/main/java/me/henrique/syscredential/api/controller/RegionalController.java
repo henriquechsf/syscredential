@@ -19,41 +19,41 @@ import org.springframework.web.bind.annotation.RestController;
 
 import me.henrique.syscredential.api.dto.RegionalInput;
 import me.henrique.syscredential.domain.model.Regional;
-import me.henrique.syscredential.domain.services.CadastroRegional;
+import me.henrique.syscredential.domain.services.GestaoRegionalService;
 
 @RestController
 @RequestMapping("/regionais")
 public class RegionalController {
 
 	@Autowired
-	private CadastroRegional cadastroRegional;
+	private GestaoRegionalService service;
 
 	@GetMapping
 	public List<Regional> listar() {
-		return cadastroRegional.listar();
+		return service.listar();
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Regional> listarPorId(@PathVariable Integer id) {
-		return ResponseEntity.ok(cadastroRegional.listarPorId(id));
+		return ResponseEntity.ok(service.listarPorId(id));
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<Regional> adicionar(@Valid @RequestBody RegionalInput dto) {
 		Regional regional = new Regional(dto);
-		return ResponseEntity.ok(cadastroRegional.salvar(regional));
+		return ResponseEntity.ok(service.salvar(regional));
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Regional> atualizar(@PathVariable Integer id, @RequestBody RegionalInput dto) {
 		Regional regional = new Regional(dto);
-		return ResponseEntity.ok(cadastroRegional.atualizar(id, regional));
+		return ResponseEntity.ok(service.atualizar(id, regional));
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> remover(@PathVariable Integer id) {
-		cadastroRegional.remover(id);
+		service.remover(id);
 		return ResponseEntity.noContent().build();
 	}
 }

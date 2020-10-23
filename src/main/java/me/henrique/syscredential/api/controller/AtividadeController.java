@@ -19,41 +19,41 @@ import org.springframework.web.bind.annotation.RestController;
 
 import me.henrique.syscredential.api.dto.AtividadeInput;
 import me.henrique.syscredential.domain.model.Atividade;
-import me.henrique.syscredential.domain.services.CadastroAtividade;
+import me.henrique.syscredential.domain.services.GestaoAtividadeService;
 
 @RestController
 @RequestMapping("/atividades")
 public class AtividadeController {
 
 	@Autowired
-	private CadastroAtividade cadastroAtividade;
+	private GestaoAtividadeService service;
 
 	@GetMapping
 	public List<Atividade> listar() {
-		return cadastroAtividade.listar();
+		return service.listar();
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Atividade> listarPorId(@PathVariable Integer id) {
-		return ResponseEntity.ok(cadastroAtividade.listarPorId(id));
+		return ResponseEntity.ok(service.listarPorId(id));
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<Atividade> adicionar(@Valid @RequestBody AtividadeInput dto) {
 		Atividade atividade = new Atividade(dto);
-		return ResponseEntity.ok(cadastroAtividade.salvar(atividade));
+		return ResponseEntity.ok(service.salvar(atividade));
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Atividade> atualizar(@PathVariable Integer id, @RequestBody AtividadeInput dto) {
 		Atividade atividade = new Atividade(dto);
-		return ResponseEntity.ok(cadastroAtividade.atualizar(id, atividade));
+		return ResponseEntity.ok(service.atualizar(id, atividade));
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> remover(@PathVariable Integer id) {
-		cadastroAtividade.remover(id);
+		service.remover(id);
 		return ResponseEntity.noContent().build();
 	}
 }

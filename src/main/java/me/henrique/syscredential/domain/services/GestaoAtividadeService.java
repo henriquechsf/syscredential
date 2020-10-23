@@ -11,7 +11,7 @@ import me.henrique.syscredential.domain.model.Atividade;
 import me.henrique.syscredential.domain.repository.AtividadeRepository;
 
 @Service
-public class CadastroAtividade {
+public class GestaoAtividadeService {
 
 	@Autowired
 	private AtividadeRepository atividadeRepository;

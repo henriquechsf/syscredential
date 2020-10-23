@@ -12,7 +12,7 @@ import me.henrique.syscredential.domain.model.Regional;
 import me.henrique.syscredential.domain.repository.RegionalRepository;
 
 @Service
-public class CadastroRegional {
+public class GestaoRegionalService {
 
 	@Autowired
 	private RegionalRepository regionalRepository;

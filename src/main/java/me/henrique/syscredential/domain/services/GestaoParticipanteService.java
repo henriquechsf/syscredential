@@ -12,7 +12,7 @@ import me.henrique.syscredential.domain.model.Participante;
 import me.henrique.syscredential.domain.repository.ParticipanteRepository;
 
 @Service
-public class CadastroParticipante {
+public class GestaoParticipanteService {
 
 	@Autowired
 	private ParticipanteRepository participanteRepository;
