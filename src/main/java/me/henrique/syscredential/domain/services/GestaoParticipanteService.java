@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import me.henrique.syscredential.domain.exception.NegocioException;
+import me.henrique.syscredential.domain.exception.DomainException;
 import me.henrique.syscredential.domain.exception.RecursoNaoEncontradoException;
 import me.henrique.syscredential.domain.model.Participante;
 import me.henrique.syscredential.domain.repository.ParticipanteRepository;
@@ -22,18 +22,18 @@ public class GestaoParticipanteService {
 	}
 
 	public Participante listarPorId(Integer id) {
-		return participanteRepository.findById(id).orElseThrow(() -> new NegocioException("ID não encontrado"));
+		return participanteRepository.findById(id).orElseThrow(() -> new DomainException("ID não encontrado"));
 	}
 
 	public Participante listarPorCpf(String cpf) {
-		return participanteRepository.findByCpf(cpf).orElseThrow(() -> new NegocioException("CPF não encontrado"));
+		return participanteRepository.findByCpf(cpf).orElseThrow(() -> new DomainException("CPF não encontrado"));
 	}
 
 	public Participante salvar(Participante participante) {
 		Optional<Participante> obj = participanteRepository.findByCpf(participante.getCpf());
 
 		if (obj.isPresent()) {
-			throw new NegocioException("Participante já cadastrado");
+			throw new DomainException("Participante já cadastrado");
 		}
 
 		return participanteRepository.save(participante);
@@ -41,7 +41,7 @@ public class GestaoParticipanteService {
 
 	public Participante atualizar(Integer id, Participante participante) {
 		if (!participanteRepository.existsById(id)) {
-			throw new NegocioException("ID não encontrado");
+			throw new DomainException("ID não encontrado");
 		}
 		participante.setId(id);
 

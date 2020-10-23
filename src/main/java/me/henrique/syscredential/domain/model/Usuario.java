@@ -5,21 +5,28 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import me.henrique.syscredential.api.dto.UsuarioInput;
+
 @Entity
 public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String login;
+
+	@JsonIgnore
 	private String senha;
+	@JsonIgnore
 	private Boolean admin;
 
 	public Usuario() {
 	}
 
-	public Usuario(String login, String senha) {
-		this.login = login;
-		this.senha = senha;
+	public Usuario(UsuarioInput dto) {
+		this.login = dto.getLogin();
+		this.senha = dto.getSenha();
 		this.admin = false;
 	}
 
