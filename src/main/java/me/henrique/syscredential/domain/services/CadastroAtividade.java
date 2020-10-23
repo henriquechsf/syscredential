@@ -1,7 +1,6 @@
 package me.henrique.syscredential.domain.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,12 +25,6 @@ public class CadastroAtividade {
 	}
 
 	public Atividade salvar(Atividade atividade) {
-		Optional<Atividade> obj = atividadeRepository.findById(atividade.getId());
-
-		if (obj.isPresent()) {
-			throw new NegocioException("Atividade já cadastrado");
-		}
-
 		return atividadeRepository.save(atividade);
 	}
 
