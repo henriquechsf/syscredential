@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import me.henrique.syscredential.api.dto.AtividadeInput;
 import me.henrique.syscredential.api.dto.EventoInput;
 import me.henrique.syscredential.api.dto.ParticipanteInput;
+import me.henrique.syscredential.api.dto.RegionalInput;
 import me.henrique.syscredential.domain.enums.TamanhoCamiseta;
 import me.henrique.syscredential.domain.model.Atividade;
 import me.henrique.syscredential.domain.model.Evento;
@@ -40,13 +41,16 @@ public class TestConfig implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Regional reg1 = new Regional(1, "Umuarama", "UMU");
-		Regional reg2 = new Regional(2, "Maringá", "MAR");
+		RegionalInput regdto1 = new RegionalInput(1, "Umuarama", "UMU");
+		RegionalInput regdto2 = new RegionalInput(2, "Maringá", "MAR");
+
+		Regional reg1 = new Regional(regdto1);
+		Regional reg2 = new Regional(regdto2);
 
 		rr.saveAll(Arrays.asList(reg1, reg2));
 
-		ParticipanteInput pdto1 = new ParticipanteInput("0444658981", "Henrique", "henrique@email.com",
-				"44984414582", TamanhoCamiseta.G, reg1);
+		ParticipanteInput pdto1 = new ParticipanteInput("0444658981", "Henrique", "henrique@email.com", "44984414582",
+				TamanhoCamiseta.G, reg1);
 		ParticipanteInput pdto2 = new ParticipanteInput("9998887772", "Dani Guerra", "dani@email.com", "99988877",
 				TamanhoCamiseta.P, reg2);
 
@@ -62,7 +66,7 @@ public class TestConfig implements CommandLineRunner {
 
 		Atividade at1 = new Atividade(atdto1);
 		Atividade at2 = new Atividade(atdto2);
-		
+
 		ar.saveAll(Arrays.asList(at1, at2));
 
 		EventoInput evdto1 = new EventoInput("Convenção de Natal", "Convenção de Vendas", "Hotel Mabu - Curitiba",

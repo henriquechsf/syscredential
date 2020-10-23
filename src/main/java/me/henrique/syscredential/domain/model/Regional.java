@@ -9,6 +9,8 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import me.henrique.syscredential.api.dto.RegionalInput;
+
 @Entity
 public class Regional {
 	@Id
@@ -23,10 +25,10 @@ public class Regional {
 	public Regional() {
 	}
 
-	public Regional(Integer id, String nome, String sigla) {
-		this.id = id;
-		this.nome = nome;
-		this.sigla = sigla;
+	public Regional(RegionalInput dto) {
+		this.id = dto.getId();
+		this.nome = dto.getNome();
+		this.sigla = dto.getSigla();
 	}
 
 	public Integer getId() {

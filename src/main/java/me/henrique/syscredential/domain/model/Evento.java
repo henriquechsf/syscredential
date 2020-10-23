@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,6 +26,8 @@ public class Evento {
 	private String local;
 	private Instant inicio;
 	private Instant termino;
+	
+	@Enumerated(EnumType.STRING)
 	private StatusEvento status;
 	
 	@OneToMany(mappedBy = "evento")

@@ -1,6 +1,8 @@
 package me.henrique.syscredential.domain.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,7 +23,10 @@ public class Participante {
 	private String nome;
 	private String email;
 	private String telefone;
+	
+	@Enumerated(EnumType.STRING)
 	private TamanhoCamiseta camiseta;
+	@Enumerated(EnumType.STRING)
 	private StatusParticipante status;
 
 	@ManyToOne

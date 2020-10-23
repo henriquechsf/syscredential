@@ -24,7 +24,6 @@ public class Atividade {
 
 	@ManyToOne
 	@JoinColumn(name = "evento_id")
-	// @JsonIgnore
 	private Evento evento;
 
 	public Atividade() {
