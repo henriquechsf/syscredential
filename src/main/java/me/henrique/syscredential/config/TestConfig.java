@@ -1,6 +1,7 @@
 package me.henrique.syscredential.config;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,9 +71,9 @@ public class TestConfig implements CommandLineRunner {
 		ar.saveAll(Arrays.asList(at1, at2));
 
 		EventoInput evdto1 = new EventoInput("Convenção de Natal", "Convenção de Vendas", "Hotel Mabu - Curitiba",
-				Instant.parse("2020-12-02T08:00:00Z"), Instant.parse("2020-12-02T17:00:00Z"));
+			LocalDateTime.of(2020,12,02,8,00), LocalDateTime.of(2020,12,02,18,00));
 		EventoInput evdto2 = new EventoInput("Convenção Junina", "Convenção de Vendas", "Chácara Mafalda",
-				Instant.parse("2020-06-02T08:00:00Z"), Instant.parse("2020-06-02T12:00:00Z"));
+			LocalDateTime.of(2020,12,02,8,00), LocalDateTime.of(2020,12,02,18,00));
 
 		Evento ev1 = new Evento(evdto1);
 		Evento ev2 = new Evento(evdto2);

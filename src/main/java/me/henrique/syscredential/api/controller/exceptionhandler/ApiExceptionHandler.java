@@ -14,15 +14,15 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import me.henrique.syscredential.domain.exception.DomainException;
-import me.henrique.syscredential.domain.exception.RecursoNaoEncontradoException;
+import me.henrique.syscredential.domain.exception.NegocioException;
+import me.henrique.syscredential.domain.exception.EntidadeNaoEncontradaException;
 
 @ControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
 	// lançamento de exceção para as regras de negócio
-	@ExceptionHandler(DomainException.class)
-	public ResponseEntity<Object> handleNegocio(DomainException ex, WebRequest request) {
+	@ExceptionHandler(NegocioException.class)
+	public ResponseEntity<Object> handleNegocio(NegocioException ex, WebRequest request) {
 		var status = HttpStatus.BAD_REQUEST;
 
 		var problema = new Problema();
@@ -33,8 +33,8 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		return handleExceptionInternal(ex, problema, new HttpHeaders(), status, request);
 	}
 	
-	@ExceptionHandler(RecursoNaoEncontradoException.class)
-	public ResponseEntity<Object> handleNegocio(RecursoNaoEncontradoException ex, WebRequest request) {
+	@ExceptionHandler(EntidadeNaoEncontradaException.class)
+	public ResponseEntity<Object> handleNegocio(EntidadeNaoEncontradaException ex, WebRequest request) {
 		var status = HttpStatus.NOT_FOUND;
 
 		var problema = new Problema();
@@ -48,7 +48,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
-		// TODO Auto-generated method stub
+
 		var campos = new ArrayList<Problema.Campo>();
 
 		for (ObjectError error : ex.getBindingResult().getAllErrors()) {

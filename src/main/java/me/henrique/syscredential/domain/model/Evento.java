@@ -1,6 +1,7 @@
 package me.henrique.syscredential.domain.model;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,8 +25,8 @@ public class Evento {
 	private String titulo;
 	private String descricao;
 	private String local;
-	private Instant inicio;
-	private Instant termino;
+	private LocalDateTime inicio;
+	private LocalDateTime termino;
 	
 	@Enumerated(EnumType.STRING)
 	private StatusEvento status;
@@ -77,19 +78,19 @@ public class Evento {
 		this.local = local;
 	}
 
-	public Instant getInicio() {
+	public LocalDateTime getInicio() {
 		return inicio;
 	}
 
-	public void setInicio(Instant inicio) {
+	public void setInicio(LocalDateTime inicio) {
 		this.inicio = inicio;
 	}
 
-	public Instant getTermino() {
+	public LocalDateTime getTermino() {
 		return termino;
 	}
 
-	public void setTermino(Instant termino) {
+	public void setTermino(LocalDateTime termino) {
 		this.termino = termino;
 	}
 
