@@ -14,34 +14,34 @@ import me.henrique.syscredential.domain.repository.AtividadeRepository;
 public class GestaoAtividadeService {
 
 	@Autowired
-	private AtividadeRepository atividadeRepository;
+	public AtividadeRepository repository;
 
 	public List<Atividade> listar() {
-		return atividadeRepository.findAll();
+		return repository.findAll();
 	}
 
 	public Atividade listarPorId(Integer id) {
-		return atividadeRepository.findById(id).orElseThrow(() -> new NegocioException("ID não encontrado"));
+		return repository.findById(id).orElseThrow(() -> new NegocioException("ID não encontrado"));
 	}
 
 	public Atividade salvar(Atividade atividade) {
-		return atividadeRepository.save(atividade);
+		return repository.save(atividade);
 	}
 
 	public Atividade atualizar(Integer id, Atividade atividade) {
-		if (!atividadeRepository.existsById(id)) {
+		if (!repository.existsById(id)) {
 			throw new NegocioException("ID não encontrado");
 		}
 		atividade.setId(id);
 
-		return atividadeRepository.save(atividade);
+		return repository.save(atividade);
 	}
 
 	public void remover(Integer id) {
-		if (!atividadeRepository.existsById(id)) {
+		if (!repository.existsById(id)) {
 			throw new EntidadeNaoEncontradaException("ID não encontrado");
 		}
-		atividadeRepository.deleteById(id);
+		repository.deleteById(id);
 	}
 
 }

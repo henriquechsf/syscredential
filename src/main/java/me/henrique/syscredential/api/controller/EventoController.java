@@ -8,42 +8,45 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import me.henrique.syscredential.api.dto.EventoInput;
 import me.henrique.syscredential.domain.model.Evento;
 import me.henrique.syscredential.domain.services.GestaoEventoService;
+import org.springframework.web.servlet.ModelAndView;
 
-@CrossOrigin
 @RestController
-@RequestMapping("/eventos")
+@Controller
+@RequestMapping("/")
 public class EventoController {
 
 	@Autowired
 	private GestaoEventoService service;
 
-	@GetMapping
+	@GetMapping("/eventos")
+	public ModelAndView getEventos() {
+		ModelAndView mv = new ModelAndView("eventos");
+		List<Evento> eventos = service.listar();
+		mv.addObject("eventos", eventos);
+		return mv;
+	}
+
+	@CrossOrigin
+	@GetMapping("/api/eventos")
 	public List<Evento> listar() {
 		return service.listar();
 	}
 
-	@GetMapping("/{id}")
+	@CrossOrigin
+	@GetMapping("/api/eventos/{id}")
 	public ResponseEntity<Evento> listarPorId(@PathVariable Integer id) {
 		return ResponseEntity.ok(service.listarPorId(id));
 	}
 
 	@Transactional
 	@CrossOrigin
-	@PostMapping
+	@PostMapping("/api/eventos")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<Evento> adicionar(@Valid @RequestBody EventoInput dto) {
 		Evento evento = new Evento(dto);
@@ -52,14 +55,14 @@ public class EventoController {
 
 	@Transactional
 	@CrossOrigin
-	@PutMapping("/{id}")
+	@PutMapping("/api/eventos/{id}")
 	public ResponseEntity<Evento> atualizar(@PathVariable Integer id, @RequestBody EventoInput dto) {
 		Evento evento = new Evento(dto);
 		return ResponseEntity.ok(service.atualizar(id, evento));
 	}
 
 	@CrossOrigin
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/api/eventos/{id}")
 	public ResponseEntity<Void> remover(@PathVariable Integer id) {
 		service.remover(id);
 		return ResponseEntity.noContent().build();

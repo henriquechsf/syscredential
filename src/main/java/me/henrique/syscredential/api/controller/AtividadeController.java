@@ -22,7 +22,6 @@ import me.henrique.syscredential.api.dto.AtividadeInput;
 import me.henrique.syscredential.domain.model.Atividade;
 import me.henrique.syscredential.domain.services.GestaoAtividadeService;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/atividades")
 public class AtividadeController {

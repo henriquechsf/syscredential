@@ -22,7 +22,6 @@ import me.henrique.syscredential.api.dto.RegionalInput;
 import me.henrique.syscredential.domain.model.Regional;
 import me.henrique.syscredential.domain.services.GestaoRegionalService;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/regionais")
 public class RegionalController {

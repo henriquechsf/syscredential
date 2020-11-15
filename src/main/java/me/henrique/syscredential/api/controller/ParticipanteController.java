@@ -22,7 +22,6 @@ import me.henrique.syscredential.api.dto.ParticipanteInput;
 import me.henrique.syscredential.domain.model.Participante;
 import me.henrique.syscredential.domain.services.GestaoParticipanteService;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/participantes")
 public class ParticipanteController {

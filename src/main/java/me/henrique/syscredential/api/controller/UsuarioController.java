@@ -22,7 +22,6 @@ import me.henrique.syscredential.api.dto.UsuarioInput;
 import me.henrique.syscredential.domain.model.Usuario;
 import me.henrique.syscredential.domain.services.GestaoUsuarioService;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {

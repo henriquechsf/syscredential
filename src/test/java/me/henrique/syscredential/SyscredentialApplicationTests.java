@@ -1,14 +1,13 @@
 package me.henrique.syscredential;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SyscredentialApplicationTests {
+public class SyscredentialApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
+
+    }
 }
