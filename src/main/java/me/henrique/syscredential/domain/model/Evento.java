@@ -27,10 +27,10 @@ public class Evento {
 	private String local;
 	private LocalDateTime inicio;
 	private LocalDateTime termino;
-	
+
 	@Enumerated(EnumType.STRING)
 	private StatusEvento status;
-	
+
 	@OneToMany(mappedBy = "evento")
 	private List<Atividade> atividades = new ArrayList<>();
 
@@ -106,7 +106,7 @@ public class Evento {
 		return atividades;
 	}
 
-	public void adicionarAtividade(Atividade atividade) {
-		this.atividades.add(atividade);
+	public void adicionarAtividade(List<Atividade> atividades) {
+		atividades.forEach(atividade -> this.atividades.add(atividade));
 	}
 }

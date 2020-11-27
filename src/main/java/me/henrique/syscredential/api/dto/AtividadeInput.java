@@ -1,6 +1,7 @@
 package me.henrique.syscredential.api.dto;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -19,13 +20,13 @@ public class AtividadeInput {
 	@Length(min = 10, max = 100)
 	private String descricao;
 
-	private Instant inicio;
-	private Instant termino;
+	private LocalDateTime inicio;
+	private LocalDateTime termino;
 
 	public AtividadeInput() {
 	}
 
-	public AtividadeInput(String titulo, String descricao, Instant inicio, Instant termino) {
+	public AtividadeInput(String titulo, String descricao, LocalDateTime inicio, LocalDateTime termino) {
 		this.titulo = titulo;
 		this.descricao = descricao;
 		this.inicio = inicio;
@@ -48,19 +49,19 @@ public class AtividadeInput {
 		this.descricao = descricao;
 	}
 
-	public Instant getInicio() {
+	public LocalDateTime getInicio() {
 		return inicio;
 	}
 
-	public void setInicio(Instant inicio) {
+	public void setInicio(LocalDateTime inicio) {
 		this.inicio = inicio;
 	}
 
-	public Instant getTermino() {
+	public LocalDateTime getTermino() {
 		return termino;
 	}
 
-	public void setTermino(Instant termino) {
+	public void setTermino(LocalDateTime termino) {
 		this.termino = termino;
 	}
 

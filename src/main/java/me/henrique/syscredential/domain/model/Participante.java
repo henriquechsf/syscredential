@@ -26,6 +26,7 @@ public class Participante {
 	
 	@Enumerated(EnumType.STRING)
 	private TamanhoCamiseta camiseta;
+
 	@Enumerated(EnumType.STRING)
 	private StatusParticipante status;
 

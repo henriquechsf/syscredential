@@ -1,6 +1,5 @@
 package me.henrique.syscredential.config;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
@@ -28,27 +27,24 @@ import me.henrique.syscredential.domain.repository.RegionalRepository;
 public class TestConfig implements CommandLineRunner {
 
 	@Autowired
-	RegionalRepository rr;
+	RegionalRepository regionalRepository;
 
 	@Autowired
-	ParticipanteRepository pr;
+	ParticipanteRepository participanteRepository;
 
 	@Autowired
-	EventoRepository er;
+	EventoRepository eventoRepository;
 
 	@Autowired
-	AtividadeRepository ar;
+	AtividadeRepository atividadeRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
 
-		RegionalInput regdto1 = new RegionalInput(1, "Umuarama", "UMU");
-		RegionalInput regdto2 = new RegionalInput(2, "Maringá", "MAR");
+		Regional reg1 = new Regional(new RegionalInput(1, "Umuarama", "UMU"));
+		Regional reg2 = new Regional(new RegionalInput(2, "Maringá", "MAR"));
 
-		Regional reg1 = new Regional(regdto1);
-		Regional reg2 = new Regional(regdto2);
-
-		rr.saveAll(Arrays.asList(reg1, reg2));
+		regionalRepository.saveAll(Arrays.asList(reg1, reg2));
 
 		ParticipanteInput pdto1 = new ParticipanteInput("0444658981", "Henrique", "henrique@email.com", "44984414582",
 				TamanhoCamiseta.G, reg1);
@@ -58,31 +54,29 @@ public class TestConfig implements CommandLineRunner {
 		Participante p1 = new Participante(pdto1);
 		Participante p2 = new Participante(pdto2);
 
-		pr.saveAll(Arrays.asList(p1, p2));
+		participanteRepository.saveAll(Arrays.asList(p1, p2));
 
 		AtividadeInput atdto1 = new AtividadeInput("Palestra de Vendas", "Como aumentar suas vendas",
-				Instant.parse("2020-12-02T08:00:00Z"), Instant.parse("2020-12-02T10:00:00Z"));
+				LocalDateTime.of(2020, 12, 2, 8, 0), LocalDateTime.of(2020, 12, 2, 9, 0));
 		AtividadeInput atdto2 = new AtividadeInput("Degusta Zaeli", "Degustação com os principais produtos",
-				Instant.parse("2020-12-02T10:00:00Z"), Instant.parse("2020-12-02T12:00:00Z"));
+				LocalDateTime.of(2020, 12, 2, 10, 0), LocalDateTime.of(2020, 12, 2, 12, 0));
 
 		Atividade at1 = new Atividade(atdto1);
 		Atividade at2 = new Atividade(atdto2);
 
-		ar.saveAll(Arrays.asList(at1, at2));
-
 		EventoInput evdto1 = new EventoInput("Convenção de Natal", "Convenção de Vendas", "Hotel Mabu - Curitiba",
-			LocalDateTime.of(2020,12,02,8,00), LocalDateTime.of(2020,12,02,18,00));
+			LocalDateTime.of(2020,12,2,8,0), LocalDateTime.of(2020,12,2,18,0));
 		EventoInput evdto2 = new EventoInput("Convenção Junina", "Convenção de Vendas", "Chácara Mafalda",
-			LocalDateTime.of(2020,12,02,8,00), LocalDateTime.of(2020,12,02,18,00));
+			LocalDateTime.of(2020,12,2,8,0), LocalDateTime.of(2020,12,2,18,0));
 
 		Evento ev1 = new Evento(evdto1);
 		Evento ev2 = new Evento(evdto2);
 
-		/* FALTA CORRIGIR ASSOCIAÇÃO */
-		ev1.adicionarAtividade(at1);
-		ev1.adicionarAtividade(at2);
-		ev2.adicionarAtividade(at2);
-		er.saveAll(Arrays.asList(ev1, ev2));
+		at1.setEvento(ev1);
+		at2.setEvento(ev1);
+
+		eventoRepository.saveAll(Arrays.asList(ev1, ev2));
+		atividadeRepository.saveAll(Arrays.asList(at1, at2));
 	}
 
 }
