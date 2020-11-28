@@ -1,6 +1,5 @@
 package me.henrique.syscredential.domain.model;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

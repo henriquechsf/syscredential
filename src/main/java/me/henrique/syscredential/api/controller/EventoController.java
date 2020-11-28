@@ -24,7 +24,6 @@ import me.henrique.syscredential.domain.model.Evento;
 import me.henrique.syscredential.domain.services.GestaoEventoService;
 import org.springframework.web.servlet.ModelAndView;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/eventos")
 public class EventoController {
@@ -32,20 +31,16 @@ public class EventoController {
 	@Autowired
 	private GestaoEventoService service;
 
-	@CrossOrigin
 	@GetMapping
 	public List<Evento> listar() {
 		return service.listar();
 	}
 
-	@CrossOrigin
 	@GetMapping("/{id}")
 	public ResponseEntity<Evento> listarPorId(@PathVariable Integer id) {
 		return ResponseEntity.ok(service.listarPorId(id));
 	}
 
-	@Transactional
-	@CrossOrigin
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<Evento> adicionar(@Valid @RequestBody EventoInput dto) {
@@ -53,15 +48,12 @@ public class EventoController {
 		return ResponseEntity.ok(service.salvar(evento));
 	}
 
-	@Transactional
-	@CrossOrigin
 	@PutMapping("/{id}")
 	public ResponseEntity<Evento> atualizar(@PathVariable Integer id, @RequestBody EventoInput dto) {
 		Evento evento = new Evento(dto);
 		return ResponseEntity.ok(service.atualizar(id, evento));
 	}
 
-	@CrossOrigin
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> remover(@PathVariable Integer id) {
 		service.remover(id);
