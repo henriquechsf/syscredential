@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import me.henrique.syscredential.domain.exception.NegocioException;
-import me.henrique.syscredential.domain.exception.EntidadeNaoEncontradaException;
+import me.henrique.syscredential.domain.exception.DomainException;
+import me.henrique.syscredential.domain.exception.EntityNotFoundException;
 import me.henrique.syscredential.domain.model.Usuario;
 import me.henrique.syscredential.domain.repository.UsuarioRepository;
 
@@ -22,14 +22,14 @@ public class GestaoUsuarioService {
 	}
 
 	public Usuario listarPorId(Integer id) {
-		return repository.findById(id).orElseThrow(() -> new EntidadeNaoEncontradaException("ID não encontrado"));
+		return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("ID não encontrado"));
 	}
 
 	public Usuario salvar(Usuario usuario) {
 		Optional<Usuario> obj = repository.findByLogin(usuario.getLogin());
 
 		if (obj.isPresent()) {
-			throw new NegocioException("Login já cadastrado");
+			throw new DomainException("Login já cadastrado");
 		}
 
 		return repository.save(usuario);
@@ -37,7 +37,7 @@ public class GestaoUsuarioService {
 
 	public Usuario atualizar(Integer id, Usuario usuario) {
 		if (!repository.existsById(id)) {
-			throw new EntidadeNaoEncontradaException("ID não encontrado");
+			throw new EntityNotFoundException("ID não encontrado");
 		}
 		usuario.setId(id);
 
@@ -46,7 +46,7 @@ public class GestaoUsuarioService {
 
 	public void remover(Integer id) {
 		if (!repository.existsById(id)) {
-			throw new EntidadeNaoEncontradaException("ID não encontrado");
+			throw new EntityNotFoundException("ID não encontrado");
 		}
 		repository.deleteById(id);
 	}

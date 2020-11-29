@@ -3,6 +3,7 @@ package me.henrique.syscredential.api.dto;
 import java.time.Instant;
 import java.time.LocalDateTime;
 
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
@@ -21,8 +22,10 @@ public class EventoInput {
 	@Length(min = 4, max = 50)
 	private String local;
 
+	@FutureOrPresent
 	private LocalDateTime inicio;
 
+	@FutureOrPresent
 	private LocalDateTime termino;
 
 	public EventoInput() {

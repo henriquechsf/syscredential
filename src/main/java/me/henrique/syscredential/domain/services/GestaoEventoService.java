@@ -2,11 +2,11 @@ package me.henrique.syscredential.domain.services;
 
 import java.util.List;
 
+import me.henrique.syscredential.domain.enums.StatusEvento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import me.henrique.syscredential.domain.exception.NegocioException;
-import me.henrique.syscredential.domain.exception.EntidadeNaoEncontradaException;
+import me.henrique.syscredential.domain.exception.EntityNotFoundException;
 import me.henrique.syscredential.domain.model.Evento;
 import me.henrique.syscredential.domain.repository.EventoRepository;
 
@@ -14,34 +14,34 @@ import me.henrique.syscredential.domain.repository.EventoRepository;
 public class GestaoEventoService {
 
 	@Autowired
-	private EventoRepository eventoRepository;
+	private EventoRepository repository;
 
-	public List<Evento> listar() {
-		return eventoRepository.findAll();
+	public List<Evento> getAll() {
+		return repository.findAll();
 	}
 
-	public Evento listarPorId(Integer id) {
-		return eventoRepository.findById(id).orElseThrow(() -> new NegocioException("ID não encontrado"));
+	public Evento getById(Integer id) {
+		return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("ID não encontrado"));
 	}
 
-	public Evento salvar(Evento evento) {
-		return eventoRepository.save(evento);
+	public Evento save(Evento evento) {
+		return repository.save(evento);
 	}
 
-	public Evento atualizar(Integer id, Evento evento) {
-		if (!eventoRepository.existsById(id)) {
-			throw new EntidadeNaoEncontradaException("ID não encontrado");
+	public Evento update(Integer id, Evento evento) {
+		if (!repository.existsById(id)) {
+			throw new EntityNotFoundException("ID não encontrado");
 		}
 		evento.setId(id);
 
-		return eventoRepository.save(evento);
+		return repository.save(evento);
 	}
 
-	public void remover(Integer id) {
-		if (!eventoRepository.existsById(id)) {
-			throw new EntidadeNaoEncontradaException("ID não encontrado");
+	public void delete(Integer id) {
+		if (!repository.existsById(id)) {
+			throw new EntityNotFoundException("ID não encontrado");
 		}
-		eventoRepository.deleteById(id);
+		repository.deleteById(id);
 	}
 
 }

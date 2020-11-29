@@ -1,14 +1,19 @@
 package me.henrique.syscredential.api.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
+import me.henrique.syscredential.api.request.EventoRequest;
+import me.henrique.syscredential.api.response.EventoResponse;
+import me.henrique.syscredential.domain.enums.StatusEvento;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +27,6 @@ import org.springframework.web.bind.annotation.RestController;
 import me.henrique.syscredential.api.dto.EventoInput;
 import me.henrique.syscredential.domain.model.Evento;
 import me.henrique.syscredential.domain.services.GestaoEventoService;
-import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @RequestMapping("/eventos")
@@ -32,31 +36,38 @@ public class EventoController {
 	private GestaoEventoService service;
 
 	@GetMapping
-	public List<Evento> listar() {
-		return service.listar();
+	public List<EventoResponse> getAll() {
+		List<Evento> eventos = service.getAll();
+		List<EventoResponse> eventosResponse = new ArrayList<>();
+		eventos.forEach(evento -> eventosResponse.add(new EventoResponse(evento)));
+		return eventosResponse;
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Evento> listarPorId(@PathVariable Integer id) {
-		return ResponseEntity.ok(service.listarPorId(id));
+	public ResponseEntity<EventoResponse> getById(@PathVariable Integer id) {
+		Evento evento = service.getById(id);
+		return ResponseEntity.ok(new EventoResponse(evento));
 	}
 
+	@Transactional
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<Evento> adicionar(@Valid @RequestBody EventoInput dto) {
-		Evento evento = new Evento(dto);
-		return ResponseEntity.ok(service.salvar(evento));
+	public ResponseEntity<EventoResponse> save(@Valid @RequestBody EventoRequest request) {
+		Evento evento = new Evento(request);
+		Evento eventoSalvo = service.save(evento);
+		return ResponseEntity.ok(new EventoResponse(eventoSalvo));
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Evento> atualizar(@PathVariable Integer id, @RequestBody EventoInput dto) {
-		Evento evento = new Evento(dto);
-		return ResponseEntity.ok(service.atualizar(id, evento));
+	public ResponseEntity<EventoResponse> update(@PathVariable Integer id, @RequestBody EventoRequest request) {
+		Evento evento = new Evento(request);
+		Evento eventoAtualizado = service.update(id, evento);
+		return ResponseEntity.ok(new EventoResponse(eventoAtualizado));
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> remover(@PathVariable Integer id) {
-		service.remover(id);
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
+		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 }

@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import me.henrique.syscredential.domain.exception.NegocioException;
-import me.henrique.syscredential.domain.exception.EntidadeNaoEncontradaException;
+import me.henrique.syscredential.domain.exception.DomainException;
+import me.henrique.syscredential.domain.exception.EntityNotFoundException;
 import me.henrique.syscredential.domain.model.Regional;
 import me.henrique.syscredential.domain.repository.RegionalRepository;
 
@@ -22,14 +22,14 @@ public class GestaoRegionalService {
 	}
 
 	public Regional listarPorId(Integer id) {
-		return regionalRepository.findById(id).orElseThrow(() -> new NegocioException("ID não encontrado"));
+		return regionalRepository.findById(id).orElseThrow(() -> new DomainException("ID não encontrado"));
 	}
 
 	public Regional salvar(Regional regional) {
 		Optional<Regional> obj = regionalRepository.findById(regional.getId());
 
 		if (obj.isPresent()) {
-			throw new NegocioException("Regional já cadastrada");
+			throw new DomainException("Regional já cadastrada");
 		}
 
 		return regionalRepository.save(regional);
@@ -37,7 +37,7 @@ public class GestaoRegionalService {
 
 	public Regional atualizar(Integer id, Regional regional) {
 		if (!regionalRepository.existsById(id)) {
-			throw new EntidadeNaoEncontradaException("ID não encontrado");
+			throw new EntityNotFoundException("ID não encontrado");
 		}
 		regional.setId(id);
 
@@ -46,7 +46,7 @@ public class GestaoRegionalService {
 
 	public void remover(Integer id) {
 		if (!regionalRepository.existsById(id)) {
-			throw new EntidadeNaoEncontradaException("ID não encontrado");
+			throw new EntityNotFoundException("ID não encontrado");
 		}
 		regionalRepository.deleteById(id);
 	}

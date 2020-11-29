@@ -3,6 +3,8 @@ package me.henrique.syscredential.config;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
+import me.henrique.syscredential.api.request.EventoRequest;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -64,9 +66,9 @@ public class TestConfig implements CommandLineRunner {
 		Atividade at1 = new Atividade(atdto1);
 		Atividade at2 = new Atividade(atdto2);
 
-		EventoInput evdto1 = new EventoInput("Convenção de Natal", "Convenção de Vendas", "Hotel Mabu - Curitiba",
+		EventoRequest evdto1 = new EventoRequest("Convenção de Natal", "Convenção de Vendas", "Hotel Mabu - Curitiba",
 			LocalDateTime.of(2020,12,2,8,0), LocalDateTime.of(2020,12,2,18,0));
-		EventoInput evdto2 = new EventoInput("Convenção Junina", "Convenção de Vendas", "Chácara Mafalda",
+		EventoRequest evdto2 = new EventoRequest("Convenção Junina", "Convenção de Vendas", "Chácara Mafalda",
 			LocalDateTime.of(2020,12,2,8,0), LocalDateTime.of(2020,12,2,18,0));
 
 		Evento ev1 = new Evento(evdto1);

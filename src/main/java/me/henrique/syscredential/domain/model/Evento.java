@@ -12,7 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import me.henrique.syscredential.api.dto.EventoInput;
+import me.henrique.syscredential.api.request.EventoRequest;
 import me.henrique.syscredential.domain.enums.StatusEvento;
 
 @Entity
@@ -36,12 +36,12 @@ public class Evento {
 	public Evento() {
 	}
 
-	public Evento(EventoInput dto) {
-		this.titulo = 		dto.getTitulo();
-		this.descricao = 	dto.getDescricao();
-		this.local = 		dto.getLocal();
-		this.inicio = 		dto.getInicio();
-		this.termino = 		dto.getTermino();
+	public Evento(EventoRequest dto) {
+		this.titulo = dto.getTitulo();
+		this.descricao = dto.getDescricao();
+		this.local = dto.getLocal();
+		this.inicio = dto.getInicio();
+		this.termino = dto.getTermino();
 		this.status = StatusEvento.CADASTRADO;
 	}
 

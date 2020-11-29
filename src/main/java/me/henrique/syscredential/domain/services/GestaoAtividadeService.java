@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import me.henrique.syscredential.domain.exception.NegocioException;
-import me.henrique.syscredential.domain.exception.EntidadeNaoEncontradaException;
+import me.henrique.syscredential.domain.exception.DomainException;
+import me.henrique.syscredential.domain.exception.EntityNotFoundException;
 import me.henrique.syscredential.domain.model.Atividade;
 import me.henrique.syscredential.domain.repository.AtividadeRepository;
 
@@ -21,7 +21,7 @@ public class GestaoAtividadeService {
 	}
 
 	public Atividade listarPorId(Integer id) {
-		return repository.findById(id).orElseThrow(() -> new NegocioException("ID não encontrado"));
+		return repository.findById(id).orElseThrow(() -> new DomainException("ID não encontrado"));
 	}
 
 	public Atividade salvar(Atividade atividade) {
@@ -30,7 +30,7 @@ public class GestaoAtividadeService {
 
 	public Atividade atualizar(Integer id, Atividade atividade) {
 		if (!repository.existsById(id)) {
-			throw new NegocioException("ID não encontrado");
+			throw new DomainException("ID não encontrado");
 		}
 		atividade.setId(id);
 
@@ -39,7 +39,7 @@ public class GestaoAtividadeService {
 
 	public void remover(Integer id) {
 		if (!repository.existsById(id)) {
-			throw new EntidadeNaoEncontradaException("ID não encontrado");
+			throw new EntityNotFoundException("ID não encontrado");
 		}
 		repository.deleteById(id);
 	}
