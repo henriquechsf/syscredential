@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import me.henrique.syscredential.api.dto.UsuarioInput;
+import me.henrique.syscredential.controller.request.UsuarioRequest;
 
 @Entity
 public class Usuario {
@@ -24,7 +24,7 @@ public class Usuario {
 	public Usuario() {
 	}
 
-	public Usuario(UsuarioInput dto) {
+	public Usuario(UsuarioRequest dto) {
 		this.login = dto.getLogin();
 		this.senha = dto.getSenha();
 		this.admin = false;

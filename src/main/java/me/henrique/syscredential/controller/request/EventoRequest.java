@@ -1,18 +1,15 @@
-package me.henrique.syscredential.api.request;
-
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.validation.constraints.FutureOrPresent;
-import javax.validation.constraints.NotNull;
+package me.henrique.syscredential.controller.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import me.henrique.syscredential.domain.enums.StatusEvento;
 import me.henrique.syscredential.domain.model.Atividade;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EventoRequest {
 
@@ -30,7 +27,6 @@ public class EventoRequest {
 
     @FutureOrPresent
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalDateTime inicio;
 
     @FutureOrPresent

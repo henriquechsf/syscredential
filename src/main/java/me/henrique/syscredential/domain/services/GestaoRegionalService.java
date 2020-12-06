@@ -1,54 +1,53 @@
 package me.henrique.syscredential.domain.services;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import me.henrique.syscredential.domain.exception.DomainException;
 import me.henrique.syscredential.domain.exception.EntityNotFoundException;
 import me.henrique.syscredential.domain.model.Regional;
 import me.henrique.syscredential.domain.repository.RegionalRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GestaoRegionalService {
 
 	@Autowired
-	private RegionalRepository regionalRepository;
+	private RegionalRepository repository;
 
-	public List<Regional> listar() {
-		return regionalRepository.findAll();
+	public List<Regional> getAll() {
+		return repository.findAll();
 	}
 
-	public Regional listarPorId(Integer id) {
-		return regionalRepository.findById(id).orElseThrow(() -> new DomainException("ID não encontrado"));
+	public Regional getById(Integer id) {
+		return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("ID não encontrado"));
 	}
 
-	public Regional salvar(Regional regional) {
-		Optional<Regional> obj = regionalRepository.findById(regional.getId());
+	public Regional save(Regional regional) {
+		Optional<Regional> obj = repository.findByCod(regional.getCod());
 
 		if (obj.isPresent()) {
 			throw new DomainException("Regional já cadastrada");
 		}
 
-		return regionalRepository.save(regional);
+		return repository.save(regional);
 	}
 
-	public Regional atualizar(Integer id, Regional regional) {
-		if (!regionalRepository.existsById(id)) {
+	public Regional update(Integer id, Regional regional) {
+		if (!repository.existsById(id)) {
 			throw new EntityNotFoundException("ID não encontrado");
 		}
 		regional.setId(id);
 
-		return regionalRepository.save(regional);
+		return repository.save(regional);
 	}
 
-	public void remover(Integer id) {
-		if (!regionalRepository.existsById(id)) {
+	public void delete(Integer id) {
+		if (!repository.existsById(id)) {
 			throw new EntityNotFoundException("ID não encontrado");
 		}
-		regionalRepository.deleteById(id);
+		repository.deleteById(id);
 	}
 
 }

@@ -1,15 +1,14 @@
 package me.henrique.syscredential.domain.services;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import me.henrique.syscredential.domain.exception.DomainException;
 import me.henrique.syscredential.domain.exception.EntityNotFoundException;
 import me.henrique.syscredential.domain.model.Usuario;
 import me.henrique.syscredential.domain.repository.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GestaoUsuarioService {
@@ -17,15 +16,15 @@ public class GestaoUsuarioService {
 	@Autowired
 	private UsuarioRepository repository;
 
-	public List<Usuario> listar() {
+	public List<Usuario> getAll() {
 		return repository.findAll();
 	}
 
-	public Usuario listarPorId(Integer id) {
+	public Usuario getById(Integer id) {
 		return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("ID não encontrado"));
 	}
 
-	public Usuario salvar(Usuario usuario) {
+	public Usuario save(Usuario usuario) {
 		Optional<Usuario> obj = repository.findByLogin(usuario.getLogin());
 
 		if (obj.isPresent()) {
@@ -35,7 +34,7 @@ public class GestaoUsuarioService {
 		return repository.save(usuario);
 	}
 
-	public Usuario atualizar(Integer id, Usuario usuario) {
+	public Usuario update(Integer id, Usuario usuario) {
 		if (!repository.existsById(id)) {
 			throw new EntityNotFoundException("ID não encontrado");
 		}
@@ -44,7 +43,7 @@ public class GestaoUsuarioService {
 		return repository.save(usuario);
 	}
 
-	public void remover(Integer id) {
+	public void delete(Integer id) {
 		if (!repository.existsById(id)) {
 			throw new EntityNotFoundException("ID não encontrado");
 		}

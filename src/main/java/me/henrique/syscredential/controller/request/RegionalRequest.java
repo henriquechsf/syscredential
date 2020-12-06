@@ -1,40 +1,37 @@
-package me.henrique.syscredential.api.dto;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+package me.henrique.syscredential.controller.request;
 
 import org.hibernate.validator.constraints.Length;
 
-public class RegionalInput {
+import javax.validation.constraints.NotNull;
 
-	@NotNull(message = "ID é obrigatório")
-	private Integer id;
+public class RegionalRequest {
+
+	@NotNull(message = "Código é obrigatório")
+	private Integer cod;
 
 	@NotNull(message = "Nome é obrigatório")
-	@NotBlank(message = "Informe um nome válido")
 	@Length(min = 4, max = 50)
 	private String nome;
 
 	@NotNull(message = "Sigla é obrigatório")
-	@NotBlank(message = "Informe uma sigla válida")
 	@Length(min = 2, max = 30)
 	private String sigla;
 
-	public RegionalInput() {
+	public RegionalRequest() {
 	}
 
-	public RegionalInput(Integer id, String nome, String sigla) {
-		this.id = id;
+	public RegionalRequest(Integer cod, String nome, String sigla) {
+		this.cod = cod;
 		this.nome = nome;
 		this.sigla = sigla;
 	}
 
-	public Integer getId() {
-		return id;
+	public Integer getCod() {
+		return cod;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setCod(Integer cod) {
+		this.cod = cod;
 	}
 
 	public String getNome() {

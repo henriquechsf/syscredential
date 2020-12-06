@@ -1,32 +1,31 @@
-package me.henrique.syscredential.api.dto;
+package me.henrique.syscredential.controller.request;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.validator.constraints.Length;
 
-public class AtividadeInput {
+import javax.validation.constraints.NotNull;
+import java.time.LocalTime;
+
+public class AtividadeRequest {
 
 	@NotNull(message = "Título é obrigatório")
-	@NotBlank(message = "Informe o título")
 	@Length(min = 4, max = 50)
 	private String titulo;
 
 	@NotNull(message = "Descrição é obrigatório")
-	@NotBlank(message = "Informe a descrição")
 	@Length(min = 10, max = 100)
 	private String descricao;
 
-	private LocalDateTime inicio;
-	private LocalDateTime termino;
+	@JsonFormat(pattern = "HH:mm")
+	private LocalTime inicio;
 
-	public AtividadeInput() {
+	@JsonFormat(pattern = "HH:mm")
+	private LocalTime termino;
+
+	public AtividadeRequest() {
 	}
 
-	public AtividadeInput(String titulo, String descricao, LocalDateTime inicio, LocalDateTime termino) {
+	public AtividadeRequest(String titulo, String descricao, LocalTime inicio, LocalTime termino) {
 		this.titulo = titulo;
 		this.descricao = descricao;
 		this.inicio = inicio;
@@ -49,19 +48,19 @@ public class AtividadeInput {
 		this.descricao = descricao;
 	}
 
-	public LocalDateTime getInicio() {
+	public LocalTime getInicio() {
 		return inicio;
 	}
 
-	public void setInicio(LocalDateTime inicio) {
+	public void setInicio(LocalTime inicio) {
 		this.inicio = inicio;
 	}
 
-	public LocalDateTime getTermino() {
+	public LocalTime getTermino() {
 		return termino;
 	}
 
-	public void setTermino(LocalDateTime termino) {
+	public void setTermino(LocalTime termino) {
 		this.termino = termino;
 	}
 

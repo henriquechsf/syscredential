@@ -1,36 +1,26 @@
-package me.henrique.syscredential.domain.model;
+package me.henrique.syscredential.controller.response;
 
-import me.henrique.syscredential.controller.request.ParticipanteRequest;
 import me.henrique.syscredential.domain.enums.StatusParticipante;
 import me.henrique.syscredential.domain.enums.TamanhoCamiseta;
+import me.henrique.syscredential.domain.model.Participante;
+import me.henrique.syscredential.domain.model.Regional;
 
-import javax.persistence.*;
-
-@Entity
-public class Participante {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ParticipanteResponse {
 	private Integer id;
-
 	private String cpf;
 	private String nome;
 	private String email;
 	private String telefone;
-	
-	@Enumerated(EnumType.STRING)
 	private TamanhoCamiseta camiseta;
-
-	@Enumerated(EnumType.STRING)
 	private StatusParticipante status;
 
-	@ManyToOne
-	@JoinColumn(name = "regional_id")
 	private Regional regional;
 
-	public Participante() {
+	public ParticipanteResponse() {
 	}
 
-	public Participante(ParticipanteRequest dto) {
+	public ParticipanteResponse(Participante dto) {
+		this.id = dto.getId();
 		this.cpf = dto.getCpf();
 		this.nome = dto.getNome();
 		this.email = dto.getEmail();

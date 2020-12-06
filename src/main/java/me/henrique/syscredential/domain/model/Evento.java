@@ -12,7 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import me.henrique.syscredential.api.request.EventoRequest;
+import me.henrique.syscredential.controller.request.EventoRequest;
 import me.henrique.syscredential.domain.enums.StatusEvento;
 
 @Entity

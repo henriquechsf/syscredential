@@ -1,16 +1,10 @@
 package me.henrique.syscredential.domain.model;
 
-import java.time.LocalDateTime;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import me.henrique.syscredential.api.dto.AtividadeInput;
+import me.henrique.syscredential.controller.request.AtividadeRequest;
+
+import javax.persistence.*;
+import java.time.LocalTime;
 
 @Entity
 public class Atividade {
@@ -20,8 +14,8 @@ public class Atividade {
 
 	private String titulo;
 	private String descricao;
-	private LocalDateTime inicio;
-	private LocalDateTime termino;
+	private LocalTime inicio;
+	private LocalTime termino;
 
 	@JsonIgnore
 	@ManyToOne
@@ -31,7 +25,7 @@ public class Atividade {
 	public Atividade() {
 	}
 
-	public Atividade(AtividadeInput dto) {
+	public Atividade(AtividadeRequest dto) {
 		this.titulo = dto.getTitulo();
 		this.descricao = dto.getDescricao();
 		this.inicio = dto.getInicio();
@@ -62,19 +56,19 @@ public class Atividade {
 		this.descricao = descricao;
 	}
 
-	public LocalDateTime getInicio() {
+	public LocalTime getInicio() {
 		return inicio;
 	}
 
-	public void setInicio(LocalDateTime inicio) {
+	public void setInicio(LocalTime inicio) {
 		this.inicio = inicio;
 	}
 
-	public LocalDateTime getTermino() {
+	public LocalTime getTermino() {
 		return termino;
 	}
 
-	public void setTermino(LocalDateTime termino) {
+	public void setTermino(LocalTime termino) {
 		this.termino = termino;
 	}
 

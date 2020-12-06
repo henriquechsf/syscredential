@@ -1,20 +1,21 @@
 package me.henrique.syscredential.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import me.henrique.syscredential.controller.request.RegionalRequest;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import me.henrique.syscredential.api.dto.RegionalInput;
 
 @Entity
 public class Regional {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+
+	@Column(unique = true)
+	private Integer cod;
+
 	private String nome;
 	private String sigla;
 
@@ -25,8 +26,8 @@ public class Regional {
 	public Regional() {
 	}
 
-	public Regional(RegionalInput dto) {
-		this.id = dto.getId();
+	public Regional(RegionalRequest dto) {
+		this.cod = dto.getCod();
 		this.nome = dto.getNome();
 		this.sigla = dto.getSigla();
 	}
@@ -37,6 +38,14 @@ public class Regional {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Integer getCod() {
+		return cod;
+	}
+
+	public void setCod(Integer cod) {
+		this.cod = cod;
 	}
 
 	public String getNome() {

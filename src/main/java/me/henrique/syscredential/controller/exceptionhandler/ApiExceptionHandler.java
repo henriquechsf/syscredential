@@ -1,23 +1,22 @@
-package me.henrique.syscredential.api.controller.exceptionhandler;
+package me.henrique.syscredential.controller.exceptionhandler;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-
+import me.henrique.syscredential.domain.exception.DomainException;
+import me.henrique.syscredential.domain.exception.EntityNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import me.henrique.syscredential.domain.exception.DomainException;
-import me.henrique.syscredential.domain.exception.EntityNotFoundException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
 	// lançamento de exceção para as regras de negócio
@@ -32,7 +31,8 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
 		return handleExceptionInternal(ex, problema, new HttpHeaders(), status, request);
 	}
-	
+
+	// lançamento de exceção para entidades não encontradas
 	@ExceptionHandler(EntityNotFoundException.class)
 	public ResponseEntity<Object> handleNegocio(EntityNotFoundException ex, WebRequest request) {
 		var status = HttpStatus.NOT_FOUND;
@@ -45,6 +45,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		return handleExceptionInternal(ex, problema, new HttpHeaders(), status, request);
 	}
 
+	// lançamento de exceção para requests com argumentos inválidos
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
@@ -60,7 +61,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
 		var problema = new Problema();
 		problema.setStatus(status.value());
-		problema.setTitulo("Um ou mais campos estão inválidos. " + "Faça o preenchimento correto e tente novamente.");
+		problema.setTitulo("Um ou mais campos estão inválidos. " + "Preencha corretamente e tente novamente.");
 		problema.setDataHora(LocalDateTime.now());
 		problema.setCampos(campos);
 

@@ -1,4 +1,4 @@
-package me.henrique.syscredential.api.controller;
+package me.henrique.syscredential.controller;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

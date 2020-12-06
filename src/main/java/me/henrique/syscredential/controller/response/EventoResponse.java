@@ -1,4 +1,4 @@
-package me.henrique.syscredential.api.response;
+package me.henrique.syscredential.controller.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import me.henrique.syscredential.domain.enums.StatusEvento;
@@ -15,10 +15,10 @@ public class EventoResponse {
     private String descricao;
     private String local;
 
-    @JsonFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern="dd/MM/yyyy HH:mm")
     private LocalDateTime inicio;
 
-    @JsonFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern="dd/MM/yyyy HH:mm")
     private LocalDateTime termino;
 
     private StatusEvento status;

@@ -1,15 +1,17 @@
-package me.henrique.syscredential.api.controller.exceptionhandler;
+package me.henrique.syscredential.controller.exceptionhandler;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(Include.NON_NULL)
 public class Problema {
 
 	private Integer status;
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private LocalDateTime dataHora;
 	private String titulo;
 	private List<Campo> campos;

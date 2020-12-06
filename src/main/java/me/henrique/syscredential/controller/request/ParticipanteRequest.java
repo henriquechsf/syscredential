@@ -1,16 +1,15 @@
-package me.henrique.syscredential.api.dto;
+package me.henrique.syscredential.controller.request;
+
+import me.henrique.syscredential.domain.enums.TamanhoCamiseta;
+import me.henrique.syscredential.domain.model.Regional;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.br.CPF;
-
-import me.henrique.syscredential.domain.enums.TamanhoCamiseta;
-import me.henrique.syscredential.domain.model.Regional;
-
-public class ParticipanteInput {
+public class ParticipanteRequest {
 
 	@CPF(message = "CPF inválido")
 	@NotNull(message = "CPF é obrigatório")
@@ -32,11 +31,11 @@ public class ParticipanteInput {
 	@NotNull(message = "Regional é obrigatório")
 	private Regional regional;
 
-	public ParticipanteInput() {
+	public ParticipanteRequest() {
 	}
 
-	public ParticipanteInput(String cpf, String nome, String email, String telefone, TamanhoCamiseta camiseta,
-			Regional regional) {
+	public ParticipanteRequest(String cpf, String nome, String email, String telefone, TamanhoCamiseta camiseta,
+							   Regional regional) {
 		this.cpf = cpf;
 		this.nome = nome;
 		this.email = email;

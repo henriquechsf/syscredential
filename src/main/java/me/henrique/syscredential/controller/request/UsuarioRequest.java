@@ -1,10 +1,9 @@
-package me.henrique.syscredential.api.dto;
-
-import javax.validation.constraints.NotNull;
+package me.henrique.syscredential.controller.request;
 
 import org.hibernate.validator.constraints.Length;
+import javax.validation.constraints.NotNull;
 
-public class UsuarioInput {
+public class UsuarioRequest {
 
 	@NotNull(message = "Login é obrigatório")
 	@Length(min = 4, max = 30)
@@ -14,10 +13,10 @@ public class UsuarioInput {
 	@Length(min = 4, max = 30)
 	private String senha;
 
-	public UsuarioInput() {
+	public UsuarioRequest() {
 	}
 
-	public UsuarioInput(String login, String senha) {
+	public UsuarioRequest(String login, String senha) {
 		this.login = login;
 		this.senha = senha;
 	}
