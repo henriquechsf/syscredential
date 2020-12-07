@@ -6,7 +6,6 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class ParticipanteRequest {
@@ -16,17 +15,17 @@ public class ParticipanteRequest {
 	private String cpf;
 
 	@NotNull(message = "Nome é obrigatório")
-	@NotBlank(message = "Informe um nome válido")
 	@Length(min = 4, max = 50)
 	private String nome;
 
 	@Email
-	@NotNull(message = "E-mail é obrigatório")
 	private String email;
+
 	private String telefone;
 
-	@NotNull(message = "Camiseta é obrigatório")
 	private TamanhoCamiseta camiseta;
+
+	private Boolean ativo = false;
 
 	@NotNull(message = "Regional é obrigatório")
 	private Regional regional;
@@ -34,13 +33,14 @@ public class ParticipanteRequest {
 	public ParticipanteRequest() {
 	}
 
-	public ParticipanteRequest(String cpf, String nome, String email, String telefone, TamanhoCamiseta camiseta,
+	public ParticipanteRequest(String cpf, String nome, String email, String telefone, TamanhoCamiseta camiseta, Boolean ativo,
 							   Regional regional) {
 		this.cpf = cpf;
 		this.nome = nome;
 		this.email = email;
 		this.telefone = telefone;
 		this.camiseta = camiseta;
+		this.ativo = ativo;
 		this.regional = regional;
 	}
 
@@ -82,6 +82,14 @@ public class ParticipanteRequest {
 
 	public void setCamiseta(TamanhoCamiseta camiseta) {
 		this.camiseta = camiseta;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	public Regional getRegional() {

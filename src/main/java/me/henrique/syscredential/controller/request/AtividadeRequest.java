@@ -17,9 +17,11 @@ public class AtividadeRequest {
 	private String descricao;
 
 	@JsonFormat(pattern = "HH:mm")
+	@NotNull(message = "Horário de início é obrigatório")
 	private LocalTime inicio;
 
 	@JsonFormat(pattern = "HH:mm")
+	@NotNull(message = "Horário de encerramento é obrigatório")
 	private LocalTime termino;
 
 	public AtividadeRequest() {

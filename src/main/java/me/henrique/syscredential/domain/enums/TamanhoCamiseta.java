@@ -4,5 +4,7 @@ public enum TamanhoCamiseta {
 	P,
 	M,
 	G,
-	GG
+	GG,
+	GG1,
+	GG2;
 }

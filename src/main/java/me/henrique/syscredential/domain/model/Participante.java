@@ -1,7 +1,6 @@
 package me.henrique.syscredential.domain.model;
 
 import me.henrique.syscredential.controller.request.ParticipanteRequest;
-import me.henrique.syscredential.domain.enums.StatusParticipante;
 import me.henrique.syscredential.domain.enums.TamanhoCamiseta;
 
 import javax.persistence.*;
@@ -20,8 +19,7 @@ public class Participante {
 	@Enumerated(EnumType.STRING)
 	private TamanhoCamiseta camiseta;
 
-	@Enumerated(EnumType.STRING)
-	private StatusParticipante status;
+	private Boolean ativo;
 
 	@ManyToOne
 	@JoinColumn(name = "regional_id")
@@ -37,7 +35,7 @@ public class Participante {
 		this.telefone = dto.getTelefone();
 		this.camiseta = dto.getCamiseta();
 		this.regional = dto.getRegional();
-		this.status = StatusParticipante.CADASTRADO;
+		this.ativo = dto.getAtivo();
 	}
 
 	public Integer getId() {
@@ -88,12 +86,12 @@ public class Participante {
 		this.camiseta = camiseta;
 	}
 
-	public StatusParticipante getStatus() {
-		return status;
+	public Boolean getAtivo() {
+		return ativo;
 	}
 
-	public void setStatus(StatusParticipante status) {
-		this.status = status;
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	public Regional getRegional() {

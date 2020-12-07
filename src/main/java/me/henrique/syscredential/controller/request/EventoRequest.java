@@ -1,6 +1,5 @@
 package me.henrique.syscredential.controller.request;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import me.henrique.syscredential.domain.enums.StatusEvento;
 import me.henrique.syscredential.domain.model.Atividade;
 import org.hibernate.validator.constraints.Length;
@@ -25,12 +24,14 @@ public class EventoRequest {
     @Length(min = 4, max = 50)
     private String local;
 
+    @NotNull(message = "Local é obrigatório")
+    @Length(min = 4, max = 50)
+    private String cidade;
+
     @FutureOrPresent
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime inicio;
 
     @FutureOrPresent
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime termino;
 
     private StatusEvento status;
@@ -40,10 +41,11 @@ public class EventoRequest {
     public EventoRequest() {
     }
 
-    public EventoRequest(String titulo, String descricao, String local, LocalDateTime inicio, LocalDateTime termino) {
+    public EventoRequest(String titulo, String descricao, String local, String cidade, LocalDateTime inicio, LocalDateTime termino) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.local = local;
+        this.cidade = cidade;
         this.inicio = inicio;
         this.termino = termino;
     }
@@ -70,6 +72,14 @@ public class EventoRequest {
 
     public void setLocal(String local) {
         this.local = local;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
     }
 
     public LocalDateTime getInicio() {

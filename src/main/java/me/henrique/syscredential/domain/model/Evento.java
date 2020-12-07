@@ -1,19 +1,12 @@
 package me.henrique.syscredential.domain.model;
 
+import me.henrique.syscredential.controller.request.EventoRequest;
+import me.henrique.syscredential.domain.enums.StatusEvento;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
-import me.henrique.syscredential.controller.request.EventoRequest;
-import me.henrique.syscredential.domain.enums.StatusEvento;
 
 @Entity
 public class Evento {
@@ -24,6 +17,7 @@ public class Evento {
 	private String titulo;
 	private String descricao;
 	private String local;
+	private String cidade;
 	private LocalDateTime inicio;
 	private LocalDateTime termino;
 
@@ -40,9 +34,10 @@ public class Evento {
 		this.titulo = dto.getTitulo();
 		this.descricao = dto.getDescricao();
 		this.local = dto.getLocal();
+		this.cidade = dto.getCidade();
 		this.inicio = dto.getInicio();
 		this.termino = dto.getTermino();
-		this.status = StatusEvento.CADASTRADO;
+		this.status = StatusEvento.INATIVO;
 	}
 
 	public Integer getId() {
@@ -75,6 +70,14 @@ public class Evento {
 
 	public void setLocal(String local) {
 		this.local = local;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
 	}
 
 	public LocalDateTime getInicio() {

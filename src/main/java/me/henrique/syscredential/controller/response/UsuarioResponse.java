@@ -4,6 +4,7 @@ import me.henrique.syscredential.domain.model.Usuario;
 
 public class UsuarioResponse {
 	private Integer id;
+	private String nome;
 	private String login;
 	private Boolean admin;
 
@@ -12,6 +13,7 @@ public class UsuarioResponse {
 
 	public UsuarioResponse(Usuario dto) {
 		this.id = dto.getId();
+		this.nome = dto.getNome();
 		this.login = dto.getLogin();
 		this.admin = false;
 	}
@@ -22,6 +24,14 @@ public class UsuarioResponse {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getLogin() {

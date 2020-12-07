@@ -14,6 +14,7 @@ public class EventoResponse {
     private String titulo;
     private String descricao;
     private String local;
+    private String cidade;
 
     @JsonFormat(pattern="dd/MM/yyyy HH:mm")
     private LocalDateTime inicio;
@@ -31,6 +32,7 @@ public class EventoResponse {
         this.titulo = evento.getTitulo();
         this.descricao = evento.getDescricao();
         this.local = evento.getLocal();
+        this.cidade = evento.getCidade();
         this.inicio = evento.getInicio();
         this.termino = evento.getTermino();
         this.status = evento.getStatus();
@@ -68,6 +70,14 @@ public class EventoResponse {
 
     public void setLocal(String local) {
         this.local = local;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
     }
 
     public LocalDateTime getInicio() {

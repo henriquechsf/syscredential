@@ -47,7 +47,12 @@ public class GestaoRegionalService {
 		if (!repository.existsById(id)) {
 			throw new EntityNotFoundException("ID não encontrado");
 		}
-		repository.deleteById(id);
+
+		try {
+			repository.deleteById(id);
+		} catch (RuntimeException e) {
+			throw new DomainException("Não foi possível excluir");
+		}
 	}
 
 }

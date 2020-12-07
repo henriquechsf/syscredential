@@ -4,6 +4,9 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.NotNull;
 
 public class UsuarioRequest {
+	@NotNull(message = "Nome é obrigatório")
+	@Length(min = 4, max = 30)
+	private String nome;
 
 	@NotNull(message = "Login é obrigatório")
 	@Length(min = 4, max = 30)
@@ -16,9 +19,18 @@ public class UsuarioRequest {
 	public UsuarioRequest() {
 	}
 
-	public UsuarioRequest(String login, String senha) {
+	public UsuarioRequest(String nome, String login, String senha) {
+		this.nome = nome;
 		this.login = login;
 		this.senha = senha;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getLogin() {

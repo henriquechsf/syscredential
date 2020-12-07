@@ -32,7 +32,7 @@ public class GestaoParticipanteService {
 		Optional<Participante> obj = participanteRepository.findByCpf(participante.getCpf());
 
 		if (obj.isPresent()) {
-			throw new DomainException("Participante já cadastrado");
+			throw new DomainException("CPF já cadastrado");
 		}
 
 		return participanteRepository.save(participante);

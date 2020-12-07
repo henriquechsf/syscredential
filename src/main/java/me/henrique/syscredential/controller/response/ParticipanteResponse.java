@@ -1,6 +1,5 @@
 package me.henrique.syscredential.controller.response;
 
-import me.henrique.syscredential.domain.enums.StatusParticipante;
 import me.henrique.syscredential.domain.enums.TamanhoCamiseta;
 import me.henrique.syscredential.domain.model.Participante;
 import me.henrique.syscredential.domain.model.Regional;
@@ -12,7 +11,7 @@ public class ParticipanteResponse {
 	private String email;
 	private String telefone;
 	private TamanhoCamiseta camiseta;
-	private StatusParticipante status;
+	private Boolean ativo;
 
 	private Regional regional;
 
@@ -26,8 +25,8 @@ public class ParticipanteResponse {
 		this.email = dto.getEmail();
 		this.telefone = dto.getTelefone();
 		this.camiseta = dto.getCamiseta();
+		this.ativo = dto.getAtivo();
 		this.regional = dto.getRegional();
-		this.status = StatusParticipante.CADASTRADO;
 	}
 
 	public Integer getId() {
@@ -78,12 +77,12 @@ public class ParticipanteResponse {
 		this.camiseta = camiseta;
 	}
 
-	public StatusParticipante getStatus() {
-		return status;
+	public Boolean getAtivo() {
+		return ativo;
 	}
 
-	public void setStatus(StatusParticipante status) {
-		this.status = status;
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	public Regional getRegional() {
