@@ -63,9 +63,9 @@ public class TestConfig implements CommandLineRunner {
 		Atividade at2 = new Atividade(atdto2);
 
 		EventoRequest evdto1 = new EventoRequest("Convenção de Natal", "Convenção de Vendas", "Hotel Mabu", "Curitiba",
-			LocalDateTime.of(2020,12,2,8,0), LocalDateTime.of(2020,12,2,18,0));
+			LocalDateTime.of(2020,12,2,8,0), LocalDateTime.of(2020,12,2,18,0), true);
 		EventoRequest evdto2 = new EventoRequest("Convenção Junina", "Convenção de Vendas", "Chácara Mafalda", "Umuarama",
-			LocalDateTime.of(2020,12,2,8,0), LocalDateTime.of(2020,12,2,18,0));
+			LocalDateTime.of(2020,12,2,8,0), LocalDateTime.of(2020,12,2,18,0), false);
 
 		Evento ev1 = new Evento(evdto1);
 		Evento ev2 = new Evento(evdto2);

@@ -1,7 +1,6 @@
 package me.henrique.syscredential.domain.model;
 
 import me.henrique.syscredential.controller.request.EventoRequest;
-import me.henrique.syscredential.domain.enums.StatusEvento;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -21,8 +20,7 @@ public class Evento {
 	private LocalDateTime inicio;
 	private LocalDateTime termino;
 
-	@Enumerated(EnumType.STRING)
-	private StatusEvento status;
+	private Boolean ativo;
 
 	@OneToMany(mappedBy = "evento")
 	private List<Atividade> atividades = new ArrayList<>();
@@ -37,7 +35,7 @@ public class Evento {
 		this.cidade = dto.getCidade();
 		this.inicio = dto.getInicio();
 		this.termino = dto.getTermino();
-		this.status = StatusEvento.INATIVO;
+		this.ativo = dto.getAtivo();
 	}
 
 	public Integer getId() {
@@ -96,12 +94,12 @@ public class Evento {
 		this.termino = termino;
 	}
 
-	public StatusEvento getStatus() {
-		return status;
+	public Boolean getAtivo() {
+		return ativo;
 	}
 
-	public void setStatus(StatusEvento status) {
-		this.status = status;
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	public List<Atividade> getAtividades() {

@@ -1,7 +1,6 @@
 package me.henrique.syscredential.controller.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import me.henrique.syscredential.domain.enums.StatusEvento;
 import me.henrique.syscredential.domain.model.Atividade;
 import me.henrique.syscredential.domain.model.Evento;
 
@@ -16,13 +15,13 @@ public class EventoResponse {
     private String local;
     private String cidade;
 
-    @JsonFormat(pattern="dd/MM/yyyy HH:mm")
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm")
     private LocalDateTime inicio;
 
-    @JsonFormat(pattern="dd/MM/yyyy HH:mm")
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm")
     private LocalDateTime termino;
 
-    private StatusEvento status;
+    private Boolean ativo;
 
     public EventoResponse() {
     }
@@ -35,7 +34,7 @@ public class EventoResponse {
         this.cidade = evento.getCidade();
         this.inicio = evento.getInicio();
         this.termino = evento.getTermino();
-        this.status = evento.getStatus();
+        this.ativo = evento.getAtivo();
     }
 
     private List<Atividade> atividades = new ArrayList<>();
@@ -96,12 +95,12 @@ public class EventoResponse {
         this.termino = termino;
     }
 
-    public StatusEvento getStatus() {
-        return status;
+    public Boolean getAtivo() {
+        return ativo;
     }
 
-    public void setStatus(StatusEvento status) {
-        this.status = status;
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
     }
 
     public List<Atividade> getAtividades() {

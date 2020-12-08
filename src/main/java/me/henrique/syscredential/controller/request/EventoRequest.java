@@ -1,6 +1,6 @@
 package me.henrique.syscredential.controller.request;
 
-import me.henrique.syscredential.domain.enums.StatusEvento;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import me.henrique.syscredential.domain.model.Atividade;
 import org.hibernate.validator.constraints.Length;
 
@@ -29,25 +29,28 @@ public class EventoRequest {
     private String cidade;
 
     @FutureOrPresent
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm")
     private LocalDateTime inicio;
 
     @FutureOrPresent
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm")
     private LocalDateTime termino;
 
-    private StatusEvento status;
+    private Boolean ativo = false;
 
     private List<Atividade> atividades = new ArrayList<>();
 
     public EventoRequest() {
     }
 
-    public EventoRequest(String titulo, String descricao, String local, String cidade, LocalDateTime inicio, LocalDateTime termino) {
+    public EventoRequest(String titulo, String descricao, String local, String cidade, LocalDateTime inicio, LocalDateTime termino, Boolean ativo) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.local = local;
         this.cidade = cidade;
         this.inicio = inicio;
         this.termino = termino;
+        this.ativo = ativo;
     }
 
     public String getTitulo() {
@@ -98,12 +101,12 @@ public class EventoRequest {
         this.termino = termino;
     }
 
-    public StatusEvento getStatus() {
-        return status;
+    public Boolean getAtivo() {
+        return ativo;
     }
 
-    public void setStatus(StatusEvento status) {
-        this.status = status;
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
     }
 
     public List<Atividade> getAtividades() {
