@@ -21,6 +21,9 @@ public class EventoResponse {
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm")
     private LocalDateTime termino;
 
+    @JsonFormat(pattern="dd/MM/yyyy HH:mm")
+    private LocalDateTime inicioFormatado;
+
     private Boolean ativo;
 
     public EventoResponse() {
@@ -35,6 +38,7 @@ public class EventoResponse {
         this.inicio = evento.getInicio();
         this.termino = evento.getTermino();
         this.ativo = evento.getAtivo();
+        this.inicioFormatado = evento.getInicio();
     }
 
     private List<Atividade> atividades = new ArrayList<>();
@@ -109,5 +113,13 @@ public class EventoResponse {
 
     public void setAtividades(List<Atividade> atividades) {
         this.atividades = atividades;
+    }
+
+    public LocalDateTime getInicioFormatado() {
+        return inicioFormatado;
+    }
+
+    public void setInicioFormatado(LocalDateTime inicioFormatado) {
+        this.inicioFormatado = inicioFormatado;
     }
 }

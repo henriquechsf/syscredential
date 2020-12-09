@@ -30,6 +30,7 @@ public class Atividade {
 		this.descricao = dto.getDescricao();
 		this.inicio = dto.getInicio();
 		this.termino = dto.getTermino();
+		this.evento = dto.getEvento();
 	}
 
 	public Integer getId() {

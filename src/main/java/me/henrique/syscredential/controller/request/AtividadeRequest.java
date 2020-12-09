@@ -1,6 +1,7 @@
 package me.henrique.syscredential.controller.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import me.henrique.syscredential.domain.model.Evento;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
@@ -24,14 +25,17 @@ public class AtividadeRequest {
 	@NotNull(message = "Horário de encerramento é obrigatório")
 	private LocalTime termino;
 
+	private Evento evento;
+
 	public AtividadeRequest() {
 	}
 
-	public AtividadeRequest(String titulo, String descricao, LocalTime inicio, LocalTime termino) {
+	public AtividadeRequest(String titulo, String descricao, LocalTime inicio, LocalTime termino, Evento evento) {
 		this.titulo = titulo;
 		this.descricao = descricao;
 		this.inicio = inicio;
 		this.termino = termino;
+		this.evento = evento;
 	}
 
 	public String getTitulo() {
@@ -66,4 +70,11 @@ public class AtividadeRequest {
 		this.termino = termino;
 	}
 
+	public Evento getEvento() {
+		return evento;
+	}
+
+	public void setEvento(Evento evento) {
+		this.evento = evento;
+	}
 }
