@@ -15,7 +15,7 @@ public class UsuarioResponse {
 		this.id = dto.getId();
 		this.nome = dto.getNome();
 		this.login = dto.getLogin();
-		this.admin = false;
+		this.admin = dto.getAdmin();
 	}
 
 	public Integer getId() {

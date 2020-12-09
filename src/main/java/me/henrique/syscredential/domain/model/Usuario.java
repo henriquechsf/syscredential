@@ -1,6 +1,5 @@
 package me.henrique.syscredential.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import me.henrique.syscredential.controller.request.UsuarioRequest;
 
 import javax.persistence.Entity;
@@ -16,11 +15,7 @@ public class Usuario {
 
 	private String nome;
 	private String login;
-
-	@JsonIgnore
 	private String senha;
-
-	@JsonIgnore
 	private Boolean admin;
 
 	public Usuario() {
@@ -30,7 +25,7 @@ public class Usuario {
 		this.nome = dto.getNome();
 		this.login = dto.getLogin();
 		this.senha = dto.getSenha();
-		this.admin = false;
+		this.admin = dto.getAdmin();
 	}
 
 	public Integer getId() {

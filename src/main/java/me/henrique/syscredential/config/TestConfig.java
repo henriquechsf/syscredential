@@ -35,18 +35,18 @@ public class TestConfig implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Usuario user1 = new Usuario(new UsuarioRequest("Carlos Henrique", "henriquechsf", "1234"));
+		Usuario user1 = new Usuario(new UsuarioRequest("Carlos Henrique", "henriquechsf", "1234", true));
 
 		usuarioRepository.saveAll(Arrays.asList(user1));
 
 		Regional reg1 = new Regional(new RegionalRequest(159, "Umuarama", "UMU"));
-		Regional reg2 = new Regional(new RegionalRequest(117, "Maringá", "MAR"));
+		Regional reg2 = new Regional(new RegionalRequest(117, "Maringá", "PRO-MAR"));
 
 		regionalRepository.saveAll(Arrays.asList(reg1, reg2));
 
-		ParticipanteRequest pdto1 = new ParticipanteRequest("0444658981", "Henrique", "henrique@email.com", "44984414582",
+		ParticipanteRequest pdto1 = new ParticipanteRequest("028.052.300-94", "Fulano da Silva", "fulano@email.com", "(44)98888-7777",
 				TamanhoCamiseta.G, true, reg1);
-		ParticipanteRequest pdto2 = new ParticipanteRequest("9998887772", "Dani Guerra", "dani@email.com", "99988877",
+		ParticipanteRequest pdto2 = new ParticipanteRequest("986.735.410-93", "Ciclano de Souza", "ciclano@email.com", "(44)99999-7788",
 				TamanhoCamiseta.P, false, reg2);
 
 		Participante p1 = new Participante(pdto1);
