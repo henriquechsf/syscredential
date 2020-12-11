@@ -1,14 +1,12 @@
 package me.henrique.syscredential.domain.services;
 
-import java.util.List;
-
-import me.henrique.syscredential.domain.enums.StatusEvento;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import me.henrique.syscredential.domain.exception.EntityNotFoundException;
 import me.henrique.syscredential.domain.model.Evento;
 import me.henrique.syscredential.domain.repository.EventoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class GestaoEventoService {
