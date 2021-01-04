@@ -1,6 +1,7 @@
 package me.henrique.syscredential.config;
 
 import me.henrique.syscredential.controller.request.*;
+import me.henrique.syscredential.domain.enums.Perfil;
 import me.henrique.syscredential.domain.enums.TamanhoCamiseta;
 import me.henrique.syscredential.domain.model.*;
 import me.henrique.syscredential.domain.repository.*;
@@ -35,9 +36,12 @@ public class TestConfig implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Usuario user1 = new Usuario(new UsuarioRequest("Carlos Henrique", "henriquechsf", "1234", true));
+		Usuario user1 = new Usuario(new UsuarioRequest("Carlos Henrique", "henriquechsf", "1234"));
+		user1.addPerfil(Perfil.ROLE_ADMIN);
 
-		usuarioRepository.saveAll(Arrays.asList(user1));
+		Usuario user2 = new Usuario(new UsuarioRequest("Daniele Guerra", "daniguerra", "123456"));
+
+		usuarioRepository.saveAll(Arrays.asList(user1, user2));
 
 		Regional reg1 = new Regional(new RegionalRequest(159, "Umuarama", "UMU"));
 		Regional reg2 = new Regional(new RegionalRequest(117, "Maringá", "PRO-MAR"));

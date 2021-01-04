@@ -16,16 +16,13 @@ public class UsuarioRequest {
 	@Length(min = 4, max = 30)
 	private String senha;
 
-	private Boolean admin = false;
-
 	public UsuarioRequest() {
 	}
 
-	public UsuarioRequest(String nome, String login, String senha, Boolean admin) {
+	public UsuarioRequest(String nome, String login, String senha) {
 		this.nome = nome;
 		this.login = login;
 		this.senha = senha;
-		this.admin = admin;
 	}
 
 	public String getNome() {
@@ -50,13 +47,5 @@ public class UsuarioRequest {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
-
-	public Boolean getAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(Boolean admin) {
-		this.admin = admin;
 	}
 }

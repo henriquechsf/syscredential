@@ -1,11 +1,11 @@
 package me.henrique.syscredential.domain.model;
 
 import me.henrique.syscredential.controller.request.UsuarioRequest;
+import me.henrique.syscredential.domain.enums.Perfil;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Usuario {
@@ -16,16 +16,21 @@ public class Usuario {
 	private String nome;
 	private String login;
 	private String senha;
-	private Boolean admin;
+
+	@Enumerated(EnumType.STRING)
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "PERFIS")
+	private Set<Perfil> perfis = new HashSet<>();
 
 	public Usuario() {
+		addPerfil(Perfil.ROLE_USER);
 	}
 
 	public Usuario(UsuarioRequest dto) {
 		this.nome = dto.getNome();
 		this.login = dto.getLogin();
 		this.senha = dto.getSenha();
-		this.admin = dto.getAdmin();
+		addPerfil(Perfil.ROLE_USER);
 	}
 
 	public Integer getId() {
@@ -60,12 +65,11 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public Boolean getAdmin() {
-		return admin;
+	public Set<Perfil> getPerfis() {
+		return perfis;
 	}
 
-	public void setAdmin(Boolean admin) {
-		this.admin = admin;
+	public void addPerfil(Perfil perfil) {
+		perfis.add(perfil);
 	}
-
 }

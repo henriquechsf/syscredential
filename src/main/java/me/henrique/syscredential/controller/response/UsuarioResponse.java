@@ -1,12 +1,17 @@
 package me.henrique.syscredential.controller.response;
 
+import me.henrique.syscredential.domain.enums.Perfil;
 import me.henrique.syscredential.domain.model.Usuario;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class UsuarioResponse {
 	private Integer id;
 	private String nome;
 	private String login;
-	private Boolean admin;
+
+	private Set<Perfil> perfis = new HashSet<>();
 
 	public UsuarioResponse() {
 	}
@@ -15,7 +20,7 @@ public class UsuarioResponse {
 		this.id = dto.getId();
 		this.nome = dto.getNome();
 		this.login = dto.getLogin();
-		this.admin = dto.getAdmin();
+		this.perfis = dto.getPerfis();
 	}
 
 	public Integer getId() {
@@ -42,12 +47,8 @@ public class UsuarioResponse {
 		this.login = login;
 	}
 
-	public Boolean getAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(Boolean admin) {
-		this.admin = admin;
+	public Set<Perfil> getPerfis() {
+		return perfis;
 	}
 
 }
