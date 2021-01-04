@@ -5,6 +5,7 @@ import me.henrique.syscredential.domain.exception.EntityNotFoundException;
 import me.henrique.syscredential.domain.model.Usuario;
 import me.henrique.syscredential.domain.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +13,9 @@ import java.util.Optional;
 
 @Service
 public class GestaoUsuarioService {
+
+	@Autowired
+	private BCryptPasswordEncoder bcrypt;
 
 	@Autowired
 	private UsuarioRepository repository;
@@ -30,6 +34,8 @@ public class GestaoUsuarioService {
 		if (obj.isPresent()) {
 			throw new DomainException("Login já cadastrado");
 		}
+
+		usuario.setSenha(bcrypt.encode(usuario.getSenha()));
 
 		return repository.save(usuario);
 	}
