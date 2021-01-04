@@ -7,6 +7,7 @@ import me.henrique.syscredential.domain.services.GestaoUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -40,6 +41,7 @@ public class UsuarioController {
 		return ResponseEntity.ok(new UsuarioResponse(usuario));
 	}
 
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<UsuarioResponse> adicionar(@Valid @RequestBody UsuarioRequest dto) {
