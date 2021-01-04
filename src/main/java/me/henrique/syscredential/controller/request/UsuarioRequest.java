@@ -8,9 +8,9 @@ public class UsuarioRequest {
 	@Length(min = 4, max = 30)
 	private String nome;
 
-	@NotNull(message = "Login é obrigatório")
+	@NotNull(message = "E-mail é obrigatório")
 	@Length(min = 4, max = 30)
-	private String login;
+	private String email;
 
 	@NotNull(message = "Senha é obrigatória")
 	@Length(min = 4, max = 30)
@@ -19,9 +19,9 @@ public class UsuarioRequest {
 	public UsuarioRequest() {
 	}
 
-	public UsuarioRequest(String nome, String login, String senha) {
+	public UsuarioRequest(String nome, String email, String senha) {
 		this.nome = nome;
-		this.login = login;
+		this.email = email;
 		this.senha = senha;
 	}
 
@@ -33,12 +33,12 @@ public class UsuarioRequest {
 		this.nome = nome;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getSenha() {

@@ -9,7 +9,7 @@ import java.util.Set;
 public class UsuarioResponse {
 	private Integer id;
 	private String nome;
-	private String login;
+	private String email;
 
 	private Set<Perfil> perfis = new HashSet<>();
 
@@ -19,7 +19,7 @@ public class UsuarioResponse {
 	public UsuarioResponse(Usuario dto) {
 		this.id = dto.getId();
 		this.nome = dto.getNome();
-		this.login = dto.getLogin();
+		this.email = dto.getEmail();
 		this.perfis = dto.getPerfis();
 	}
 
@@ -39,12 +39,12 @@ public class UsuarioResponse {
 		this.nome = nome;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public Set<Perfil> getPerfis() {

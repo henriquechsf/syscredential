@@ -34,6 +34,12 @@ public class UsuarioController {
 		return ResponseEntity.ok(new UsuarioResponse(usuario));
 	}
 
+	@GetMapping("/email/{email}")
+	public ResponseEntity<UsuarioResponse> listarPorEmail(@PathVariable String email) {
+		Usuario usuario = service.getByEmail(email);
+		return ResponseEntity.ok(new UsuarioResponse(usuario));
+	}
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<UsuarioResponse> adicionar(@Valid @RequestBody UsuarioRequest dto) {

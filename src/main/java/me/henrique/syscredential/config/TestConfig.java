@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -17,6 +18,9 @@ import java.util.Arrays;
 @Configuration
 @Profile("test")
 public class TestConfig implements CommandLineRunner {
+
+	@Autowired
+	BCryptPasswordEncoder bcrypt;
 
 	@Autowired
 	UsuarioRepository usuarioRepository;
@@ -36,10 +40,10 @@ public class TestConfig implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Usuario user1 = new Usuario(new UsuarioRequest("Carlos Henrique", "henriquechsf", "1234"));
+		Usuario user1 = new Usuario(new UsuarioRequest("Carlos Henrique", "henrique@email.com", bcrypt.encode("1234")));
 		user1.addPerfil(Perfil.ROLE_ADMIN);
 
-		Usuario user2 = new Usuario(new UsuarioRequest("Daniele Guerra", "daniguerra", "123456"));
+		Usuario user2 = new Usuario(new UsuarioRequest("Daniele Guerra", "daniele@email.com", bcrypt.encode("123456")));
 
 		usuarioRepository.saveAll(Arrays.asList(user1, user2));
 
