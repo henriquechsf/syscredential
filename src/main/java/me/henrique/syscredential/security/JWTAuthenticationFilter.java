@@ -33,7 +33,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                     .readValue(request.getInputStream(), CredenciaisRequest.class);
 
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                    credenciais.getEmail(),
+                    credenciais.getLogin(),
                     credenciais.getSenha(),
                     new ArrayList<>()
             );

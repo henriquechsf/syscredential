@@ -40,10 +40,10 @@ public class TestConfig implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Usuario user1 = new Usuario(new UsuarioRequest("Carlos Henrique", "henrique@email.com", bcrypt.encode("1234")));
+		Usuario user1 = new Usuario(new UsuarioRequest("Carlos Henrique", "henrique", bcrypt.encode("1234")));
 		user1.addPerfil(Perfil.ROLE_ADMIN);
 
-		Usuario user2 = new Usuario(new UsuarioRequest("Daniele Guerra", "daniele@email.com", bcrypt.encode("123456")));
+		Usuario user2 = new Usuario(new UsuarioRequest("Daniele Guerra", "daniele", bcrypt.encode("123456")));
 
 		usuarioRepository.saveAll(Arrays.asList(user1, user2));
 

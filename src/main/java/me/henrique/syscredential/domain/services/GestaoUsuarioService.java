@@ -28,15 +28,15 @@ public class GestaoUsuarioService {
 		return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("ID não encontrado"));
 	}
 
-	public Usuario getByEmail(String email) {
-		return repository.findByEmail(email).orElseThrow(() -> new EntityNotFoundException("E-mail não encontrado"));
+	public Usuario getByLogin(String login) {
+		return repository.findByLogin(login).orElseThrow(() -> new EntityNotFoundException("Login não encontrado"));
 	}
 
 	public Usuario save(Usuario usuario) {
-		Optional<Usuario> obj = repository.findByEmail(usuario.getEmail());
+		Optional<Usuario> obj = repository.findByLogin(usuario.getLogin());
 
 		if (obj.isPresent()) {
-			throw new DomainException("E-mail já cadastrado");
+			throw new DomainException("Login já cadastrado");
 		}
 
 		usuario.setSenha(bcrypt.encode(usuario.getSenha()));
@@ -59,5 +59,4 @@ public class GestaoUsuarioService {
 		}
 		repository.deleteById(id);
 	}
-
 }

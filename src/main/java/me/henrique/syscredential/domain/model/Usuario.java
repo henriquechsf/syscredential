@@ -14,7 +14,7 @@ public class Usuario {
 	private Integer id;
 
 	private String nome;
-	private String email;
+	private String login;
 	private String senha;
 
 	@Enumerated(EnumType.STRING)
@@ -28,7 +28,7 @@ public class Usuario {
 
 	public Usuario(UsuarioRequest dto) {
 		this.nome = dto.getNome();
-		this.email = dto.getEmail();
+		this.login = dto.getLogin();
 		this.senha = dto.getSenha();
 		addPerfil(Perfil.ROLE_USER);
 	}
@@ -49,12 +49,12 @@ public class Usuario {
 		this.nome = nome;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getLogin() {
+		return login;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 	public String getSenha() {

@@ -34,9 +34,9 @@ public class UsuarioController {
 		return ResponseEntity.ok(new UsuarioResponse(usuario));
 	}
 
-	@GetMapping("/email/{email}")
-	public ResponseEntity<UsuarioResponse> listarPorEmail(@PathVariable String email) {
-		Usuario usuario = service.getByEmail(email);
+	@GetMapping("/login/{login}")
+	public ResponseEntity<UsuarioResponse> listarPorLogin(@PathVariable String login) {
+		Usuario usuario = service.getByLogin(login);
 		return ResponseEntity.ok(new UsuarioResponse(usuario));
 	}
 
