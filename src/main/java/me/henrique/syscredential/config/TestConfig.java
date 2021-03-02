@@ -52,15 +52,18 @@ public class TestConfig implements CommandLineRunner {
 
 		regionalRepository.saveAll(Arrays.asList(reg1, reg2));
 
-		ParticipanteRequest pdto1 = new ParticipanteRequest("028.052.300-94", "Fulano da Silva", "fulano@email.com", "(44)98888-7777",
+		ParticipanteRequest pdto1 = new ParticipanteRequest("02805230094", "Fulano da Silva", "fulano@email.com", "(44)98888-7777",
 				TamanhoCamiseta.G, true, reg1);
-		ParticipanteRequest pdto2 = new ParticipanteRequest("986.735.410-93", "Ciclano de Souza", "ciclano@email.com", "(44)99999-7788",
-				TamanhoCamiseta.P, false, reg2);
+		ParticipanteRequest pdto2 = new ParticipanteRequest("98673541093", "Ciclano de Souza", "ciclano@email.com", "(44)99999-7788",
+				TamanhoCamiseta.P, true, reg2);
+		ParticipanteRequest pdto3 = new ParticipanteRequest("04446568981", "Carlos Henrique de S. Ferreira", "henrique@email.com", "(44)99999-7788",
+				TamanhoCamiseta.G, true, reg1);
 
 		Participante p1 = new Participante(pdto1);
 		Participante p2 = new Participante(pdto2);
+		Participante p3 = new Participante(pdto3);
 
-		participanteRepository.saveAll(Arrays.asList(p1, p2));
+		participanteRepository.saveAll(Arrays.asList(p1, p2, p3));
 
 		EventoRequest evdto1 = new EventoRequest("Convenção Junina 2021", "Reunião com equipe de vendas para apresentação de projetos de campanha", "Hotel Mabu", "Curitiba",
 				LocalDateTime.of(2021,4,10,8,0), LocalDateTime.of(2021,4,10,17,0), true);
