@@ -1,4 +1,4 @@
-package me.henrique.syscredential.controller.response;
+package me.henrique.syscredential.api.dto.response;
 
 import me.henrique.syscredential.domain.enums.Perfil;
 import me.henrique.syscredential.domain.model.Usuario;

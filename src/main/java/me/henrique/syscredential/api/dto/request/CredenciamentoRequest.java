@@ -1,4 +1,4 @@
-package me.henrique.syscredential.controller.request;
+package me.henrique.syscredential.api.dto.request;
 
 public class CredenciamentoRequest {
     private String cpf;

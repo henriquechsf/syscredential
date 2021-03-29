@@ -1,6 +1,6 @@
 package me.henrique.syscredential.domain.model;
 
-import me.henrique.syscredential.controller.request.EventoRequest;
+import me.henrique.syscredential.api.dto.request.EventoRequest;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

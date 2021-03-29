@@ -1,4 +1,4 @@
-package me.henrique.syscredential.controller.response;
+package me.henrique.syscredential.api.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;

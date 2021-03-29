@@ -1,4 +1,4 @@
-package me.henrique.syscredential.controller.request;
+package me.henrique.syscredential.api.dto.request;
 
 import org.hibernate.validator.constraints.Length;
 

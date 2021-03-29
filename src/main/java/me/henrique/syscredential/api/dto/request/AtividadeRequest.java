@@ -1,4 +1,4 @@
-package me.henrique.syscredential.controller.request;
+package me.henrique.syscredential.api.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import me.henrique.syscredential.domain.model.Evento;

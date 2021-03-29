@@ -1,6 +1,6 @@
 package me.henrique.syscredential.domain.model;
 
-import me.henrique.syscredential.controller.request.ParticipanteRequest;
+import me.henrique.syscredential.api.dto.request.ParticipanteRequest;
 import me.henrique.syscredential.domain.enums.TamanhoCamiseta;
 
 import javax.persistence.*;

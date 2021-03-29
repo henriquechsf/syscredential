@@ -1,7 +1,7 @@
-package me.henrique.syscredential.controller;
+package me.henrique.syscredential.api.resources;
 
-import me.henrique.syscredential.controller.request.ParticipanteRequest;
-import me.henrique.syscredential.controller.response.ParticipanteResponse;
+import me.henrique.syscredential.api.dto.request.ParticipanteRequest;
+import me.henrique.syscredential.api.dto.response.ParticipanteResponse;
 import me.henrique.syscredential.domain.model.Participante;
 import me.henrique.syscredential.domain.services.GestaoParticipanteService;
 import org.springframework.beans.factory.annotation.Autowired;

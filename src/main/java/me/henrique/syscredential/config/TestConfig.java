@@ -1,6 +1,6 @@
 package me.henrique.syscredential.config;
 
-import me.henrique.syscredential.controller.request.*;
+import me.henrique.syscredential.api.dto.request.*;
 import me.henrique.syscredential.domain.enums.Perfil;
 import me.henrique.syscredential.domain.enums.TamanhoCamiseta;
 import me.henrique.syscredential.domain.model.*;

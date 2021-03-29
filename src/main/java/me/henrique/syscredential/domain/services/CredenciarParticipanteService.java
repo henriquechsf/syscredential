@@ -1,6 +1,6 @@
 package me.henrique.syscredential.domain.services;
 
-import me.henrique.syscredential.controller.request.CredenciamentoRequest;
+import me.henrique.syscredential.api.dto.request.CredenciamentoRequest;
 import me.henrique.syscredential.domain.exception.EntityNotFoundException;
 import me.henrique.syscredential.domain.model.Credenciamento;
 import me.henrique.syscredential.domain.model.Evento;

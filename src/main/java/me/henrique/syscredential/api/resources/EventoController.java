@@ -1,9 +1,9 @@
-package me.henrique.syscredential.controller;
+package me.henrique.syscredential.api.resources;
 
-import me.henrique.syscredential.controller.request.CredenciamentoRequest;
-import me.henrique.syscredential.controller.request.EventoRequest;
-import me.henrique.syscredential.controller.response.CredenciamentoResponse;
-import me.henrique.syscredential.controller.response.EventoResponse;
+import me.henrique.syscredential.api.dto.request.CredenciamentoRequest;
+import me.henrique.syscredential.api.dto.request.EventoRequest;
+import me.henrique.syscredential.api.dto.response.CredenciamentoResponse;
+import me.henrique.syscredential.api.dto.response.EventoResponse;
 import me.henrique.syscredential.domain.model.Credenciamento;
 import me.henrique.syscredential.domain.model.Evento;
 import me.henrique.syscredential.domain.services.CredenciarParticipanteService;

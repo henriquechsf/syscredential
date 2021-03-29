@@ -1,6 +1,6 @@
 package me.henrique.syscredential.domain.model;
 
-import me.henrique.syscredential.controller.request.UsuarioRequest;
+import me.henrique.syscredential.api.dto.request.UsuarioRequest;
 import me.henrique.syscredential.domain.enums.Perfil;
 
 import javax.persistence.*;

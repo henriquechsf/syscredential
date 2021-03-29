@@ -1,7 +1,7 @@
 package me.henrique.syscredential.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import me.henrique.syscredential.controller.request.RegionalRequest;
+import me.henrique.syscredential.api.dto.request.RegionalRequest;
 
 import javax.persistence.*;
 import java.util.ArrayList;

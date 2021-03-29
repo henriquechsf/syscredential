@@ -1,7 +1,7 @@
-package me.henrique.syscredential.controller;
+package me.henrique.syscredential.api.resources;
 
-import me.henrique.syscredential.controller.request.AtividadeRequest;
-import me.henrique.syscredential.controller.response.AtividadeResponse;
+import me.henrique.syscredential.api.dto.request.AtividadeRequest;
+import me.henrique.syscredential.api.dto.response.AtividadeResponse;
 import me.henrique.syscredential.domain.model.Atividade;
 import me.henrique.syscredential.domain.services.GestaoAtividadeService;
 import org.springframework.beans.factory.annotation.Autowired;
