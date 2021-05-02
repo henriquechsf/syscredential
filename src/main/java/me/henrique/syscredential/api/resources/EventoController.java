@@ -17,6 +17,7 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/eventos")
@@ -64,12 +65,20 @@ public class EventoController {
 		return ResponseEntity.noContent().build();
 	}
 
+	// subrecurso de evento - CREDENCIAMENTO
 	@GetMapping("/{idEvento}/credenciamentos")
-	public ResponseEntity<List<Credenciamento>> listarParticipantesCredenciados(@PathVariable Integer idEvento) {
+	public ResponseEntity<List<CredenciamentoResponse>> listarParticipantesCredenciados(@PathVariable Integer idEvento) {
 		List<Credenciamento> participantesCredenciados = credenciamentoService.listarParticipantesCredenciados(idEvento);
-		return ResponseEntity.ok(participantesCredenciados);
+
+		List<CredenciamentoResponse> listaCredenciados = participantesCredenciados
+				.stream()
+				.map(credenciamento -> new CredenciamentoResponse(credenciamento))
+				.collect(Collectors.toList());
+
+		return ResponseEntity.ok(listaCredenciados);
 	}
 
+	@Transactional
 	@PostMapping("/{idEvento}/credenciamentos")
 	public ResponseEntity<CredenciamentoResponse> credenciarParticipante(@PathVariable Integer idEvento, @RequestBody CredenciamentoRequest request) {
 		Credenciamento credenciamento = credenciamentoService.credenciarParticipante(idEvento, request);
