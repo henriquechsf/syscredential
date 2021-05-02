@@ -1,13 +1,12 @@
-package me.henrique.syscredential.controller;
+package me.henrique.syscredential.api.resources;
 
-import me.henrique.syscredential.controller.request.UsuarioRequest;
-import me.henrique.syscredential.controller.response.UsuarioResponse;
+import me.henrique.syscredential.api.dto.request.UsuarioRequest;
+import me.henrique.syscredential.api.dto.response.UsuarioResponse;
 import me.henrique.syscredential.domain.model.Usuario;
 import me.henrique.syscredential.domain.services.GestaoUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -41,7 +40,6 @@ public class UsuarioController {
 		return ResponseEntity.ok(new UsuarioResponse(usuario));
 	}
 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<UsuarioResponse> adicionar(@Valid @RequestBody UsuarioRequest dto) {

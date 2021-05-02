@@ -1,4 +1,4 @@
-package me.henrique.syscredential.controller.exceptionhandler;
+package me.henrique.syscredential.api.exceptionhandler;
 
 import me.henrique.syscredential.domain.exception.DomainException;
 import me.henrique.syscredential.domain.exception.EntityNotFoundException;

@@ -1,7 +1,7 @@
-package me.henrique.syscredential.controller;
+package me.henrique.syscredential.api.resources;
 
-import me.henrique.syscredential.controller.request.RegionalRequest;
-import me.henrique.syscredential.controller.response.RegionalResponse;
+import me.henrique.syscredential.api.dto.request.RegionalRequest;
+import me.henrique.syscredential.api.dto.response.RegionalResponse;
 import me.henrique.syscredential.domain.model.Regional;
 import me.henrique.syscredential.domain.services.GestaoRegionalService;
 import org.springframework.beans.factory.annotation.Autowired;

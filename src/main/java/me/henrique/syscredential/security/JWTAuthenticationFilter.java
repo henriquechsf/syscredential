@@ -1,7 +1,7 @@
 package me.henrique.syscredential.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import me.henrique.syscredential.controller.request.CredenciaisRequest;
+import me.henrique.syscredential.api.dto.request.CredenciaisRequest;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

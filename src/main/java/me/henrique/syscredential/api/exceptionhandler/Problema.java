@@ -1,4 +1,4 @@
-package me.henrique.syscredential.controller.exceptionhandler;
+package me.henrique.syscredential.api.exceptionhandler;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;

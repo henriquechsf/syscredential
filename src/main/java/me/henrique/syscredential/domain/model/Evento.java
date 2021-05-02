@@ -1,6 +1,6 @@
 package me.henrique.syscredential.domain.model;
 
-import me.henrique.syscredential.controller.request.EventoRequest;
+import me.henrique.syscredential.api.dto.request.EventoRequest;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -24,6 +24,9 @@ public class Evento {
 
 	@OneToMany(mappedBy = "evento")
 	private List<Atividade> atividades = new ArrayList<>();
+
+	@OneToMany(mappedBy = "evento")
+	private List<Credenciamento> credenciamentos = new ArrayList<>();
 
 	public Evento() {
 	}

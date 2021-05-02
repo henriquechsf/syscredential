@@ -1,4 +1,4 @@
-package me.henrique.syscredential.controller.request;
+package me.henrique.syscredential.api.dto.request;
 
 import me.henrique.syscredential.domain.enums.TamanhoCamiseta;
 import me.henrique.syscredential.domain.model.Regional;
