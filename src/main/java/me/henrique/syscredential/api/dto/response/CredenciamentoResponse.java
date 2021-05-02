@@ -13,7 +13,8 @@ public class CredenciamentoResponse {
     private Integer idEvento;
     private String nomeEvento;
 
-    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm")
+    //@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm")
+    @JsonFormat(pattern="dd/MM/yyyy HH:mm:ss")
     private LocalDateTime instante;
 
     private Participante participante;
