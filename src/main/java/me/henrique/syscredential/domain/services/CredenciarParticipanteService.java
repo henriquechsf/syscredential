@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -42,5 +43,17 @@ public class CredenciarParticipanteService {
         Credenciamento credenciamento = new Credenciamento(LocalDateTime.now(), evento.get(), participante.get());
 
         return credenciamentoRepository.save(credenciamento);
+    }
+
+    public List<Credenciamento> listarParticipantesCredenciados(Integer idEvento) {
+        Optional<Evento> evento = eventoRepository.findById(idEvento);
+
+        if(!evento.isPresent()) {
+            throw new EntityNotFoundException("ID Evento inexistente");
+        }
+
+        List<Credenciamento> credenciamentos = credenciamentoRepository.findAllParticipantesCredenciados(evento.get());
+
+        return credenciamentos;
     }
 }

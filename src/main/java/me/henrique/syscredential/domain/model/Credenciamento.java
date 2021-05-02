@@ -12,12 +12,16 @@ public class Credenciamento {
 
     private LocalDateTime instante;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "participante_id")
     private Participante participante;
 
     @ManyToOne
     @JoinColumn(name = "evento_id")
     private Evento evento;
+
+    public Credenciamento() {
+    }
 
     public Credenciamento(LocalDateTime instante, Evento evento, Participante participante) {
         this.instante = instante;

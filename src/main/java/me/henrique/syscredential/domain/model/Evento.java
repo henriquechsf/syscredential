@@ -25,6 +25,9 @@ public class Evento {
 	@OneToMany(mappedBy = "evento")
 	private List<Atividade> atividades = new ArrayList<>();
 
+	@OneToMany(mappedBy = "evento")
+	private List<Credenciamento> credenciamentos = new ArrayList<>();
+
 	public Evento() {
 	}
 

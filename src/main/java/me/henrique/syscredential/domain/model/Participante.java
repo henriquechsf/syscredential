@@ -4,6 +4,7 @@ import me.henrique.syscredential.api.dto.request.ParticipanteRequest;
 import me.henrique.syscredential.domain.enums.TamanhoCamiseta;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Participante {
@@ -24,6 +25,9 @@ public class Participante {
 	@ManyToOne
 	@JoinColumn(name = "regional_id")
 	private Regional regional;
+
+	@OneToMany(mappedBy = "participante")
+	private List<Credenciamento> credenciamentos;
 
 	public Participante() {
 	}
