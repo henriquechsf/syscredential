@@ -12,7 +12,7 @@ public class SyscredentialApplication {
 	@PostConstruct
 	void started() {
 		// set JVM timezone as UTC
-		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+		TimeZone.setDefault(TimeZone.getTimeZone("America/Sao_Paulo"));
 	}
 
 	public static void main(String[] args) {

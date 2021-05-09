@@ -1,6 +1,7 @@
 package me.henrique.syscredential.domain.services;
 
 import me.henrique.syscredential.api.dto.request.CredenciamentoRequest;
+import me.henrique.syscredential.domain.exception.DomainException;
 import me.henrique.syscredential.domain.exception.EntityNotFoundException;
 import me.henrique.syscredential.domain.model.Credenciamento;
 import me.henrique.syscredential.domain.model.Evento;
@@ -29,15 +30,18 @@ public class CredenciarParticipanteService {
 
     public Credenciamento credenciarParticipante(Integer idEvento, CredenciamentoRequest request) {
         Optional<Evento> evento = eventoRepository.findById(idEvento);
-
         if (!evento.isPresent()) {
             throw new EntityNotFoundException("ID Evento inexistente");
         }
 
         Optional<Participante> participante = participanteRepository.findByCpf(request.getCpf());
-
         if (!participante.isPresent()) {
-            throw new EntityNotFoundException("CPF do Participante não cadastrado");
+            throw new EntityNotFoundException("Credencial não cadastrada.");
+        }
+
+        Optional<Credenciamento> credenciamentoParticipante = credenciamentoRepository.findByParticipante(participante.get());
+        if(credenciamentoParticipante.isPresent()) {
+            throw new DomainException("Participante já credenciado.");
         }
 
         Credenciamento credenciamento = new Credenciamento(LocalDateTime.now(), evento.get(), participante.get());

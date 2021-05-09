@@ -3,14 +3,13 @@ package me.henrique.syscredential.api.dto.request;
 import me.henrique.syscredential.domain.enums.TamanhoCamiseta;
 import me.henrique.syscredential.domain.model.Regional;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 public class ParticipanteRequest {
 
-	@CPF(message = "CPF inválido")
+	//@CPF(message = "CPF inválido")
 	@NotNull(message = "CPF é obrigatório")
 	private String cpf;
 

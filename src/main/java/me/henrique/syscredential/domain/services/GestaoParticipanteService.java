@@ -25,7 +25,7 @@ public class GestaoParticipanteService {
 	}
 
 	public Participante getByCpf(String cpf) {
-		return participanteRepository.findByCpf(cpf).orElseThrow(() -> new EntityNotFoundException("CPF não encontrado"));
+		return participanteRepository.findByCpf(cpf).orElseThrow(() -> new EntityNotFoundException("Participante não cadastrado"));
 	}
 
 	public Participante save(Participante participante) {
