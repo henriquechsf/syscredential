@@ -38,6 +38,9 @@ public class CredenciarParticipanteService {
         if (!participante.isPresent()) {
             throw new EntityNotFoundException("Credencial não cadastrada.");
         }
+        if (participante.isPresent() && !participante.get().getAtivo()) {
+            throw new DomainException("Participante inativo.");
+        }
 
         Optional<Credenciamento> credenciamentoParticipante = credenciamentoRepository.findByParticipante(participante.get());
         if(credenciamentoParticipante.isPresent()) {
