@@ -9,10 +9,11 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CredenciamentoRepository extends JpaRepository<Credenciamento, Long> {
-    public Credenciamento findByParticipante(Participante participante);
+    Optional<Credenciamento> findByParticipante(Participante participante);
     public Credenciamento findByEvento(Evento evento);
 
     @Query("SELECT credenciamento FROM Credenciamento credenciamento " +

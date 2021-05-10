@@ -28,11 +28,11 @@ public class EventoRequest {
     @Length(min = 4, max = 50)
     private String cidade;
 
-    @FutureOrPresent
+    @FutureOrPresent(message = "Não é permitido datas passadas")
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm")
     private LocalDateTime inicio;
 
-    @FutureOrPresent
+    @FutureOrPresent(message = "Não é permitido datas passadas")
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm")
     private LocalDateTime termino;
 
