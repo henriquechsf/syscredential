@@ -6,6 +6,7 @@ import me.henrique.syscredential.domain.model.Participante;
 import me.henrique.syscredential.domain.repository.ParticipanteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +29,7 @@ public class GestaoParticipanteService {
 		return participanteRepository.findByCpf(cpf).orElseThrow(() -> new EntityNotFoundException("Participante não cadastrado"));
 	}
 
+	@Transactional
 	public Participante save(Participante participante) {
 		Optional<Participante> obj = participanteRepository.findByCpf(participante.getCpf());
 
@@ -38,6 +40,7 @@ public class GestaoParticipanteService {
 		return participanteRepository.save(participante);
 	}
 
+	@Transactional
 	public Participante update(Integer id, Participante participante) {
 		if (!participanteRepository.existsById(id)) {
 			throw new EntityNotFoundException("ID não encontrado");
@@ -47,6 +50,7 @@ public class GestaoParticipanteService {
 		return participanteRepository.save(participante);
 	}
 
+	@Transactional
 	public void delete(Integer id) {
 		if (!participanteRepository.existsById(id)) {
 			throw new EntityNotFoundException("ID não encontrado");
