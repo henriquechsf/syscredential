@@ -8,14 +8,13 @@ import me.henrique.syscredential.domain.model.Credenciamento;
 import me.henrique.syscredential.domain.model.Evento;
 import me.henrique.syscredential.domain.services.CredenciarParticipanteService;
 import me.henrique.syscredential.domain.services.GestaoEventoService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,40 +22,51 @@ import java.util.stream.Collectors;
 @RequestMapping("/eventos")
 public class EventoController {
 
-	@Autowired
+	private ModelMapper mapper;
 	private GestaoEventoService eventoService;
-
-	@Autowired
 	private CredenciarParticipanteService credenciamentoService;
+
+	public EventoController(ModelMapper mapper, GestaoEventoService eventoService, CredenciarParticipanteService credenciamentoService) {
+		this.mapper = mapper;
+		this.eventoService = eventoService;
+		this.credenciamentoService = credenciamentoService;
+	}
 
 	@GetMapping
 	public List<EventoResponse> listar() {
 		List<Evento> eventos = eventoService.getAll();
-		List<EventoResponse> eventosResponse = new ArrayList<>();
-		eventos.forEach(evento -> eventosResponse.add(new EventoResponse(evento)));
-		return eventosResponse;
+		List<EventoResponse> response = eventos
+				.stream().map(evento -> mapper.map(evento, EventoResponse.class))
+				.collect(Collectors.toList());
+
+		return response;
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<EventoResponse> listarPorId(@PathVariable Integer id) {
 		Evento evento = eventoService.getById(id);
-		return ResponseEntity.ok(new EventoResponse(evento));
+		EventoResponse response = mapper.map(evento, EventoResponse.class);
+
+		return ResponseEntity.ok(response);
 	}
 
-	@Transactional
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<EventoResponse> adicionar(@Valid @RequestBody EventoRequest dto) {
-		Evento evento = new Evento(dto);
+	public ResponseEntity<EventoResponse> adicionar(@Valid @RequestBody EventoRequest request) {
+		Evento evento = mapper.map(request, Evento.class);
 		Evento eventoSalvo = eventoService.save(evento);
-		return ResponseEntity.ok(new EventoResponse(eventoSalvo));
+		EventoResponse response = mapper.map(eventoSalvo, EventoResponse.class);
+
+		return ResponseEntity.ok(response);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<EventoResponse> atualizar(@PathVariable Integer id, @RequestBody EventoRequest dto) {
-		Evento evento = new Evento(dto);
+	public ResponseEntity<EventoResponse> atualizar(@PathVariable Integer id, @Valid  @RequestBody EventoRequest request) {
+		Evento evento = mapper.map(request, Evento.class);
 		Evento eventoAtualizado = eventoService.update(id, evento);
-		return ResponseEntity.ok(new EventoResponse(eventoAtualizado));
+		EventoResponse response = mapper.map(eventoAtualizado, EventoResponse.class);
+
+		return ResponseEntity.ok(response);
 	}
 
 	@DeleteMapping("/{id}")

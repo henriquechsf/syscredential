@@ -62,7 +62,7 @@ public class ParticipanteController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<ParticipanteResponse> atualizar(@PathVariable Integer id, @RequestBody ParticipanteRequest request) {
+	public ResponseEntity<ParticipanteResponse> atualizar(@PathVariable Integer id, @Valid  @RequestBody ParticipanteRequest request) {
 		Participante participante = mapper.map(request, Participante.class);
 		Participante participanteAtualizado = service.update(id, participante);
 		ParticipanteResponse response = mapper.map(participanteAtualizado, ParticipanteResponse.class);

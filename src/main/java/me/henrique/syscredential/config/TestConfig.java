@@ -58,13 +58,24 @@ public class TestConfig implements CommandLineRunner {
 
 		participanteRepository.saveAll(Arrays.asList(p1, p2, p3));
 
-		EventoRequest evdto1 = new EventoRequest("Convenção Junina 2021", "Reunião com equipe de vendas para apresentação de projetos de campanha", "Hotel Mabu", "Curitiba",
-				LocalDateTime.of(2021,4,10,8,0), LocalDateTime.of(2021,4,10,17,0), true);
-		EventoRequest evdto2 = new EventoRequest("Convenção Natalina 2020", "Apresentação dos Materiais de Marketing e Campanha Natal 2020", "Chácara Zaeli", "Umuarama",
-				LocalDateTime.of(2020,12,2,9,0), LocalDateTime.of(2020,12,2,12,0), false);
+		Evento ev1 = Evento.builder()
+				.titulo("Natal Mágico 2020")
+				.descricao("Convenção de Vendas Natal 2020")
+				.local("Hotel Mabu").cidade("Curitiba")
+				.inicio(LocalDateTime.parse("2021-05-28T19:00"))
+				.termino(LocalDateTime.parse("2021-05-28T22:00"))
+				.ativo(true)
+				.build();
 
-		Evento ev1 = new Evento(evdto1);
-		Evento ev2 = new Evento(evdto2);
+		Evento ev2 = Evento.builder()
+				.titulo("Arraiá Junino 2021")
+				.descricao("Convenção de Vendas Junina 2021")
+				.local("Cataratas")
+				.cidade("Foz do Iguaçú")
+				.inicio(LocalDateTime.parse("2021-05-28T19:00"))
+				.termino(LocalDateTime.parse("2021-05-28T22:00"))
+				.ativo(false)
+				.build();
 
 		AtividadeRequest atdto1 = new AtividadeRequest("Palestra de Vendas", "Como aumentar suas vendas",
 				LocalTime.of(8, 0), LocalTime.of(9, 0), ev1);
