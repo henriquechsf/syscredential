@@ -47,8 +47,8 @@ public class TestConfig implements CommandLineRunner {
 
 		usuarioRepository.saveAll(Arrays.asList(user1, user2));
 
-		Regional reg1 = new Regional(new RegionalRequest(159, "Umuarama", "UMU"));
-		Regional reg2 = new Regional(new RegionalRequest(117, "Maringá", "PRO-MAR"));
+		Regional reg1 = Regional.builder().cod(159).nome("Umuarama").sigla("PRO-UMU").build();
+		Regional reg2 = Regional.builder().cod(117).nome("Maringá").sigla("PRO-MAR").build();
 
 		regionalRepository.saveAll(Arrays.asList(reg1, reg2));
 

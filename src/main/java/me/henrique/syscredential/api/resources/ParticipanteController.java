@@ -28,11 +28,11 @@ public class ParticipanteController {
 	@GetMapping
 	public List<ParticipanteResponse> listar() {
 		List<Participante> participantes = service.getAll();
-		List<ParticipanteResponse> participantesResponse = participantes
+		List<ParticipanteResponse> response = participantes
 				.stream().map(participante -> mapper.map(participante, ParticipanteResponse.class))
 				.collect(Collectors.toList());
 
-		return participantesResponse;
+		return response;
 	}
 
 	@GetMapping("/{id}")
