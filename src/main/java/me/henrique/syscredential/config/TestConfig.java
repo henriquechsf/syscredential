@@ -40,10 +40,10 @@ public class TestConfig implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Usuario user1 = new Usuario(new UsuarioRequest("Carlos Henrique", "henrique", bcrypt.encode("1234")));
+		Usuario user1 = new Usuario(new UsuarioRequest("Carlos Henrique", "carlos.ferreira", bcrypt.encode("1234")));
 		user1.addPerfil(Perfil.ROLE_ADMIN);
 
-		Usuario user2 = new Usuario(new UsuarioRequest("Daniele Guerra", "daniele", bcrypt.encode("123456")));
+		Usuario user2 = new Usuario(new UsuarioRequest("Daniele Guerra", "daniele.guerra", bcrypt.encode("123456")));
 
 		usuarioRepository.saveAll(Arrays.asList(user1, user2));
 
@@ -52,16 +52,9 @@ public class TestConfig implements CommandLineRunner {
 
 		regionalRepository.saveAll(Arrays.asList(reg1, reg2));
 
-		ParticipanteRequest pdto1 = new ParticipanteRequest("02805230094", "Fulano da Silva", "fulano@email.com", "(44)98888-7777",
-				TamanhoCamiseta.G, true, reg1);
-		ParticipanteRequest pdto2 = new ParticipanteRequest("98673541093", "Ciclano de Souza", "ciclano@email.com", "(44)99999-7788",
-				TamanhoCamiseta.P, true, reg2);
-		ParticipanteRequest pdto3 = new ParticipanteRequest("04446568981", "Carlos Henrique de S. Ferreira", "henrique@email.com", "(44)99999-7788",
-				TamanhoCamiseta.G, true, reg1);
-
-		Participante p1 = new Participante(pdto1);
-		Participante p2 = new Participante(pdto2);
-		Participante p3 = new Participante(pdto3);
+		Participante p1 = Participante.builder().cpf("02805230094").nome("Fulano da Silva").email("fulano@email.com").telefone("(44)98888-7777").camiseta(TamanhoCamiseta.G).ativo(true).regional(reg1).build();
+		Participante p2 = Participante.builder().cpf("98673541093").nome("Ciclano de Souza").email("ciclano@email.com").telefone("(44)99999-7788").camiseta(TamanhoCamiseta.P).ativo(true).regional(reg2).build();
+		Participante p3 = Participante.builder().cpf("04446568981").nome("Carlos Henrique de S. Ferreira").email("henrique@email.com").telefone("(44)98888-7777").camiseta(TamanhoCamiseta.G).ativo(true).regional(reg1).build();
 
 		participanteRepository.saveAll(Arrays.asList(p1, p2, p3));
 
