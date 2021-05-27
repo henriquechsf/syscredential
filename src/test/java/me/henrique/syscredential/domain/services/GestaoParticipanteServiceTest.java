@@ -2,6 +2,7 @@ package me.henrique.syscredential.domain.services;
 
 import me.henrique.syscredential.domain.enums.TamanhoCamiseta;
 import me.henrique.syscredential.domain.exception.DomainException;
+import me.henrique.syscredential.domain.exception.EntityNotFoundException;
 import me.henrique.syscredential.domain.model.Participante;
 import me.henrique.syscredential.domain.model.Regional;
 import me.henrique.syscredential.domain.repository.ParticipanteRepository;
@@ -82,6 +83,22 @@ public class GestaoParticipanteServiceTest {
                 .hasMessage("CPF já cadastrado");
 
         Mockito.verify(repository, Mockito.never()).save(participante);
+    }
+
+    @Test
+    @DisplayName("Deve lançar uma excessão ao buscar um participante com ID não cadastrado")
+    public void participantNotFoundException() {
+        // cenario
+        int id = 1;
+        Mockito.when(repository.findById(Mockito.anyInt())).thenReturn(Optional.empty());
+
+        // execução
+        Throwable exception = catchThrowable(() -> service.getById(id));
+
+        // verificação
+        assertThat(exception)
+                .isInstanceOf(EntityNotFoundException.class)
+                .hasMessage("ID não encontrado");
     }
 
     @Test
