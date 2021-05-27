@@ -68,7 +68,8 @@ public class TestConfig implements CommandLineRunner {
 				.email("fulano@email.com")
 				.telefone("(44)98888-7777")
 				.camiseta(TamanhoCamiseta.G)
-				.ativo(true).regional(reg1)
+				.ativo(true)
+				.regional(reg1)
 				.build();
 
 		Participante p2 = Participante.builder()
@@ -77,7 +78,8 @@ public class TestConfig implements CommandLineRunner {
 				.email("ciclano@email.com")
 				.telefone("(44)99999-7788")
 				.camiseta(TamanhoCamiseta.P)
-				.ativo(true).regional(reg2)
+				.ativo(true)
+				.regional(reg2)
 				.build();
 
 		Participante p3 = Participante.builder()
@@ -86,7 +88,8 @@ public class TestConfig implements CommandLineRunner {
 				.email("henrique@email.com")
 				.telefone("(44)98888-7777")
 				.camiseta(TamanhoCamiseta.G)
-				.ativo(true).regional(reg1)
+				.ativo(true)
+				.regional(reg1)
 				.build();
 
 		participanteRepository.saveAll(Arrays.asList(p1, p2, p3));
@@ -94,7 +97,8 @@ public class TestConfig implements CommandLineRunner {
 		Evento ev1 = Evento.builder()
 				.titulo("Natal Mágico 2020")
 				.descricao("Convenção de Vendas Natal 2020")
-				.local("Hotel Mabu").cidade("Curitiba")
+				.local("Hotel Mabu")
+				.cidade("Curitiba")
 				.inicio(LocalDateTime.parse("2021-05-28T19:00"))
 				.termino(LocalDateTime.parse("2021-05-28T22:00"))
 				.ativo(true)

@@ -4,7 +4,6 @@ import me.henrique.syscredential.domain.exception.DomainException;
 import me.henrique.syscredential.domain.exception.EntityNotFoundException;
 import me.henrique.syscredential.domain.model.Participante;
 import me.henrique.syscredential.domain.repository.ParticipanteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,8 +13,11 @@ import java.util.Optional;
 @Service
 public class GestaoParticipanteService {
 
-	@Autowired
 	private ParticipanteRepository participanteRepository;
+
+	public GestaoParticipanteService(ParticipanteRepository participanteRepository) {
+		this.participanteRepository = participanteRepository;
+	}
 
 	public List<Participante> getAll() {
 		return participanteRepository.findAll();
