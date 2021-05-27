@@ -6,6 +6,7 @@ import me.henrique.syscredential.domain.model.Regional;
 import me.henrique.syscredential.domain.repository.RegionalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,6 +25,7 @@ public class GestaoRegionalService {
 		return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("ID não encontrado"));
 	}
 
+	@Transactional
 	public Regional save(Regional regional) {
 		Optional<Regional> obj = repository.findByCod(regional.getCod());
 
@@ -34,6 +36,7 @@ public class GestaoRegionalService {
 		return repository.save(regional);
 	}
 
+	@Transactional
 	public Regional update(Integer id, Regional regional) {
 		if (!repository.existsById(id)) {
 			throw new EntityNotFoundException("ID não encontrado");
@@ -43,6 +46,7 @@ public class GestaoRegionalService {
 		return repository.save(regional);
 	}
 
+	@Transactional
 	public void delete(Integer id) {
 		if (!repository.existsById(id)) {
 			throw new EntityNotFoundException("ID não encontrado");

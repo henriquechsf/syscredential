@@ -54,7 +54,7 @@ public class RegionalController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<RegionalResponse> atualizar(@PathVariable Integer id, @RequestBody RegionalRequest request) {
+	public ResponseEntity<RegionalResponse> atualizar(@PathVariable Integer id, @Valid @RequestBody RegionalRequest request) {
 		Regional regional = mapper.map(request, Regional.class);
 		Regional regionalAtualizada = service.update(id, regional);
 		RegionalResponse response = mapper.map(regionalAtualizada, RegionalResponse.class);

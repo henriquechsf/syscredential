@@ -13,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -88,7 +87,6 @@ public class EventoController {
 		return ResponseEntity.ok(listaCredenciados);
 	}
 
-	@Transactional
 	@PostMapping("/{idEvento}/credenciamentos")
 	public ResponseEntity<CredenciamentoResponse> credenciarParticipante(@PathVariable Integer idEvento, @RequestBody CredenciamentoRequest request) {
 		Credenciamento credenciamento = credenciamentoService.credenciarParticipante(idEvento, request);
