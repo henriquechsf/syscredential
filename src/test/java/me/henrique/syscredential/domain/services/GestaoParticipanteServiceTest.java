@@ -14,6 +14,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
@@ -33,7 +35,7 @@ public class GestaoParticipanteServiceTest {
 
     @Test
     @DisplayName("Deve salvar um participante")
-    public void salvarParticipante() {
+    public void shouldSaveParticipantTest() {
         // cenario
         Participante participante =  createParticipante();
 
@@ -66,7 +68,7 @@ public class GestaoParticipanteServiceTest {
 
     @Test
     @DisplayName("Deve lançar exceção ao tentar salvar um participante com CPF já cadastrado")
-    public void naoDeveSalvarParticipanteComCpfJaCadastrado() {
+    public void shouldNotSaveAParticipantWithDuplicatedCpf() {
         // cenario
         Participante participante = createParticipante();
         Mockito.when(repository.existsByCpf(Mockito.anyString())).thenReturn(true);
@@ -80,6 +82,24 @@ public class GestaoParticipanteServiceTest {
                 .hasMessage("CPF já cadastrado");
 
         Mockito.verify(repository, Mockito.never()).save(participante);
+    }
+
+    @Test
+    @DisplayName("Deve obter um participante por Id")
+    public void getParticipantByIdTest() {
+        // cenario
+        int id = 1;
+        Participante participante = createParticipante();
+        participante.setId(id);
+        Mockito.when(repository.findById(id)).thenReturn(Optional.of(participante));
+
+        // execução
+        Participante foundParticipant = service.getById(id);
+
+        // verificação
+        assertThat(foundParticipant).isNotNull();
+        assertThat(foundParticipant.getId()).isEqualTo(id);
+        assertThat(foundParticipant.getNome()).isEqualTo(participante.getNome());
     }
 
 
