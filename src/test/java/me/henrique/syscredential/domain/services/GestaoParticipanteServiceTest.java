@@ -102,6 +102,26 @@ public class GestaoParticipanteServiceTest {
         assertThat(foundParticipant.getNome()).isEqualTo(participante.getNome());
     }
 
+    @Test
+    @DisplayName("Deve obter um participante pelo CPF")
+    public void getParticipantByCpfTest() {
+        // cenario
+        String cpf = "02805230094";
+        Participante participante = createParticipante();
+        Mockito.when(repository.findByCpf(cpf)).thenReturn(Optional.of(participante));
+
+        // execução
+        Participante foundParticipant = service.getByCpf(cpf);
+
+        // verificação
+        assertThat(foundParticipant).isNotNull();
+        assertThat(foundParticipant.getId()).isEqualTo(participante.getId());
+        assertThat(foundParticipant.getCpf()).isEqualTo(participante.getCpf());
+        assertThat(foundParticipant.getNome()).isEqualTo(participante.getNome());
+
+        Mockito.verify(repository, Mockito.times(1)).findByCpf(cpf);
+    }
+
 
     private Participante createParticipante() {
         return Participante.builder()
