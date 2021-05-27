@@ -1,6 +1,5 @@
 package me.henrique.syscredential.domain.model;
 
-import lombok.Builder;
 import me.henrique.syscredential.api.dto.request.UsuarioRequest;
 import me.henrique.syscredential.domain.enums.Perfil;
 
@@ -8,7 +7,6 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Builder
 @Entity
 public class Usuario {
 	@Id
