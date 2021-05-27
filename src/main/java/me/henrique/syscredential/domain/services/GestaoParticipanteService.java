@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class GestaoParticipanteService {
@@ -33,9 +32,7 @@ public class GestaoParticipanteService {
 
 	@Transactional
 	public Participante save(Participante participante) {
-		Optional<Participante> obj = participanteRepository.findByCpf(participante.getCpf());
-
-		if (obj.isPresent()) {
+		if (participanteRepository.existsByCpf(participante.getCpf())) {
 			throw new DomainException("CPF já cadastrado");
 		}
 

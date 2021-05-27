@@ -1,6 +1,7 @@
 package me.henrique.syscredential.domain.services;
 
 import me.henrique.syscredential.domain.enums.TamanhoCamiseta;
+import me.henrique.syscredential.domain.exception.DomainException;
 import me.henrique.syscredential.domain.model.Participante;
 import me.henrique.syscredential.domain.model.Regional;
 import me.henrique.syscredential.domain.repository.ParticipanteRepository;
@@ -14,6 +15,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")
@@ -61,6 +63,25 @@ public class GestaoParticipanteServiceTest {
         assertThat(participanteSalvo.getCamiseta()).isEqualTo(TamanhoCamiseta.G);
         assertThat(participanteSalvo.getRegional().getId()).isEqualTo(1);
     }
+
+    @Test
+    @DisplayName("Deve lançar exceção ao tentar salvar um participante com CPF já cadastrado")
+    public void naoDeveSalvarParticipanteComCpfJaCadastrado() {
+        // cenario
+        Participante participante = createParticipante();
+        Mockito.when(repository.existsByCpf(Mockito.anyString())).thenReturn(true);
+
+        // execução
+        Throwable exception = catchThrowable(() -> service.save(participante));
+
+        // verificações
+        assertThat(exception)
+                .isInstanceOf(DomainException.class)
+                .hasMessage("CPF já cadastrado");
+
+        Mockito.verify(repository, Mockito.never()).save(participante);
+    }
+
 
     private Participante createParticipante() {
         return Participante.builder()
