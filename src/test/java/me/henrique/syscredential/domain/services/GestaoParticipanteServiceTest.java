@@ -6,6 +6,7 @@ import me.henrique.syscredential.domain.exception.EntityNotFoundException;
 import me.henrique.syscredential.domain.model.Participante;
 import me.henrique.syscredential.domain.model.Regional;
 import me.henrique.syscredential.domain.repository.ParticipanteRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,7 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 @ActiveProfiles("test")
 public class GestaoParticipanteServiceTest {
 
+    // SUT
     GestaoParticipanteService service;
 
     @MockBean
@@ -139,6 +141,16 @@ public class GestaoParticipanteServiceTest {
         Mockito.verify(repository, Mockito.times(1)).findByCpf(cpf);
     }
 
+    @Test
+    @DisplayName("Deve excluir um participante")
+    public void deleteParticipantTest() {
+        Participante participante = Participante.builder().id(1).build();
+
+        Mockito.when(repository.existsById(Mockito.anyInt())).thenReturn(true);
+
+        Assertions.assertDoesNotThrow(() -> service.delete(1));
+        Mockito.verify(repository, Mockito.times(1)).deleteById(1);
+    }
 
     private Participante createParticipante() {
         return Participante.builder()
