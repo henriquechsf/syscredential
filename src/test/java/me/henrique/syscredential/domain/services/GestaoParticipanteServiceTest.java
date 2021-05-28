@@ -144,12 +144,21 @@ public class GestaoParticipanteServiceTest {
     @Test
     @DisplayName("Deve excluir um participante")
     public void deleteParticipantTest() {
-        Participante participante = Participante.builder().id(1).build();
+        int id = 1;
+        Participante participante = Participante.builder().id(id).build();
 
         Mockito.when(repository.existsById(Mockito.anyInt())).thenReturn(true);
 
-        Assertions.assertDoesNotThrow(() -> service.delete(1));
-        Mockito.verify(repository, Mockito.times(1)).deleteById(1);
+        Assertions.assertDoesNotThrow(() -> service.delete(id));
+        Mockito.verify(repository, Mockito.times(1)).deleteById(id);
+    }
+
+    @Test
+    @DisplayName("Deve lançar um exceção ao excluir um livro com ID inexistente")
+    public void deleteInvalidParticipantTest() {
+        int id = 1;
+        Assertions.assertThrows(EntityNotFoundException.class, () -> service.delete(id));
+        Mockito.verify(repository, Mockito.never()).deleteById(id);
     }
 
     private Participante createParticipante() {
