@@ -9,7 +9,6 @@ import me.henrique.syscredential.domain.model.Participante;
 import me.henrique.syscredential.domain.repository.CredenciamentoRepository;
 import me.henrique.syscredential.domain.repository.EventoRepository;
 import me.henrique.syscredential.domain.repository.ParticipanteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -19,14 +18,15 @@ import java.util.Optional;
 @Service
 public class CredenciarParticipanteService {
 
-    @Autowired
     private EventoRepository eventoRepository;
-
-    @Autowired
     private ParticipanteRepository participanteRepository;
-
-    @Autowired
     private CredenciamentoRepository credenciamentoRepository;
+
+    public CredenciarParticipanteService(EventoRepository eventoRepository, ParticipanteRepository participanteRepository, CredenciamentoRepository credenciamentoRepository) {
+        this.eventoRepository = eventoRepository;
+        this.participanteRepository = participanteRepository;
+        this.credenciamentoRepository = credenciamentoRepository;
+    }
 
     public Credenciamento credenciarParticipante(Integer idEvento, CredenciamentoRequest request) {
         Optional<Evento> evento = eventoRepository.findById(idEvento);
@@ -47,7 +47,11 @@ public class CredenciarParticipanteService {
             throw new DomainException("Participante já credenciado.");
         }
 
-        Credenciamento credenciamento = new Credenciamento(LocalDateTime.now(), evento.get(), participante.get());
+        Credenciamento credenciamento = Credenciamento.builder()
+                .instante(LocalDateTime.now())
+                .evento(evento.get())
+                .participante(participante.get())
+                .build();
 
         return credenciamentoRepository.save(credenciamento);
     }
