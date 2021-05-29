@@ -42,16 +42,15 @@ public class CredenciarParticipanteService {
             throw new DomainException("Participante inativo.");
         }
 
-        Optional<Credenciamento> credenciamentoParticipante = credenciamentoRepository.findByParticipante(participante.get());
+        Optional<Credenciamento> credenciamentoParticipante = credenciamentoRepository.findParticipanteCredenciado(evento.get());
         if(credenciamentoParticipante.isPresent()) {
             throw new DomainException("Participante já credenciado.");
         }
 
-        Credenciamento credenciamento = Credenciamento.builder()
-                .instante(LocalDateTime.now())
-                .evento(evento.get())
-                .participante(participante.get())
-                .build();
+        Credenciamento credenciamento = new Credenciamento();
+        credenciamento.setInstante(LocalDateTime.now());
+        credenciamento.setParticipante(participante.get());
+        credenciamento.setEvento(evento.get());
 
         return credenciamentoRepository.save(credenciamento);
     }
