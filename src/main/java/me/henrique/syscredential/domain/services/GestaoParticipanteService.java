@@ -4,18 +4,19 @@ import me.henrique.syscredential.domain.exception.DomainException;
 import me.henrique.syscredential.domain.exception.EntityNotFoundException;
 import me.henrique.syscredential.domain.model.Participante;
 import me.henrique.syscredential.domain.repository.ParticipanteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class GestaoParticipanteService {
 
-	@Autowired
 	private ParticipanteRepository participanteRepository;
+
+	public GestaoParticipanteService(ParticipanteRepository participanteRepository) {
+		this.participanteRepository = participanteRepository;
+	}
 
 	public List<Participante> getAll() {
 		return participanteRepository.findAll();
@@ -31,9 +32,7 @@ public class GestaoParticipanteService {
 
 	@Transactional
 	public Participante save(Participante participante) {
-		Optional<Participante> obj = participanteRepository.findByCpf(participante.getCpf());
-
-		if (obj.isPresent()) {
+		if (participanteRepository.existsByCpf(participante.getCpf())) {
 			throw new DomainException("CPF já cadastrado");
 		}
 

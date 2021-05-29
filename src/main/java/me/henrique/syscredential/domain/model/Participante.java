@@ -1,5 +1,6 @@
 package me.henrique.syscredential.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,6 +34,7 @@ public class Participante {
 	@JoinColumn(name = "regional_id")
 	private Regional regional;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "participante")
 	private List<Credenciamento> credenciamentos;
 

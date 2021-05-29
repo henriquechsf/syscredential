@@ -13,11 +13,16 @@ import java.util.Optional;
 
 @Repository
 public interface CredenciamentoRepository extends JpaRepository<Credenciamento, Long> {
+
     Optional<Credenciamento> findByParticipante(Participante participante);
+
     public Credenciamento findByEvento(Evento evento);
 
     @Query("SELECT credenciamento FROM Credenciamento credenciamento " +
-            " JOIN credenciamento.evento ON credenciamento.evento = :evento ORDER BY credenciamento.instante DESC")
+            " WHERE credenciamento.evento = :evento ORDER BY credenciamento.instante DESC")
     public List<Credenciamento> findAllParticipantesCredenciados(@Param("evento") Evento evento);
+
+    @Query("SELECT c FROM Credenciamento c WHERE c.evento = ?1 and c.participante = ?2")
+    public Optional<Credenciamento> findParticipanteCredenciado(Evento evento, Participante participante);
 
 }

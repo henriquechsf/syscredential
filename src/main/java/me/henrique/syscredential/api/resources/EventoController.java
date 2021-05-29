@@ -1,6 +1,5 @@
 package me.henrique.syscredential.api.resources;
 
-import me.henrique.syscredential.api.dto.request.CredenciamentoRequest;
 import me.henrique.syscredential.api.dto.request.EventoRequest;
 import me.henrique.syscredential.api.dto.response.CredenciamentoResponse;
 import me.henrique.syscredential.api.dto.response.EventoResponse;
@@ -81,15 +80,17 @@ public class EventoController {
 
 		List<CredenciamentoResponse> listaCredenciados = participantesCredenciados
 				.stream()
-				.map(credenciamento -> new CredenciamentoResponse(credenciamento))
+				.map(credenciamento -> mapper.map(credenciamento, CredenciamentoResponse.class))
 				.collect(Collectors.toList());
 
 		return ResponseEntity.ok(listaCredenciados);
 	}
 
-	@PostMapping("/{idEvento}/credenciamentos")
-	public ResponseEntity<CredenciamentoResponse> credenciarParticipante(@PathVariable Integer idEvento, @RequestBody CredenciamentoRequest request) {
-		Credenciamento credenciamento = credenciamentoService.credenciarParticipante(idEvento, request);
-		return ResponseEntity.ok(new CredenciamentoResponse(credenciamento));
+	@PutMapping("/{idEvento}/credenciamentos/{credencial}")
+	public ResponseEntity<CredenciamentoResponse> credenciarParticipante(@PathVariable Integer idEvento, @RequestBody @PathVariable String credencial) {
+		Credenciamento credenciamento = credenciamentoService.credenciarParticipante(idEvento, credencial);
+		CredenciamentoResponse response = mapper.map(credenciamento, CredenciamentoResponse.class);
+
+		return ResponseEntity.ok(response);
 	}
 }
