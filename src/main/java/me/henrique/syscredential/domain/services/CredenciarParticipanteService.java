@@ -42,7 +42,7 @@ public class CredenciarParticipanteService {
             throw new DomainException("Participante inativo.");
         }
 
-        Optional<Credenciamento> credenciamentoParticipante = credenciamentoRepository.findParticipanteCredenciado(evento.get());
+        Optional<Credenciamento> credenciamentoParticipante = credenciamentoRepository.findParticipanteCredenciado(evento.get(), participante.get());
         if(credenciamentoParticipante.isPresent()) {
             throw new DomainException("Participante já credenciado.");
         }

@@ -22,8 +22,7 @@ public interface CredenciamentoRepository extends JpaRepository<Credenciamento, 
             " WHERE credenciamento.evento = :evento ORDER BY credenciamento.instante DESC")
     public List<Credenciamento> findAllParticipantesCredenciados(@Param("evento") Evento evento);
 
-    @Query("SELECT credenciamento FROM Credenciamento credenciamento " +
-            " WHERE credenciamento.evento = :evento ORDER BY credenciamento.instante")
-    public Optional<Credenciamento> findParticipanteCredenciado(@Param("evento") Evento evento);
+    @Query("SELECT c FROM Credenciamento c WHERE c.evento = ?1 and c.participante = ?2")
+    public Optional<Credenciamento> findParticipanteCredenciado(Evento evento, Participante participante);
 
 }

@@ -86,7 +86,7 @@ public class EventoController {
 		return ResponseEntity.ok(listaCredenciados);
 	}
 
-	@PostMapping("/{idEvento}/credenciamentos/{credencial}")
+	@PutMapping("/{idEvento}/credenciamentos/{credencial}")
 	public ResponseEntity<CredenciamentoResponse> credenciarParticipante(@PathVariable Integer idEvento, @RequestBody @PathVariable String credencial) {
 		Credenciamento credenciamento = credenciamentoService.credenciarParticipante(idEvento, credencial);
 		CredenciamentoResponse response = mapper.map(credenciamento, CredenciamentoResponse.class);
