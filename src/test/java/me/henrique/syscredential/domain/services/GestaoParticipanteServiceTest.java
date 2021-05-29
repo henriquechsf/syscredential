@@ -40,40 +40,29 @@ public class GestaoParticipanteServiceTest {
     @DisplayName("Deve salvar um participante")
     public void shouldSaveParticipantTest() {
         // cenario
-        Participante participante =  createParticipante();
-
-        Mockito.when(repository.save(participante))
-                .thenReturn(
-                        Participante.builder()
-                            .id(1)
-                            .cpf("02805230094")
-                            .nome("Fulano da Silva")
-                            .email("fulano@email.com")
-                            .telefone("(44)98888-7777")
-                            .camiseta(TamanhoCamiseta.G)
-                            .ativo(true)
-                            .regional(Regional.builder().id(1).build())
-                            .build()
-                );
+        Participante participante =  createParticipanteDTO();
+        Mockito.when(repository.save(participante)).thenReturn(createParticipanteMockComID());
 
         // execução
-        Participante participanteSalvo = service.save(participante);
+        Participante sut = service.save(participante);
 
         // verificação
-        assertThat(participanteSalvo.getId()).isNotNull();
-        assertThat(participanteSalvo.getCpf()).isEqualTo("02805230094");
-        assertThat(participanteSalvo.getNome()).isEqualTo("Fulano da Silva");
-        assertThat(participanteSalvo.getEmail()).isEqualTo("fulano@email.com");
-        assertThat(participanteSalvo.getTelefone()).isEqualTo("(44)98888-7777");
-        assertThat(participanteSalvo.getCamiseta()).isEqualTo(TamanhoCamiseta.G);
-        assertThat(participanteSalvo.getRegional().getId()).isEqualTo(1);
+        assertThat(sut.getId()).isNotNull();
+        assertThat(sut.getCpf()).isEqualTo(participante.getCpf());
+        assertThat(sut.getNome()).isEqualTo(participante.getNome());
+        assertThat(sut.getEmail()).isEqualTo(participante.getEmail());
+        assertThat(sut.getTelefone()).isEqualTo(participante.getTelefone());
+        assertThat(sut.getCamiseta()).isEqualTo(participante.getCamiseta());
+        assertThat(sut.getRegional().getId()).isEqualTo(participante.getRegional().getId());
+
+        Mockito.verify(repository, Mockito.times(1)).save(participante);
     }
 
     @Test
     @DisplayName("Deve lançar exceção ao tentar salvar um participante com CPF já cadastrado")
     public void shouldNotSaveAParticipantWithDuplicatedCpf() {
         // cenario
-        Participante participante = createParticipante();
+        Participante participante = createParticipanteDTO();
         Mockito.when(repository.existsByCpf(Mockito.anyString())).thenReturn(true);
 
         // execução
@@ -85,6 +74,69 @@ public class GestaoParticipanteServiceTest {
                 .hasMessage("CPF já cadastrado");
 
         Mockito.verify(repository, Mockito.never()).save(participante);
+    }
+
+    @Test
+    @DisplayName("Deve obter um participante pelo CPF")
+    public void getParticipantByCpfTest() {
+        // cenario
+        String cpf = "02805230094";
+        Participante participante = createParticipanteDTO();
+        Mockito.when(repository.findByCpf(cpf)).thenReturn(Optional.of(participante));
+
+        // execução
+        Participante sut = service.getByCpf(cpf);
+
+        // verificação
+        assertThat(sut).isNotNull();
+        assertThat(sut.getId()).isEqualTo(participante.getId());
+        assertThat(sut.getCpf()).isEqualTo(participante.getCpf());
+        assertThat(sut.getNome()).isEqualTo(participante.getNome());
+
+        Mockito.verify(repository, Mockito.times(1)).findByCpf(cpf);
+    }
+
+    @Test
+    @DisplayName("Deve atualizar um participante")
+    public void updateParticipantTest() {
+        // cenario
+        int id = 1;
+        Participante participante = createParticipanteDTO();
+        participante.setId(id);
+
+        Mockito.when(repository.existsById(id)).thenReturn(true);
+        Mockito.when(repository.save(participante)).thenReturn(createParticipanteMockComID());
+
+        // execução
+        Participante sut = service.update(id, participante);
+
+        // verificação
+        assertThat(sut.getId()).isEqualTo(participante.getId());
+        assertThat(sut.getCpf()).isEqualTo(participante.getCpf());
+        assertThat(sut.getNome()).isEqualTo(participante.getNome());
+
+        Mockito.verify(repository, Mockito.times(1)).save(participante);
+    }
+
+    @Test
+    @DisplayName("Deve obter um participante por Id")
+    public void getParticipantByIdTest() {
+        // cenario
+        int id = 1;
+        Participante participante = createParticipanteDTO();
+        participante.setId(id);
+        Mockito.when(repository.findById(id)).thenReturn(Optional.of(participante));
+
+        // execução
+        Participante sut = service.getById(id);
+
+        // verificação
+        assertThat(sut).isNotNull();
+        assertThat(sut.getId()).isEqualTo(participante.getId());
+        assertThat(sut.getCpf()).isEqualTo(participante.getCpf());
+        assertThat(sut.getNome()).isEqualTo(participante.getNome());
+
+        Mockito.verify(repository, Mockito.times(1)).findById(id);
     }
 
     @Test
@@ -104,52 +156,18 @@ public class GestaoParticipanteServiceTest {
     }
 
     @Test
-    @DisplayName("Deve obter um participante por Id")
-    public void getParticipantByIdTest() {
-        // cenario
-        int id = 1;
-        Participante participante = createParticipante();
-        participante.setId(id);
-        Mockito.when(repository.findById(id)).thenReturn(Optional.of(participante));
-
-        // execução
-        Participante foundParticipant = service.getById(id);
-
-        // verificação
-        assertThat(foundParticipant).isNotNull();
-        assertThat(foundParticipant.getId()).isEqualTo(id);
-        assertThat(foundParticipant.getNome()).isEqualTo(participante.getNome());
-    }
-
-    @Test
-    @DisplayName("Deve obter um participante pelo CPF")
-    public void getParticipantByCpfTest() {
-        // cenario
-        String cpf = "02805230094";
-        Participante participante = createParticipante();
-        Mockito.when(repository.findByCpf(cpf)).thenReturn(Optional.of(participante));
-
-        // execução
-        Participante foundParticipant = service.getByCpf(cpf);
-
-        // verificação
-        assertThat(foundParticipant).isNotNull();
-        assertThat(foundParticipant.getId()).isEqualTo(participante.getId());
-        assertThat(foundParticipant.getCpf()).isEqualTo(participante.getCpf());
-        assertThat(foundParticipant.getNome()).isEqualTo(participante.getNome());
-
-        Mockito.verify(repository, Mockito.times(1)).findByCpf(cpf);
-    }
-
-    @Test
     @DisplayName("Deve excluir um participante")
     public void deleteParticipantTest() {
+        // cenario
         int id = 1;
-        Participante participante = Participante.builder().id(id).build();
-
+        Participante participante = createParticipanteDTO();
+        participante.setId(id);
         Mockito.when(repository.existsById(Mockito.anyInt())).thenReturn(true);
 
+        // execução
         Assertions.assertDoesNotThrow(() -> service.delete(id));
+
+        //verificação
         Mockito.verify(repository, Mockito.times(1)).deleteById(id);
     }
 
@@ -157,33 +175,14 @@ public class GestaoParticipanteServiceTest {
     @DisplayName("Deve lançar um exceção ao excluir um participante com ID inexistente")
     public void deleteInvalidParticipantTest() {
         int id = 1;
+
         Assertions.assertThrows(EntityNotFoundException.class, () -> service.delete(id));
+
         Mockito.verify(repository, Mockito.never()).deleteById(id);
     }
 
-    @Test
-    @DisplayName("Deve atualizar um participante")
-    public void updateParticipantTest() {
-        // cenario
-        int id = 1;
-        Participante dto = Participante.builder().id(id).build();
 
-        Participante participanteAtualizado = createParticipante();
-        participanteAtualizado.setId(id);
-
-        Mockito.when(repository.existsById(id)).thenReturn(true);
-        Mockito.when(repository.save(dto)).thenReturn(participanteAtualizado);
-
-        // execução
-        Participante response = service.update(id, dto);
-
-        // verificação
-        assertThat(response.getId()).isEqualTo(participanteAtualizado.getId());
-        assertThat(response.getCpf()).isEqualTo(participanteAtualizado.getCpf());
-        assertThat(response.getNome()).isEqualTo(participanteAtualizado.getNome());
-    }
-
-    private Participante createParticipante() {
+    private Participante createParticipanteDTO() {
         return Participante.builder()
                 .cpf("02805230094")
                 .nome("Fulano da Silva")
@@ -193,5 +192,11 @@ public class GestaoParticipanteServiceTest {
                 .ativo(true)
                 .regional(Regional.builder().id(1).build())
                 .build();
+    }
+
+    private Participante createParticipanteMockComID() {
+        Participante participante = createParticipanteDTO();
+        participante.setId(1);
+        return participante;
     }
 }
