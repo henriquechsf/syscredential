@@ -1,20 +1,14 @@
 package me.henrique.syscredential.api.dto.request;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class CredenciamentoRequest {
     private String cpf;
-
-    public CredenciamentoRequest() {
-    }
-
-    public CredenciamentoRequest(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
 }

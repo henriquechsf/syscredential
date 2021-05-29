@@ -32,7 +32,7 @@ public class GestaoParticipanteServiceTest {
     ParticipanteRepository repository;
 
     @BeforeEach
-    public void setup() {
+    public void setUp() {
         this.service = new GestaoParticipanteService(repository);
     }
 
