@@ -7,6 +7,7 @@ import me.henrique.syscredential.domain.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +33,7 @@ public class GestaoUsuarioService {
 		return repository.findByLogin(login).orElseThrow(() -> new EntityNotFoundException("Login não encontrado"));
 	}
 
+	@Transactional
 	public Usuario save(Usuario usuario) {
 		Optional<Usuario> obj = repository.findByLogin(usuario.getLogin());
 
@@ -44,6 +46,7 @@ public class GestaoUsuarioService {
 		return repository.save(usuario);
 	}
 
+	@Transactional
 	public Usuario update(Integer id, Usuario usuario) {
 		if (!repository.existsById(id)) {
 			throw new EntityNotFoundException("ID não encontrado");
@@ -53,6 +56,7 @@ public class GestaoUsuarioService {
 		return repository.save(usuario);
 	}
 
+	@Transactional
 	public void delete(Integer id) {
 		if (!repository.existsById(id)) {
 			throw new EntityNotFoundException("ID não encontrado");

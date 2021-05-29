@@ -1,11 +1,18 @@
 package me.henrique.syscredential.domain.model;
 
-import me.henrique.syscredential.api.dto.request.ParticipanteRequest;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import me.henrique.syscredential.domain.enums.TamanhoCamiseta;
 
 import javax.persistence.*;
 import java.util.List;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 public class Participante {
 	@Id
@@ -28,82 +35,5 @@ public class Participante {
 
 	@OneToMany(mappedBy = "participante")
 	private List<Credenciamento> credenciamentos;
-
-	public Participante() {
-	}
-
-	public Participante(ParticipanteRequest dto) {
-		this.cpf = dto.getCpf();
-		this.nome = dto.getNome();
-		this.email = dto.getEmail();
-		this.telefone = dto.getTelefone();
-		this.camiseta = dto.getCamiseta();
-		this.regional = dto.getRegional();
-		this.ativo = dto.getAtivo();
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-
-	public TamanhoCamiseta getCamiseta() {
-		return camiseta;
-	}
-
-	public void setCamiseta(TamanhoCamiseta camiseta) {
-		this.camiseta = camiseta;
-	}
-
-	public Boolean getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
-	}
-
-	public Regional getRegional() {
-		return regional;
-	}
-
-	public void setRegional(Regional regional) {
-		this.regional = regional;
-	}
 
 }

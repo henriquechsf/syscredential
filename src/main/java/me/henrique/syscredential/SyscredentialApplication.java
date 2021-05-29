@@ -1,7 +1,9 @@
 package me.henrique.syscredential;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 import javax.annotation.PostConstruct;
 import java.util.TimeZone;
@@ -11,8 +13,12 @@ public class SyscredentialApplication {
 
 	@PostConstruct
 	void started() {
-		// set JVM timezone as UTC
 		TimeZone.setDefault(TimeZone.getTimeZone("America/Sao_Paulo"));
+	}
+
+	@Bean
+	public ModelMapper modelMapper() {
+		return new ModelMapper();
 	}
 
 	public static void main(String[] args) {

@@ -4,52 +4,62 @@ import me.henrique.syscredential.api.dto.request.AtividadeRequest;
 import me.henrique.syscredential.api.dto.response.AtividadeResponse;
 import me.henrique.syscredential.domain.model.Atividade;
 import me.henrique.syscredential.domain.services.GestaoAtividadeService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/atividades")
 public class AtividadeController {
 
-	@Autowired
+	private ModelMapper mapper;
 	private GestaoAtividadeService service;
+
+	public AtividadeController(ModelMapper mapper, GestaoAtividadeService service) {
+		this.mapper = mapper;
+		this.service = service;
+	}
 
 	@GetMapping
 	public List<AtividadeResponse> listar() {
 		List<Atividade> atividades = service.getAll();
-		List<AtividadeResponse> atividadesResponse = new ArrayList<>();
-		atividades.forEach(atividade -> atividadesResponse.add(new AtividadeResponse(atividade)));
-		return atividadesResponse;
+		List<AtividadeResponse> response = atividades
+				.stream().map(atividade -> mapper.map(atividade, AtividadeResponse.class))
+				.collect(Collectors.toList());
+
+		return response;
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<AtividadeResponse> listarPorId(@PathVariable Integer id) {
 		Atividade atividade = service.getById(id);
-		return ResponseEntity.ok(new AtividadeResponse(atividade));
+		AtividadeResponse response = mapper.map(atividade, AtividadeResponse.class);
+
+		return ResponseEntity.ok(response);
 	}
 
-	@Transactional
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<AtividadeResponse> adicionar(@Valid @RequestBody AtividadeRequest dto) {
-		Atividade atividade = new Atividade(dto);
+	public ResponseEntity<AtividadeResponse> adicionar(@Valid @RequestBody AtividadeRequest request) {
+		Atividade atividade = mapper.map(request, Atividade.class);
 		Atividade atividadeSalva = service.save(atividade);
-		return ResponseEntity.ok(new AtividadeResponse(atividadeSalva));
+		AtividadeResponse response = mapper.map(atividadeSalva, AtividadeResponse.class);
+
+		return ResponseEntity.ok(response);
 	}
 
-	@Transactional
 	@PutMapping("/{id}")
-	public ResponseEntity<AtividadeResponse> atualizar(@PathVariable Integer id, @RequestBody AtividadeRequest dto) {
-		Atividade atividade = new Atividade(dto);
+	public ResponseEntity<AtividadeResponse> atualizar(@PathVariable Integer id, @Valid @RequestBody AtividadeRequest request) {
+		Atividade atividade = mapper.map(request, Atividade.class);
 		Atividade atividadeAtualizada = service.update(id, atividade);
-		return ResponseEntity.ok(new AtividadeResponse(atividadeAtualizada));
+		AtividadeResponse response = mapper.map(atividadeAtualizada, AtividadeResponse.class);
+
+		return ResponseEntity.ok(response);
 	}
 
 	@DeleteMapping("/{id}")

@@ -1,9 +1,16 @@
 package me.henrique.syscredential.api.dto.response;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import me.henrique.syscredential.domain.enums.TamanhoCamiseta;
-import me.henrique.syscredential.domain.model.Participante;
 import me.henrique.syscredential.domain.model.Regional;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class ParticipanteResponse {
 	private Integer id;
 	private String cpf;
@@ -14,83 +21,4 @@ public class ParticipanteResponse {
 	private Boolean ativo;
 
 	private Regional regional;
-
-	public ParticipanteResponse() {
-	}
-
-	public ParticipanteResponse(Participante dto) {
-		this.id = dto.getId();
-		this.cpf = dto.getCpf();
-		this.nome = dto.getNome();
-		this.email = dto.getEmail();
-		this.telefone = dto.getTelefone();
-		this.camiseta = dto.getCamiseta();
-		this.ativo = dto.getAtivo();
-		this.regional = dto.getRegional();
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-
-	public TamanhoCamiseta getCamiseta() {
-		return camiseta;
-	}
-
-	public void setCamiseta(TamanhoCamiseta camiseta) {
-		this.camiseta = camiseta;
-	}
-
-	public Boolean getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
-	}
-
-	public Regional getRegional() {
-		return regional;
-	}
-
-	public void setRegional(Regional regional) {
-		this.regional = regional;
-	}
-
 }

@@ -40,46 +40,89 @@ public class TestConfig implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Usuario user1 = new Usuario(new UsuarioRequest("Carlos Henrique", "henrique", bcrypt.encode("1234")));
+		Usuario user1 = new Usuario(new UsuarioRequest("Carlos Henrique", "carlos.ferreira", bcrypt.encode("1234")));
 		user1.addPerfil(Perfil.ROLE_ADMIN);
 
-		Usuario user2 = new Usuario(new UsuarioRequest("Daniele Guerra", "daniele", bcrypt.encode("123456")));
+		Usuario user2 = new Usuario(new UsuarioRequest("Daniele Guerra", "daniele.guerra", bcrypt.encode("123456")));
 
 		usuarioRepository.saveAll(Arrays.asList(user1, user2));
 
-		Regional reg1 = new Regional(new RegionalRequest(159, "Umuarama", "UMU"));
-		Regional reg2 = new Regional(new RegionalRequest(117, "Maringá", "PRO-MAR"));
+		Regional reg1 = Regional
+				.builder()
+				.cod(159)
+				.nome("Umuarama")
+				.sigla("PRO-UMU")
+				.build();
+
+		Regional reg2 = Regional
+				.builder().cod(117)
+				.nome("Maringá")
+				.sigla("PRO-MAR")
+				.build();
 
 		regionalRepository.saveAll(Arrays.asList(reg1, reg2));
 
-		ParticipanteRequest pdto1 = new ParticipanteRequest("02805230094", "Fulano da Silva", "fulano@email.com", "(44)98888-7777",
-				TamanhoCamiseta.G, true, reg1);
-		ParticipanteRequest pdto2 = new ParticipanteRequest("98673541093", "Ciclano de Souza", "ciclano@email.com", "(44)99999-7788",
-				TamanhoCamiseta.P, true, reg2);
-		ParticipanteRequest pdto3 = new ParticipanteRequest("04446568981", "Carlos Henrique de S. Ferreira", "henrique@email.com", "(44)99999-7788",
-				TamanhoCamiseta.G, true, reg1);
+		Participante p1 = Participante.builder()
+				.cpf("02805230094")
+				.nome("Fulano da Silva")
+				.email("fulano@email.com")
+				.telefone("(44)98888-7777")
+				.camiseta(TamanhoCamiseta.G)
+				.ativo(true).regional(reg1)
+				.build();
 
-		Participante p1 = new Participante(pdto1);
-		Participante p2 = new Participante(pdto2);
-		Participante p3 = new Participante(pdto3);
+		Participante p2 = Participante.builder()
+				.cpf("98673541093")
+				.nome("Ciclano de Souza")
+				.email("ciclano@email.com")
+				.telefone("(44)99999-7788")
+				.camiseta(TamanhoCamiseta.P)
+				.ativo(true).regional(reg2)
+				.build();
+
+		Participante p3 = Participante.builder()
+				.cpf("04446568981")
+				.nome("Carlos Henrique de S. Ferreira")
+				.email("henrique@email.com")
+				.telefone("(44)98888-7777")
+				.camiseta(TamanhoCamiseta.G)
+				.ativo(true).regional(reg1)
+				.build();
 
 		participanteRepository.saveAll(Arrays.asList(p1, p2, p3));
 
-		EventoRequest evdto1 = new EventoRequest("Convenção Junina 2021", "Reunião com equipe de vendas para apresentação de projetos de campanha", "Hotel Mabu", "Curitiba",
-				LocalDateTime.of(2021,4,10,8,0), LocalDateTime.of(2021,4,10,17,0), true);
-		EventoRequest evdto2 = new EventoRequest("Convenção Natalina 2020", "Apresentação dos Materiais de Marketing e Campanha Natal 2020", "Chácara Zaeli", "Umuarama",
-				LocalDateTime.of(2020,12,2,9,0), LocalDateTime.of(2020,12,2,12,0), false);
+		Evento ev1 = Evento.builder()
+				.titulo("Natal Mágico 2020")
+				.descricao("Convenção de Vendas Natal 2020")
+				.local("Hotel Mabu").cidade("Curitiba")
+				.inicio(LocalDateTime.parse("2021-05-28T19:00"))
+				.termino(LocalDateTime.parse("2021-05-28T22:00"))
+				.ativo(true)
+				.build();
 
-		Evento ev1 = new Evento(evdto1);
-		Evento ev2 = new Evento(evdto2);
+		Evento ev2 = Evento.builder()
+				.titulo("Arraiá Junino 2021")
+				.descricao("Convenção de Vendas Junina 2021")
+				.local("Cataratas")
+				.cidade("Foz do Iguaçú")
+				.inicio(LocalDateTime.parse("2021-05-28T19:00"))
+				.termino(LocalDateTime.parse("2021-05-28T22:00"))
+				.ativo(false)
+				.build();
 
-		AtividadeRequest atdto1 = new AtividadeRequest("Palestra de Vendas", "Como aumentar suas vendas",
-				LocalTime.of(8, 0), LocalTime.of(9, 0), ev1);
-		AtividadeRequest atdto2 = new AtividadeRequest("Degusta Zaeli", "Degustação com os principais produtos",
-				LocalTime.of(10, 0), LocalTime.of(12, 0), ev1);
+		Atividade at1 = Atividade.builder()
+				.titulo("Palestra de Vendas")
+				.descricao("Como aumentar suas vendas")
+				.inicio(LocalTime.parse("19:00"))
+				.termino(LocalTime.parse("19:00"))
+				.build();
 
-		Atividade at1 = new Atividade(atdto1);
-		Atividade at2 = new Atividade(atdto2);
+		Atividade at2 = Atividade.builder()
+				.titulo("Degusta Zaeli")
+				.descricao("Degustação com os principais produtos")
+				.inicio(LocalTime.parse("20:00"))
+				.termino(LocalTime.parse("20:00"))
+				.build();
 
 		eventoRepository.saveAll(Arrays.asList(ev1, ev2));
 		atividadeRepository.saveAll(Arrays.asList(at1, at2));
