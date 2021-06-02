@@ -1,62 +1,21 @@
 package me.henrique.syscredential.domain.services;
 
-import me.henrique.syscredential.domain.exception.DomainException;
-import me.henrique.syscredential.domain.exception.EntityNotFoundException;
 import me.henrique.syscredential.domain.model.Regional;
-import me.henrique.syscredential.domain.repository.RegionalRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
-@Service
-public class GestaoRegionalService {
+public interface GestaoRegionalService {
+    List<Regional> getAll();
 
-	@Autowired
-	private RegionalRepository repository;
+    Regional getById(Integer id);
 
-	public List<Regional> getAll() {
-		return repository.findAll();
-	}
+    @Transactional
+    Regional save(Regional regional);
 
-	public Regional getById(Integer id) {
-		return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("ID não encontrado"));
-	}
+    @Transactional
+    Regional update(Integer id, Regional regional);
 
-	@Transactional
-	public Regional save(Regional regional) {
-		Optional<Regional> obj = repository.findByCod(regional.getCod());
-
-		if (obj.isPresent()) {
-			throw new DomainException("Regional já cadastrada");
-		}
-
-		return repository.save(regional);
-	}
-
-	@Transactional
-	public Regional update(Integer id, Regional regional) {
-		if (!repository.existsById(id)) {
-			throw new EntityNotFoundException("ID não encontrado");
-		}
-		regional.setId(id);
-
-		return repository.save(regional);
-	}
-
-	@Transactional
-	public void delete(Integer id) {
-		if (!repository.existsById(id)) {
-			throw new EntityNotFoundException("ID não encontrado");
-		}
-
-		try {
-			repository.deleteById(id);
-		} catch (RuntimeException e) {
-			throw new DomainException("Não foi possível excluir");
-		}
-	}
-
+    @Transactional
+    void delete(Integer id);
 }

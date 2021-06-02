@@ -4,7 +4,6 @@ import me.henrique.syscredential.api.dto.request.UsuarioRequest;
 import me.henrique.syscredential.api.dto.response.UsuarioResponse;
 import me.henrique.syscredential.domain.model.Usuario;
 import me.henrique.syscredential.domain.services.GestaoUsuarioService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +16,11 @@ import java.util.List;
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
-	@Autowired
 	private GestaoUsuarioService service;
+
+	public UsuarioController(GestaoUsuarioService service) {
+		this.service = service;
+	}
 
 	@GetMapping
 	public List<UsuarioResponse> listar() {

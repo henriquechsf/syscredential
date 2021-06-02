@@ -1,4 +1,4 @@
-package me.henrique.syscredential.domain.services;
+package me.henrique.syscredential.domain.services.impl;
 
 import me.henrique.syscredential.domain.model.Usuario;
 import me.henrique.syscredential.domain.repository.UsuarioRepository;

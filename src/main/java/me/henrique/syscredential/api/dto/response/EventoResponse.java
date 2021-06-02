@@ -19,10 +19,10 @@ public class EventoResponse {
     private String local;
     private String cidade;
 
-    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm")
+    @JsonFormat(pattern="dd/MM/yyyy HH:mm")
     private LocalDateTime inicio;
 
-    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm")
+    @JsonFormat(pattern="dd/MM/yyyy HH:mm")
     private LocalDateTime termino;
 
     @JsonFormat(pattern="dd/MM/yyyy HH:mm")

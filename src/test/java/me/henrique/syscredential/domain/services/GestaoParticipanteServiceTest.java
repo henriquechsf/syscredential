@@ -6,6 +6,7 @@ import me.henrique.syscredential.domain.exception.EntityNotFoundException;
 import me.henrique.syscredential.domain.model.Participante;
 import me.henrique.syscredential.domain.model.Regional;
 import me.henrique.syscredential.domain.repository.ParticipanteRepository;
+import me.henrique.syscredential.domain.services.impl.GestaoParticipanteServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -33,7 +34,7 @@ public class GestaoParticipanteServiceTest {
 
     @BeforeEach
     public void setUp() {
-        this.service = new GestaoParticipanteService(repository);
+        this.service = new GestaoParticipanteServiceImpl(repository);
     }
 
     @Test
