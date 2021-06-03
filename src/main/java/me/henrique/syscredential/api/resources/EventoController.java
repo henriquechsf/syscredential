@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/eventos")
+@RequestMapping(value = "/eventos")
 public class EventoController {
 
 	private ModelMapper mapper;

@@ -58,6 +58,7 @@ public class GestaoUsuarioServiceImpl implements GestaoUsuarioService {
 			throw new EntityNotFoundException("ID não encontrado");
 		}
 		usuario.setId(id);
+		usuario.setSenha(bcrypt.encode(usuario.getSenha()));
 
 		return repository.save(usuario);
 	}
