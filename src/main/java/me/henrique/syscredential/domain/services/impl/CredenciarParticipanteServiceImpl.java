@@ -78,4 +78,9 @@ public class CredenciarParticipanteServiceImpl implements CredenciarParticipante
         }
         credenciamentoRepository.deleteById(id);
     }
+
+    @Override
+    public List<Credenciamento> getAll() {
+        return credenciamentoRepository.findAll();
+    }
 }

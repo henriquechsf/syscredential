@@ -99,4 +99,14 @@ public class EventoController {
 		credenciamentoService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
+
+	@GetMapping("/credenciamentos")
+	public List<CredenciamentoResponse> listarCredenciamentos() {
+		List<Credenciamento> credenciamentos = credenciamentoService.getAll();
+		List<CredenciamentoResponse> response = credenciamentos
+				.stream().map(credenciamento -> mapper.map(credenciamento, CredenciamentoResponse.class))
+				.collect(Collectors.toList());
+
+		return response;
+	}
 }

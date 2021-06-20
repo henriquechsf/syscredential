@@ -10,4 +10,6 @@ public interface CredenciarParticipanteService {
     List<Credenciamento> listarParticipantesCredenciados(Integer idEvento);
 
     void delete(Long id);
+
+    List<Credenciamento> getAll();
 }
