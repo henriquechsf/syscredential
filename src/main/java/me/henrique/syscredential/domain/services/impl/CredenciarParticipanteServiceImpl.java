@@ -69,4 +69,13 @@ public class CredenciarParticipanteServiceImpl implements CredenciarParticipante
 
         return credenciamentos;
     }
+
+    @Override
+    public void delete(Long id) {
+        Optional<Credenciamento> credenciamento = credenciamentoRepository.findById(id);
+        if (!credenciamento.isPresent()) {
+            throw new EntityNotFoundException("ID Credenciamento inexistente");
+        }
+        credenciamentoRepository.deleteById(id);
+    }
 }

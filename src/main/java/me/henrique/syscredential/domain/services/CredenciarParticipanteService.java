@@ -8,4 +8,6 @@ public interface CredenciarParticipanteService {
     Credenciamento credenciarParticipante(Integer idEvento, String credencial);
 
     List<Credenciamento> listarParticipantesCredenciados(Integer idEvento);
+
+    void delete(Long id);
 }

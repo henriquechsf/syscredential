@@ -87,10 +87,16 @@ public class EventoController {
 	}
 
 	@PutMapping("/{idEvento}/credenciamentos/{credencial}")
-	public ResponseEntity<CredenciamentoResponse> credenciarParticipante(@PathVariable Integer idEvento, @RequestBody @PathVariable String credencial) {
+	public ResponseEntity<CredenciamentoResponse> credenciarParticipante(@PathVariable Integer idEvento, @PathVariable String credencial) {
 		Credenciamento credenciamento = credenciamentoService.credenciarParticipante(idEvento, credencial);
 		CredenciamentoResponse response = mapper.map(credenciamento, CredenciamentoResponse.class);
 
 		return ResponseEntity.ok(response);
+	}
+
+	@DeleteMapping("/{idEvento}/credenciamentos/{id}")
+	public ResponseEntity<Void> removerCredencial(@PathVariable Long id) {
+		credenciamentoService.delete(id);
+		return ResponseEntity.noContent().build();
 	}
 }
