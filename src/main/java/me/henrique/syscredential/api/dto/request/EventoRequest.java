@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import me.henrique.syscredential.domain.model.Atividade;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -36,11 +35,9 @@ public class EventoRequest {
     @Length(min = 4, max = 50)
     private String cidade;
 
-    @FutureOrPresent(message = "Não é permitido datas passadas")
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm")
     private LocalDateTime inicio;
 
-    @FutureOrPresent(message = "Não é permitido datas passadas")
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm")
     private LocalDateTime termino;
 
